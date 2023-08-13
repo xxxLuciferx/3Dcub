@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/13 18:34:40 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/13 18:46:31 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,11 @@ void	error_map(void)
 void	error_colors(void)
 {
 	printf("\n$ Incorrect MAP colors\n\n");
+	exit(0);
+}
+void	error_path(void)
+{
+	printf("\n$ Incorrect path\n\n");
 	exit(0);
 }
 void	first_and_last_line(char *line)
@@ -188,6 +193,19 @@ void	floor_colors(t_pars *pars, int i)
 	if(pars->F_B < 0 || pars->F_B > 255)
 		error_colors();
 }
+
+void	north(t_pars *pars, int i)
+{
+	char	**tmp;
+
+	tmp = ft_split(pars->map[i], ' ');
+	pars->north_path = tmp[1];
+	free_arrays(tmp);
+	// NEED STR CPY
+	if(pars->north_path[0] != '.' || pars->north_path[0] != '/')
+		error_path();
+}
+
 void	parsing_data(t_pars *pars)
 {
 	int i;
@@ -201,6 +219,7 @@ void	parsing_data(t_pars *pars)
 		else if (pars->map[i][0] == 'F' && pars->map[i][1] == ' ')
 			floor_colors(pars, i);
 		else if (pars->map[i][0] == 'N' && pars->map[i][1] == 'O')
+			north(pars, i);
 			
 		i++;
 	}

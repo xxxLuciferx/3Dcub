@@ -26,6 +26,7 @@ typedef	struct s_pars
 	int		F_G;
 	int		F_B;
 	char	**map;
+	char	*north_path;
 
 }				t_pars;
 typedef struct	s_tools
