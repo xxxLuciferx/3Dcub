@@ -3,7 +3,7 @@
 
 # include <unistd.h>
 # include <stdio.h>
-// # include <mlx.h>
+# include <mlx.h>
 #include <stdlib.h>
 #include <fcntl.h>
 

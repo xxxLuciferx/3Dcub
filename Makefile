@@ -11,7 +11,7 @@ OBJ = ${SRC:.c=.o}
 all : $(NAME)
 
 $(NAME): $(OBJ)
-		cc $(CFLAGS) $^ -o $(NAME)
+		cc $(CFLAGS) $^ -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 
 clean : 
