@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/13 18:01:54 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/13 18:34:40 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	error_map(void)
 }
 void	error_colors(void)
 {
-	printf("\n$ Invalid MAP colors\n\n");
+	printf("\n$ Incorrect MAP colors\n\n");
 	exit(0);
 }
 void	first_and_last_line(char *line)
@@ -146,23 +146,13 @@ void	if_valid_string(char *line)
 
 void	ceiling_colors(t_pars *pars, int i)
 {
-	char **tmp;
-	int io = 0;
+	char	**tmp;
 	
 	if_valid_string(pars->map[i]);
 	tmp = ft_split(pars->map[i], ',');
-	while (tmp[io])
-	{
-		printf("%s\n", tmp[io]);
-		io++;
-	}
-	// exit(0);
 	pars->C_R = ft_atoi(tmp[0]);
 	pars->C_G = ft_atoi(tmp[1]);
 	pars->C_B = ft_atoi(tmp[2]);
-	// printf("====> %d", pars->C_R);
-	printf("OOO %d, %d, %d\n", pars->C_R, pars->C_G, pars->C_B);
-	exit(0);
 	free_arrays(tmp);
 	if(pars->C_R < 0 || pars->C_R > 255)
 		error_colors();
@@ -174,24 +164,22 @@ void	ceiling_colors(t_pars *pars, int i)
 
 void	floor_colors(t_pars *pars, int i)
 {
-	char **tmp1;
+	char	**tmp;
 	// char **tmp2;
 	// int io = 0;
 	
 	if_valid_string(pars->map[i]);
-	tmp1 = ft_split(pars->map[i], ',');
-	// while (tmp1[io])
+	tmp = ft_split(pars->map[i], ',');
+	// while (tmp[io])
 	// {
-	// 	printf("%s\n", tmp1[io]);
+	// 	printf("%s\n", tmp[io]);
 	// 	io++;
 	// }
-	// tmp2 = ft_split(tmp1[1], ',');
-	pars->F_R = ft_atoi(tmp1[0]);
-	pars->F_G = ft_atoi(tmp1[1]);
-	pars->F_B = ft_atoi(tmp1[2]);
-	printf("%d, %d, %d\n", pars->F_R, pars->F_G, pars->F_B);
-	exit(0);
-	free_arrays(tmp1);
+	// tmp2 = ft_split(tmp[1], ',');
+	pars->F_R = ft_atoi(tmp[0]);
+	pars->F_G = ft_atoi(tmp[1]);
+	pars->F_B = ft_atoi(tmp[2]);
+	free_arrays(tmp);
 	// free_arrays(tmp2);
 	if(pars->F_R < 0 || pars->F_R > 255)
 		error_colors();
@@ -208,10 +196,12 @@ void	parsing_data(t_pars *pars)
 	while (pars->map[i])
 	{
 		
-		if (pars->map && pars->map[i][0] == 'C' && pars->map[i][1] == ' ')
+		if (pars->map[i][0] == 'C' && pars->map[i][1] == ' ')
 			ceiling_colors(pars, i);
 		else if (pars->map[i][0] == 'F' && pars->map[i][1] == ' ')
 			floor_colors(pars, i);
+		else if (pars->map[i][0] == 'N' && pars->map[i][1] == 'O')
+			
 		i++;
 	}
 	printf("OKAY\n");
