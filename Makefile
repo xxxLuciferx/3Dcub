@@ -1,6 +1,6 @@
 NAME = cub3D
 # LIBFT = ./libft/libft.a
-SRC = cub3D.c
+SRC = cub3D.c ft_split.c
 CFLAGS = -Wall -Wextra -Werror
 
 OBJ = ${SRC:.c=.o}
@@ -11,7 +11,7 @@ OBJ = ${SRC:.c=.o}
 all : $(NAME)
 
 $(NAME): $(OBJ)
-		cc $(CFLAGS) $^ -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+		cc $(CFLAGS) $^ -o $(NAME)
 
 
 clean : 

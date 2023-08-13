@@ -3,7 +3,7 @@
 
 # include <unistd.h>
 # include <stdio.h>
-# include <mlx.h>
+// # include <mlx.h>
 #include <stdlib.h>
 #include <fcntl.h>
 
@@ -12,6 +12,8 @@
 #define RIGHT 124
 #define UP 126
 #define DOWN 125
+
+char	**ft_split(char const *s, char c);
 
 typedef struct	s_tools
 {
