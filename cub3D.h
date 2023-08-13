@@ -21,6 +21,10 @@ typedef	struct s_pars
 	int		C_R;
 	int		C_G;
 	int		C_B;
+
+	int		F_R;
+	int		F_G;
+	int		F_B;
 	char	**map;
 
 }				t_pars;

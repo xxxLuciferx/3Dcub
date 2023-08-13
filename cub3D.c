@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/13 15:08:17 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/13 18:01:54 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@ void	error_map(void)
 	printf("\n$ Invalid MAP format\n\n");
 	exit(0);
 }
+void	error_colors(void)
+{
+	printf("\n$ Invalid MAP colors\n\n");
+	exit(0);
+}
 void	first_and_last_line(char *line)
 {
 	int i;
@@ -104,30 +109,117 @@ void	first_and_last_line(char *line)
 // 	// 		error_map();
 // 	// }
 // }
-void	c_colors(t_pars *pars, char *line, int i)
+void	free_arrays(char **array)
 {
-	char *tmp1;
-	char *tmp2;
+	int	i;
+
+	i = 0;
+	while (array[i] != NULL)
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}
+
+void	if_valid_string(char *line)
+{
+	int	i;
+	int	counter;
+
+	i = 1;
+	counter = 0;
+	while (line[i])
+	{
+		if(line[i] != ' ' && (line[i] > '9' || line[i] < '0'))
+		{
+			if(line[i] == ',')
+				counter++;
+			else
+				error_colors();
+		}
+		i++;
+	}
+	if(counter != 2)
+		error_colors();
+}
+
+void	ceiling_colors(t_pars *pars, int i)
+{
+	char **tmp;
+	int io = 0;
 	
-	tmp1 = ft_split(pars->map[i], " ");
-	tmp2 = ft_split(tmp1[1], ",");
-	pars->C_R = ft_atoi(tmp2[0]);
-	pars->C_G = ft_atoi(tmp2[1]);
-	pars->C_B = ft_atoi(tmp2[2]);
+	if_valid_string(pars->map[i]);
+	tmp = ft_split(pars->map[i], ',');
+	while (tmp[io])
+	{
+		printf("%s\n", tmp[io]);
+		io++;
+	}
+	// exit(0);
+	pars->C_R = ft_atoi(tmp[0]);
+	pars->C_G = ft_atoi(tmp[1]);
+	pars->C_B = ft_atoi(tmp[2]);
+	// printf("====> %d", pars->C_R);
+	printf("OOO %d, %d, %d\n", pars->C_R, pars->C_G, pars->C_B);
+	exit(0);
+	free_arrays(tmp);
+	if(pars->C_R < 0 || pars->C_R > 255)
+		error_colors();
+	if(pars->C_G < 0 || pars->C_G > 255)
+		error_colors();
+	if(pars->C_B < 0 || pars->C_B > 255)
+		error_colors();
+}
+
+void	floor_colors(t_pars *pars, int i)
+{
+	char **tmp1;
+	// char **tmp2;
+	// int io = 0;
+	
+	if_valid_string(pars->map[i]);
+	tmp1 = ft_split(pars->map[i], ',');
+	// while (tmp1[io])
+	// {
+	// 	printf("%s\n", tmp1[io]);
+	// 	io++;
+	// }
+	// tmp2 = ft_split(tmp1[1], ',');
+	pars->F_R = ft_atoi(tmp1[0]);
+	pars->F_G = ft_atoi(tmp1[1]);
+	pars->F_B = ft_atoi(tmp1[2]);
+	printf("%d, %d, %d\n", pars->F_R, pars->F_G, pars->F_B);
+	exit(0);
+	free_arrays(tmp1);
+	// free_arrays(tmp2);
+	if(pars->F_R < 0 || pars->F_R > 255)
+		error_colors();
+	if(pars->F_G < 0 || pars->F_G > 255)
+		error_colors();
+	if(pars->F_B < 0 || pars->F_B > 255)
+		error_colors();
 }
 void	parsing_data(t_pars *pars)
 {
 	int i;
 
 	i = 0;
-	while (1)
+	while (pars->map[i])
 	{
-		if (pars->map[i][0] == 'C' && pars->map[i][1] == ' ')
-		{
-			c_colors(pars, pars->map[i], i);
-		}
+		
+		if (pars->map && pars->map[i][0] == 'C' && pars->map[i][1] == ' ')
+			ceiling_colors(pars, i);
+		else if (pars->map[i][0] == 'F' && pars->map[i][1] == ' ')
+			floor_colors(pars, i);
 		i++;
 	}
+	printf("OKAY\n");
+	exit(0);
+	// printf("celing => %d, %d, %d, \n", pars->C_B, pars->C_G, pars->C_R);
+	// printf("floor => %d, %d, %d, ", pars->F_B, pars->F_G, pars->F_R);
+	
+	
 	
 }
 
@@ -144,7 +236,7 @@ void	if_valid_map(t_tools *tools)
 	buffer[i] = '\0';
 	tools->pars->map = ft_split(buffer, '\n');
 	
-	// printf("%s", tools->pars->map[0]);
+	// printf("%s", tools->pars->map[11]);
 
 	parsing_data(tools->pars);
 	// if_valid_lines(map);  //fixing split
