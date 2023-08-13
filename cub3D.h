@@ -14,9 +14,19 @@
 #define DOWN 125
 
 char	**ft_split(char const *s, char c);
+int		ft_atoi(const char *str);
 
+typedef	struct s_pars
+{
+	int		C_R;
+	int		C_G;
+	int		C_B;
+	char	**map;
+
+}				t_pars;
 typedef struct	s_tools
 {
+	t_pars	*pars;
 	void	*mlx;
 	void	*win;
 	int		player_x;

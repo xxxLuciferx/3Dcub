@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/13 09:14:44 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/13 15:08:17 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,38 +87,69 @@ void	first_and_last_line(char *line)
 	// printf("OK");
 }
 
-void	if_valid_lines(char **map)
+// void	if_valid_lines(char **map)
+// {
+// 	int i;
+
+// 	i = 0;
+// 	while (map[i] != 0)
+// 		i++;
+// 	first_and_last_line(map[0]);
+// 	first_and_last_line(map[i - 1]);
+// 	// while (--i)
+// 	// {
+// 	// 	if(map[i][0] != '1')
+// 	// 		error_map();
+// 	// 	if(map[i][ft_strlen(map[i]) - 1] != '1')
+// 	// 		error_map();
+// 	// }
+// }
+void	c_colors(t_pars *pars, char *line, int i)
+{
+	char *tmp1;
+	char *tmp2;
+	
+	tmp1 = ft_split(pars->map[i], " ");
+	tmp2 = ft_split(tmp1[1], ",");
+	pars->C_R = ft_atoi(tmp2[0]);
+	pars->C_G = ft_atoi(tmp2[1]);
+	pars->C_B = ft_atoi(tmp2[2]);
+}
+void	parsing_data(t_pars *pars)
 {
 	int i;
 
 	i = 0;
-	while (map[i] != 0)
+	while (1)
+	{
+		if (pars->map[i][0] == 'C' && pars->map[i][1] == ' ')
+		{
+			c_colors(pars, pars->map[i], i);
+		}
 		i++;
-	first_and_last_line(map[0]);
-	first_and_last_line(map[i - 1]);
-	// while (--i)
-	// {
-	// 	if(map[i][0] != '1')
-	// 		error_map();
-	// 	if(map[i][ft_strlen(map[i]) - 1] != '1')
-	// 		error_map();
-	// }
+	}
+	
 }
 
-void	if_valid_map(void)
+void	if_valid_map(t_tools *tools)
 {
 	int fd;
 	int i;
 	char buffer[1001];
-	char **map;
-	// i = 0;
+	i = 0;
+	
+	tools->pars = malloc(sizeof(t_pars));
 	fd = open("test.cub", O_RDONLY, NULL);
 	i = read(fd, buffer, 1000);
 	buffer[i] = '\0';
-	map = ft_split(buffer, '\n');
-	if_valid_lines(map);
+	tools->pars->map = ft_split(buffer, '\n');
+	
+	// printf("%s", tools->pars->map[0]);
+
+	parsing_data(tools->pars);
+	// if_valid_lines(map);  //fixing split
 }
-void	valid_entry(int ac, char **av)
+void	valid_entry(int ac, char **av, t_tools *tools)
 {
 	int	len;
 	
@@ -133,14 +164,14 @@ void	valid_entry(int ac, char **av)
 		printf("\n$ Please enter a .cub file\n\n");
 		exit(0);
 	}
-	if_valid_map();
+	if_valid_map(tools);
 }
 
 int main(int argc, char **argv)
 {
 	t_tools tools;
 
-	valid_entry(argc, argv);
+	valid_entry(argc, argv, &tools);
 	tools.mlx = mlx_init();
 	tools.win = mlx_new_window(tools.mlx, 500, 500, "KHALIL");
 	tools.player_x = 500 / 2;
