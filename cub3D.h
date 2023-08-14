@@ -13,8 +13,12 @@
 #define UP 126
 #define DOWN 125
 
-char	**ft_split(char const *s, char c);
+char	**ft_split(char const *s, char *c);
 int		ft_atoi(const char *str);
+char	*ft_strdup(const char *s1);
+size_t	ft_strlen(const char *s);
+
+
 
 typedef	struct s_pars
 {
@@ -25,8 +29,13 @@ typedef	struct s_pars
 	int		F_R;
 	int		F_G;
 	int		F_B;
+
 	char	**map;
+
 	char	*north_path;
+	char	*south_path;
+	char	*west_path;
+	char	*east_path;
 
 }				t_pars;
 typedef struct	s_tools
@@ -37,6 +46,18 @@ typedef struct	s_tools
 	int		player_x;
 	int		player_y;
 }				t_tools;
+
+//PATH FUNCTIONS (paths.c)
+void	north_path(t_pars *pars, int i);
+void	south_path(t_pars *pars, int i);
+void	west_path(t_pars *pars, int i);
+void	east_path(t_pars *pars, int i);
+
+//ERRORS (errors.c)
+void	error_map(void);
+void	error_colors(void);
+void	error_path(void);
+void	free_arrays(char **array);
 
 
 #endif

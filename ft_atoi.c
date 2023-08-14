@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 11:41:07 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/13 18:03:33 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/14 08:35:58 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,34 @@ int	ft_atoi(const char *str)
 		a++;
 	}
 	return (res * sign);
+}
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	int		i;
+	char	*c;
+	char	*m;
+
+	i = ft_strlen(s1);
+	c = (char *)malloc(i + 1);
+	m = c;
+	if (!c)
+		return (NULL);
+	while (*s1)
+	{
+		*c = *s1;
+		c++;
+		s1++;
+	}
+	*c = '\0';
+	return (m);
 }

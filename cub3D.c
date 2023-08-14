@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/13 18:46:31 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/14 13:14:10 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,31 +58,7 @@ int key_codes(int keycode, t_tools *tools)
 	return (0);
 }
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-void	error_map(void)
-{
-	printf("\n$ Invalid MAP format\n\n");
-	exit(0);
-}
-void	error_colors(void)
-{
-	printf("\n$ Incorrect MAP colors\n\n");
-	exit(0);
-}
-void	error_path(void)
-{
-	printf("\n$ Incorrect path\n\n");
-	exit(0);
-}
 void	first_and_last_line(char *line)
 {
 	int i;
@@ -94,7 +70,6 @@ void	first_and_last_line(char *line)
 			error_map();
 		i++;
 	}
-	// printf("OK");
 }
 
 // void	if_valid_lines(char **map)
@@ -114,18 +89,7 @@ void	first_and_last_line(char *line)
 // 	// 		error_map();
 // 	// }
 // }
-void	free_arrays(char **array)
-{
-	int	i;
 
-	i = 0;
-	while (array[i] != NULL)
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
-}
 
 void	if_valid_string(char *line)
 {
@@ -154,7 +118,7 @@ void	ceiling_colors(t_pars *pars, int i)
 	char	**tmp;
 	
 	if_valid_string(pars->map[i]);
-	tmp = ft_split(pars->map[i], ',');
+	tmp = ft_split(pars->map[i], ",");
 	pars->C_R = ft_atoi(tmp[0]);
 	pars->C_G = ft_atoi(tmp[1]);
 	pars->C_B = ft_atoi(tmp[2]);
@@ -174,7 +138,7 @@ void	floor_colors(t_pars *pars, int i)
 	// int io = 0;
 	
 	if_valid_string(pars->map[i]);
-	tmp = ft_split(pars->map[i], ',');
+	tmp = ft_split(pars->map[i], ",");
 	// while (tmp[io])
 	// {
 	// 	printf("%s\n", tmp[io]);
@@ -194,16 +158,58 @@ void	floor_colors(t_pars *pars, int i)
 		error_colors();
 }
 
-void	north(t_pars *pars, int i)
-{
-	char	**tmp;
 
-	tmp = ft_split(pars->map[i], ' ');
-	pars->north_path = tmp[1];
-	free_arrays(tmp);
-	// NEED STR CPY
-	if(pars->north_path[0] != '.' || pars->north_path[0] != '/')
+// char	find_spliter(char *line)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (line[i] == ' ' || line[i] == '\t')
+// 		i++;
+// 	while (line[i] >= 'A' && line[i] <= 'Z')
+// 		i++;
+// 	while (line[i])
+// 	{
+// 		if(line[i] == ' ' || line[i] == '\t')
+// 		{
+// 			// printf("-%c-", line[i]);
+// 			// exit(0);
+// 			return (line[i]);
+// 		}
+// 		i++;
+// 	}
+// 	error_path();
+// 	return(0);
+// }
+
+void	all_textures(t_pars *pars)
+{
+	if(!pars->east_path || !pars->north_path || !pars->south_path || !pars->west_path )
 		error_path();
+	// if(!pars->east_path || !pars->north_path || !pars->south_path || !pars->west_path )
+	
+}
+void	if_texture(t_pars *pars, int i)
+{
+	if (pars->map[i][0] == 'C')
+		ceiling_colors(pars, i);
+	else if (pars->map[i][0] == 'F')
+		floor_colors(pars, i);
+	else if (pars->map[i][0] == 'N' && pars->map[i][1] == 'O')
+		north_path(pars, i);
+	else if (pars->map[i][0] == 'S' && pars->map[i][1] == 'O')
+		south_path(pars, i);
+	else if (pars->map[i][0] == 'W' && pars->map[i][1] == 'E')
+		west_path(pars, i);
+	else if (pars->map[i][0] == 'E' && pars->map[i][1] == 'A')
+		east_path(pars, i);
+	
+}
+int		check_pars(t_pars *pars)
+{
+	if(pars->east_path == NULL || pars->north_path == NULL || pars->south_path == NULL || pars->west_path == NULL || pars->C_B == -1 || pars->C_G == -1 || pars->C_R == -1 || pars->F_B == -1 || pars->F_G == -1 || pars->F_R == -1)
+		return(0);
+	return(1);
 }
 
 void	parsing_data(t_pars *pars)
@@ -213,22 +219,27 @@ void	parsing_data(t_pars *pars)
 	i = 0;
 	while (pars->map[i])
 	{
-		
-		if (pars->map[i][0] == 'C' && pars->map[i][1] == ' ')
-			ceiling_colors(pars, i);
-		else if (pars->map[i][0] == 'F' && pars->map[i][1] == ' ')
-			floor_colors(pars, i);
-		else if (pars->map[i][0] == 'N' && pars->map[i][1] == 'O')
-			north(pars, i);
-			
+		if_texture(pars, i);
+		if(check_pars(pars))
+			break;
 		i++;
 	}
-	printf("OKAY\n");
-	exit(0);
-	// printf("celing => %d, %d, %d, \n", pars->C_B, pars->C_G, pars->C_R);
-	// printf("floor => %d, %d, %d, ", pars->F_B, pars->F_G, pars->F_R);
-	
-	
+	all_textures(pars);
+}
+
+void	initiation(t_pars *pars)
+{
+	pars->C_B = -1;
+	pars->C_G = -1;
+	pars->C_B = -1;
+	pars->F_R = -1;
+	pars->F_G = -1;
+	pars->F_B = -1;
+	pars->map = NULL;
+	pars->north_path = NULL;
+	pars->south_path = NULL;
+	pars->west_path = NULL;
+	pars->east_path = NULL;
 	
 }
 
@@ -240,12 +251,11 @@ void	if_valid_map(t_tools *tools)
 	i = 0;
 	
 	tools->pars = malloc(sizeof(t_pars));
+	initiation(tools->pars);
 	fd = open("test.cub", O_RDONLY, NULL);
 	i = read(fd, buffer, 1000);
 	buffer[i] = '\0';
-	tools->pars->map = ft_split(buffer, '\n');
-	
-	// printf("%s", tools->pars->map[11]);
+	tools->pars->map = ft_split(buffer, "\n");
 
 	parsing_data(tools->pars);
 	// if_valid_lines(map);  //fixing split
@@ -271,8 +281,9 @@ void	valid_entry(int ac, char **av, t_tools *tools)
 int main(int argc, char **argv)
 {
 	t_tools tools;
-
+	
 	valid_entry(argc, argv, &tools);
+	exit(0);
 	tools.mlx = mlx_init();
 	tools.win = mlx_new_window(tools.mlx, 500, 500, "KHALIL");
 	tools.player_x = 500 / 2;
