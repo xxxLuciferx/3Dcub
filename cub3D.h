@@ -31,6 +31,8 @@ typedef	struct s_pars
 	int		F_B;
 
 	char	**map;
+	char	**land;
+	int		land_range;
 
 	char	*north_path;
 	char	*south_path;
@@ -57,7 +59,8 @@ void	east_path(t_pars *pars, int i);
 void	error_map(void);
 void	error_colors(void);
 void	error_path(void);
-void	free_arrays(char **array);
 
+//LEAKS (leaks.c)
+void	free_arrays(char **array);
 
 #endif

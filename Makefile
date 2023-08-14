@@ -1,6 +1,6 @@
 NAME = cub3D
 # LIBFT = ./libft/libft.a
-SRC = cub3D.c ft_split.c ft_atoi.c paths.c errors.c
+SRC = cub3D.c ft_split.c ft_atoi.c paths.c errors.c leaks.c
 CFLAGS = -Wall -Wextra -Werror
 
 OBJ = ${SRC:.c=.o}
