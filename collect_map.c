@@ -6,11 +6,33 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:46:35 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/15 11:48:23 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/15 16:59:51 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+void	if_valid_string(char *line)
+{
+	int	i;
+	int	counter;
+
+	i = 1;
+	counter = 0;
+	while (line[i])
+	{
+		if(line[i] != ' ' && (line[i] > '9' || line[i] < '0'))
+		{
+			if(line[i] == ',')
+				counter++;
+			else
+				error_colors();
+		}
+		i++;
+	}
+	if(counter != 2)
+		error_colors();
+}
 
 void		ceiling_colors(t_pars *pars, int i)
 {

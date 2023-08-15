@@ -81,6 +81,7 @@ int		check_pars(t_pars *pars);
 void	collect_texture_and_colors(t_pars *pars, int i);
 void	ft_map_copy(t_pars *pars, int pos);
 void	if_player_exist(t_pars *pars);
+void	if_one_player(t_pars *pars);
 
 // (ft_walls.c)
 void	ft_surrounded_walls(t_pars *pars);
@@ -89,12 +90,11 @@ void	ft_surrounded_walls(t_pars *pars);
 void	initiation(t_tools *tools);
 void	if_valid_lines(t_pars *pars);
 void	if_line_of_walls(char *line, t_pars *pars, int line_pos);
-void	floor_colors(t_pars *pars, int i);
-void	ceiling_colors(t_pars *pars, int i);
 void	if_valid_string(char *line);
 void	check_next_wall(t_pars *pars, int pos, int line_pos);
 
 //(CEILING && FLOOR COLLECTING) (collect_map.c)
-void		ceiling_colors(t_pars *pars, int i);
+void	ceiling_colors(t_pars *pars, int i);
 void	floor_colors(t_pars *pars, int i);
+void	if_valid_string(char *line);
 #endif

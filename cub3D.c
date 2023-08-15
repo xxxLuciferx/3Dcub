@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/15 14:35:08 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/15 16:59:44 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,27 +58,7 @@ int key_codes(int keycode, t_tools *tools)
 	return (0);
 }
 //-------------------------------------------------------------------
-void	if_valid_string(char *line)
-{
-	int	i;
-	int	counter;
 
-	i = 1;
-	counter = 0;
-	while (line[i])
-	{
-		if(line[i] != ' ' && (line[i] > '9' || line[i] < '0'))
-		{
-			if(line[i] == ',')
-				counter++;
-			else
-				error_colors();
-		}
-		i++;
-	}
-	if(counter != 2)
-		error_colors();
-}
    
 	//-----------------------------------------------------------------------
 // void	check_next_wall(t_pars *pars, int pos, int line_pos)
