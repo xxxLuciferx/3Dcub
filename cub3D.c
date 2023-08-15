@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/15 14:34:13 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/15 14:35:08 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,22 +81,22 @@ void	if_valid_string(char *line)
 }
    
 	//-----------------------------------------------------------------------
-void	check_next_wall(t_pars *pars, int pos, int line_pos)
-{
-	printf("IM HERO\n");
-	if ((pars->land_range / line_pos) >= (pars->land_range / 2 ) && line_pos > 0) // 9AL MEN NESS
-	{
-		printf("%d\n", line_pos);
-		exit(0);
-		while (line_pos > 0)
-		{
-			if (pars->land[line_pos - 1][pos] == '1')
-				return;
-			line_pos--;
-		}
-		error_map();
-	}
-	exit(0);
+// void	check_next_wall(t_pars *pars, int pos, int line_pos)
+// {
+// 	printf("IM HERO\n");
+// 	if ((pars->land_range / line_pos) >= (pars->land_range / 2 ) && line_pos > 0) // 9AL MEN NESS
+// 	{
+// 		printf("%d\n", line_pos);
+// 		exit(0);
+// 		while (line_pos > 0)
+// 		{
+// 			if (pars->land[line_pos - 1][pos] == '1')
+// 				return;
+// 			line_pos--;
+// 		}
+// 		error_map();
+// 	}
+// 	exit(0);
 	// else if (pars->land_range / line_pos <= pars->land_range / 2) // KTAR MEN NESS
 	// {
 	// 	while (pars->land[line_pos] && line_pos >= 0)
@@ -107,7 +107,7 @@ void	check_next_wall(t_pars *pars, int pos, int line_pos)
 	// 	}
 	// 	error_map();
 	// }
-}
+// }
 
 
 	//-----------------------------------------------------------------------

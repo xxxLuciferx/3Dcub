@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:22:24 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/15 12:42:21 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/15 16:56:26 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 
 
-void	if_one_player(char **land)
+void	if_one_player(t_pars *pars)
 {
 	int	i;
 	int	j;
@@ -23,17 +23,20 @@ void	if_one_player(char **land)
 	i = 0;
 	j = 0;
 	counter = 0;
-	while (land[i] != 0)
+	while (pars->land[i] != 0)
 	{
 		j = 0;
-		while (land[i][j] != '\n' && land[i][j] != '\0')
+		while (pars->land[i][j] != '\n' && pars->land[i][j] != '\0')
 		{
-			if(land[i][j] == 'N' || land[i][j] == 'S' || land[i][j] == 'E' || land[i][j] == 'W')
+			if(pars->land[i][j] == 'N' || pars->land[i][j] == 'S' || pars->land[i][j] == 'E' || pars->land[i][j] == 'W')
 				counter++;
+			else if(i != pars->land_range && pars->land[i][j] != '0' && pars->land[i][j] != '1' && i != 0)
+				error_map();
 			j++;
 		}
 		i++;
 	}
+	// printf("%s\n", pars->land[pars->land_range]);
 	if(counter != 1)
 		error_player();
 }
@@ -43,7 +46,7 @@ void	if_player_exist(t_pars *pars)
 	int	j;
 
 	i = 0;
-	if_one_player(pars->land);
+	if_one_player(pars);
 	while (pars->land[i])
 	{
 		j = 0;
@@ -88,14 +91,10 @@ void	ft_map_copy(t_pars *pars, int pos)
 	tmp = pars->land_range - 1;
 	pars->land_range = pars->land_range - pos;
 	pars->land = malloc(sizeof(char **) * pars->land_range + 1);
-	// pars->land
 	pars->land_range = 0;
-	// pars->land[tmp] = ft_strdup(pars->map[pos]);
-	// printf("%s\n", pars->land[tmp]);
 	while (pars->map[pos])
 	{
 		pars->land[i] = ft_strdup(pars->map[pos]);
-		// printf("%s\n", pars->land[i]);
 		pos++;
 		i++;
 	}

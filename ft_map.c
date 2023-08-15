@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:15:18 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/15 12:37:59 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/15 15:40:06 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	checking_data(t_pars *pars)
 		i++;
 	}
 	ft_map_copy(pars, i);
+	
 	
 	ft_surrounded_walls(pars);
 	
