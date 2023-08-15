@@ -6,12 +6,17 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:24:25 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/14 19:48:54 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/15 12:32:26 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
+void	error_player(void)
+{
+	printf("\n$ Invalid PLAYER numbers\n\n");
+	exit(0);
+}
 void	error_map(void)
 {
 	printf("\n$ Invalid MAP format\n\n");
