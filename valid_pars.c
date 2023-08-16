@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:22:24 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/15 16:56:26 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/16 09:46:49 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ void	if_one_player(t_pars *pars)
 	i = 0;
 	j = 0;
 	counter = 0;
-	while (pars->land[i] != 0)
+	while (pars->land[i])
 	{
 		j = 0;
 		while (pars->land[i][j] != '\n' && pars->land[i][j] != '\0')
 		{
 			if(pars->land[i][j] == 'N' || pars->land[i][j] == 'S' || pars->land[i][j] == 'E' || pars->land[i][j] == 'W')
 				counter++;
-			else if(i != pars->land_range && pars->land[i][j] != '0' && pars->land[i][j] != '1' && i != 0)
-				error_map();
+			// else if(i != pars->land_range && pars->land[i][j] != '0' && pars->land[i][j] != '1' && i != 0)
+			// 	error_map();
 			j++;
 		}
 		i++;
@@ -40,13 +40,14 @@ void	if_one_player(t_pars *pars)
 	if(counter != 1)
 		error_player();
 }
-void	if_player_exist(t_pars *pars)
+void		if_player_exist(t_pars *pars)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	if_one_player(pars);
+	
 	while (pars->land[i])
 	{
 		j = 0;

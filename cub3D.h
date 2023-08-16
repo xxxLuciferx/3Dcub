@@ -3,7 +3,7 @@
 
 # include <unistd.h>
 # include <stdio.h>
-# include <mlx.h>
+// # include <mlx.h>
 #include <stdlib.h>
 #include <fcntl.h>
 
@@ -89,7 +89,7 @@ void	ft_surrounded_walls(t_pars *pars);
 // main
 void	initiation(t_tools *tools);
 void	if_valid_lines(t_pars *pars);
-void	if_line_of_walls(char *line, t_pars *pars, int line_pos);
+void	if_line_of_walls(char *line);
 void	if_valid_string(char *line);
 void	check_next_wall(t_pars *pars, int pos, int line_pos);
 
