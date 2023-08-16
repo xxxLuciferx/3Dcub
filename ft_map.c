@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:15:18 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/16 12:51:30 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/16 14:53:13 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,16 @@ void	map_lines(char *buffer, int pos)
 	int i;
 
 	i = 0;
-	while (pos && (buffer[pos] == '1' || buffer[pos] == '0'))
+	while (pos && buffer[pos])
 	{
 		if(buffer[pos] == '\n' && buffer[pos - 1] == '\n')
 		{
+			// printf("KHAILL\n");
 			error_map();
-			printf("KHAILL\n");
 		}
 		pos--;
 	}
-	printf("WTF\n"); //FIX THIS SHIT
+	// printf("WTF\n"); //FIX THIS SHIT
 	exit(0);
 	
 }
