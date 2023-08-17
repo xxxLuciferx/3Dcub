@@ -6,39 +6,51 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/17 14:32:07 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/17 16:10:27 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
+void	ft_draw(t_tools *tools, int number)
+{
+	static int counter;
+	static int count;
+
+	if(number == 0)
+		number = 70;
+	while (counter < number)
+	{
+		count = 0;
+		while(count < number)
+		{
+			mlx_pixel_put(tools->mlx, tools->win, counter, count, 0xFF0000);
+			count++;
+		}
+		counter++;
+	}
+	// printf("%d, %d", count, counter);
+	// exit(0);
+}
+
 void	put_map(t_tools *tools)
 {
 	int i = 0;
 	int j = 0;
-	while(i <= 10)
+	static int number;
+	while (tools->pars->land[i])
 	{
-		while(j <= 10)
-		{
-			mlx_pixel_put(tools->mlx, tools->win, tools->player_x + i, tools->player_y + j, 0xFFFFFF);
-			j = j + 1;
-		}
-		i++;
 		j = 0;
+		while (tools->pars->land[i][j])
+		{
+			ft_draw(tools, number);
+			j++;
+			number = number + 50;
+		}
+		number = 0;
+		i++;
 	}
-	// i = 0;
-	// j = 0;
-	// while(i <= 500)
-	// {
-	// 	while(j <= 500)
-	// 	{
-	// 		mlx_pixel_put(tools->mlx, tools->win, j, i, 0xFF0000);
-	// 		mlx_pixel_put(tools->mlx, tools->win, i, j, 0xFF0000);
-	// 		j = j + 50;
-	// 	}
-	// 	i++;
-	// 	j = 0;
-	// }
+	
 }
 int key_codes(int keycode, t_tools *tools)
 {
@@ -146,9 +158,10 @@ int main(int argc, char **argv)
 	t_tools tools;
 	
 	valid_entry(argc, argv, &tools);
+	printf("OK\n");
 	// printf("%d\n", tools.pars->land_range);
 	tools.mlx = mlx_init();
-	tools.win = mlx_new_window(tools.mlx, (biggest_line(&tools) * 20), (20 * tools.pars->land_range + 1), "cub3D");
+	tools.win = mlx_new_window(tools.mlx, (biggest_line(&tools) * 50), (50 * tools.pars->land_range + 1), "cub3D");
 	// printf("%d, %d\n", tools.player_x, tools.player_y);
 	// tools.win = mlx_new_window(tools.mlx, (20 * tools.pars->land_range + 1), (biggest_line(&tools) * 20), "cub3D");
 	// exit(1);
