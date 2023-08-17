@@ -10,7 +10,6 @@ SRC = cub3D.c  \
 			  valid_pars.c \
 			   ft_walls.c \
 			    collect_map.c \
-				 ft_strtrim.c
 
 CFLAGS = -Wall -Wextra -Werror
 
