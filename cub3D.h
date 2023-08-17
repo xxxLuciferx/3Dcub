@@ -3,7 +3,7 @@
 
 # include <unistd.h>
 # include <stdio.h>
-// # include <mlx.h>
+# include <mlx.h>
 #include <stdlib.h>
 #include <fcntl.h>
 
@@ -72,7 +72,7 @@ void	free_arrays(char **array);
 
 //MAP (ft_map.c)
 void	valid_entry(int ac, char **av, t_tools *tools);
-void	reading_map(t_tools *tools);
+void	reading_map(t_tools *tools, char *av);
 void	checking_data(t_pars *pars);
 void	if_directions_and_colors_exist(char **map);
 int		check_pars(t_pars *pars);
@@ -85,7 +85,10 @@ void	if_player_exist(t_pars *pars);
 void	if_one_player(t_pars *pars);
 
 // (ft_walls.c)
-void	ft_surrounded_walls(t_pars *pars);
+void	if_valid_inside_lines(t_pars *pars);
+void	zero_sides_verification(char **land, int pos_i, int pos_j);
+void	left_wall(t_pars *pars);
+void	if_line_of_walls(char *line);
 
 // main
 void	initiation(t_tools *tools);

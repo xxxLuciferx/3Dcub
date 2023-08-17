@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:15:18 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/17 12:07:01 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/17 14:31:53 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,11 @@ void	checking_data(t_pars *pars)
 		}
 		i++;
 	}
-
 	ft_map_copy(pars, i);
-	
-	ft_surrounded_walls(pars);
-	
-	
-	printf("IM HERE NOW\n"); //------------------------
+	left_wall(pars);
+	if_line_of_walls(pars->land[0]);
+	if_line_of_walls(pars->land[pars->land_range]);
+	if_valid_inside_lines(pars);
 }
 void	map_lines(char *buffer, int pos)
 {
@@ -71,14 +69,9 @@ void	map_lines(char *buffer, int pos)
 	while (pos && buffer[0] != '\n')
 	{
 		if(buffer[pos] == '\n' && buffer[pos - 1] == '\n')
-		{
-			// printf("KHAILL\n");
 			error_map();
-		}
 		pos--;
 	}
-	// printf("WTF\n"); //FIX THIS SHIT
-	// exit(0);
 	
 }
 
@@ -101,7 +94,6 @@ void	check_new_lines(char *buffer,int start, int end)
 				error_map();
 		start++;
 	}
-	printf("PERFECT\n");
 }
 int	last_char_pos(char *line, int last_pos)
 {
@@ -116,7 +108,7 @@ int	last_char_pos(char *line, int last_pos)
 	}
 	return (last_pos);
 }
-void	reading_map(t_tools *tools)
+void	reading_map(t_tools *tools, char *av)
 {
 	int fd;
 	int i;
@@ -125,17 +117,14 @@ void	reading_map(t_tools *tools)
 	
 	tools->pars = malloc(sizeof(t_pars));
 	initiation(tools);
-	fd = open("test.cub", O_RDONLY, NULL);
+	fd = open(av, O_RDONLY, NULL);
 	i = read(fd, buffer, 1000);
 	buffer[i] = '\0';
 	i = last_char_pos(buffer, i-1);
-	//CHECK THE MAP BEFORE BEING SPLITED
 	check_new_lines(buffer, first_in_map(buffer, i), i);
-	exit(0);
-	first_in_map(buffer, i);
 	tools->pars->map = ft_split(buffer, "\n");
-	printf("MAP READED (ft_map)\n");
 	checking_data(tools->pars);
+
 }
 
 void	valid_entry(int ac, char **av, t_tools *tools)
@@ -153,6 +142,5 @@ void	valid_entry(int ac, char **av, t_tools *tools)
 		printf("\n$ Please enter a .cub file\n\n");
 		exit(1);
 	}
-	printf("CORRECT ARGUMENT (ft_map)\n");
-	reading_map(tools);
+	reading_map(tools, av[1]);
 }
