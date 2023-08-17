@@ -1,6 +1,17 @@
 NAME = cub3D
 # LIBFT = ./libft/libft.a
-SRC = cub3D.c ft_split.c ft_atoi.c paths.c errors.c leaks.c ft_map.c valid_pars.c ft_walls.c collect_map.c
+SRC = cub3D.c  \
+		ft_split.c \
+		 ft_atoi.c \
+		  paths.c \
+		   errors.c \
+		    leaks.c \
+			 ft_map.c \
+			  valid_pars.c \
+			   ft_walls.c \
+			    collect_map.c \
+				 ft_strtrim.c
+
 CFLAGS = -Wall -Wextra -Werror
 
 OBJ = ${SRC:.c=.o}
@@ -11,9 +22,7 @@ OBJ = ${SRC:.c=.o}
 all : $(NAME)
 
 $(NAME): $(OBJ)
-		cc $(CFLAGS) $^  -o $(NAME)
-
-# -lmlx -framework OpenGL -framework AppKit
+		cc -lmlx -framework OpenGL -framework AppKit $(CFLAGS) $^  -o $(NAME)
 
 
 clean : 

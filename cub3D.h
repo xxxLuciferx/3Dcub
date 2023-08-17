@@ -17,6 +17,7 @@ char	**ft_split(char const *s, char *c);
 int		ft_atoi(const char *str);
 char	*ft_strdup(const char *s1);
 size_t	ft_strlen(const char *s);
+char	*ft_strtrim(char const *s1, char const *set);
 
 typedef	struct s_pars t_pars;
 
