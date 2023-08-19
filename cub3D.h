@@ -13,6 +13,11 @@
 #define UP 126
 #define DOWN 125
 
+
+#define RED	0xFF0000
+#define BLUE 0xFF
+
+
 char	**ft_split(char const *s, char *c);
 int		ft_atoi(const char *str);
 char	*ft_strdup(const char *s1);
