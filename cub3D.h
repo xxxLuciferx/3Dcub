@@ -19,6 +19,8 @@ char	*ft_strdup(const char *s1);
 size_t	ft_strlen(const char *s);
 char	*ft_strtrim(char const *s1, char const *set);
 
+
+
 typedef	struct s_pars t_pars;
 
 
@@ -96,6 +98,7 @@ void	if_valid_lines(t_pars *pars);
 void	if_line_of_walls(char *line);
 void	if_valid_string(char *line);
 void	check_next_wall(t_pars *pars, int pos, int line_pos);
+void	put_map(t_tools *tools);
 
 //(CEILING && FLOOR COLLECTING) (collect_map.c)
 void	ceiling_colors(t_pars *pars, int i);
