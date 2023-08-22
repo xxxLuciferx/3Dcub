@@ -21,7 +21,7 @@ OBJ = ${SRC:.c=.o}
 all : $(NAME)
 
 $(NAME): $(OBJ)
-		cc -lmlx -framework OpenGL -framework AppKit $(CFLAGS) $^  -o $(NAME)
+		cc -fsanitize=address -g -lmlx -framework OpenGL -framework AppKit $(CFLAGS) $^  -o $(NAME)
 
 
 clean : 

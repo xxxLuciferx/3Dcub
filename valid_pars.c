@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_pars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:22:24 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/16 09:46:49 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/21 08:47:06 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ void	if_one_player(t_pars *pars)
 	i = 0;
 	j = 0;
 	counter = 0;
+	
 	while (pars->land[i])
 	{
 		j = 0;
-		while (pars->land[i][j] != '\n' && pars->land[i][j] != '\0')
+		while ( pars->land[i][j] != '\0')
 		{
 			if(pars->land[i][j] == 'N' || pars->land[i][j] == 'S' || pars->land[i][j] == 'E' || pars->land[i][j] == 'W')
 				counter++;
@@ -47,7 +48,6 @@ void		if_player_exist(t_pars *pars)
 
 	i = 0;
 	if_one_player(pars);
-	
 	while (pars->land[i])
 	{
 		j = 0;
@@ -99,6 +99,7 @@ void	ft_map_copy(t_pars *pars, int pos)
 		pos++;
 		i++;
 	}
+	pars->land[i] = NULL;
 	pars->land_range = i - 1;	
 	if_player_exist(pars);
 	// if_correct_map(pars);

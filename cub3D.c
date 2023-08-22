@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/19 16:18:08 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/21 21:26:10 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
 
 void	initiation(t_tools *tools)
 {
@@ -28,40 +36,26 @@ void	initiation(t_tools *tools)
 	tools->pars->east_path = NULL;
 	tools->pars->land_range = 0;
 }
+
 void	ft_draw(t_tools *tools, int start_y, int start_x, int red)
 {
 	int y = 0;
 	int x = 0;
-	while (y <= 50)
+	while (y < 50)
 	{
 		x = 0;
-		while(x <= 50)
+		while(x < 50)
 		{
-			mlx_pixel_put(tools->mlx, tools->win, start_x + x, start_y + y, red);
-			// mlx_pixel_put(tools->mlx, tools->win, x, y, 0xffd700);
-			// mlx_pixel_put(tools->mlx, tools->win, x, y, 0xffd700);
-			mlx_pixel_put(tools->mlx, tools->win, start_x + x, start_y, 0xffd700);
+			my_mlx_pixel_put(&tools->img, start_x + x, start_y + y, red);
+			my_mlx_pixel_put(&tools->img, start_x + x, start_y, 0xffd700);
 			x++;
 		}
-		mlx_pixel_put(tools->mlx, tools->win, start_x, start_y + y, 0xffd700);
-		y++;
-	}
-}
-void	move_player(t_tools *tools, int y, int x)
-{
-	char c;
-	
-	if(tools->pars->land[y][x] != '1')
-	{
-		c = tools->pars->land[y][x];
-		tools->pars->land[y][x] = tools->pars->land[tools->player_y][tools->player_x];
-		tools->pars->land[tools->player_y][tools->player_x] = c;
-		tools->player_x = x;
-		tools->player_y = y;
+			my_mlx_pixel_put(&tools->img, start_x , start_y + y, 0xffd700);
+			y++;
 	}
 }
 	
-void	player(t_tools *tools)
+void	put_player(t_tools *tools)
 {
 	int i = 0;
 	int j = 0;
@@ -69,46 +63,58 @@ void	player(t_tools *tools)
 	{
 		while (j < 10)
 		{
-			mlx_pixel_put(tools->mlx, tools->win, tools->player_x + i, tools->player_y + j, 0xffd700);
+			my_mlx_pixel_put(&tools->img, tools->player_x + i, tools->player_y + j, 0xffd700);
 			j++;
 		}
 		j = 0;
 		i++;
 	}
-	// put_map(tools);
 }
+
+void	rendering_after_move(t_tools *tools, int start_y, int start_x)
+{
+	
+	int i = (start_x - 20) /50;
+	int j = (start_y - 20) /50;
+	
+	int	end_x = ((start_x - 20) / 50 ) +1;
+	int	end_y =((start_y - 20) / 50 ) +1;
+	while (i <= end_x)
+	{
+		j = ((start_y - 20) / 50 ) - 1;
+		while (j <= end_y )
+		{
+			if(tools->pars->land[i][j] == '1')
+				ft_draw(tools, i * 50, j * 50, RED);
+			else
+				ft_draw(tools, i * 50, j * 50, BLUE);
+			j++;
+		}
+		my_mlx_pixel_put(&tools->img, i, j, 0xffd700);
+		i++;
+	}
+	put_player(tools);
+}
+
 int key_codes(int keycode, t_tools *tools)
 {
 	int x;
 	int y;
-
-	x = (tools->player_x) / 50;
-	y = (tools->player_y) / 50;
-	if (keycode == LEFT && tools->pars->land[y][x] != '0')
-	{
-		tools->player_x -= 25;
-		player(tools);
-	}
-	else if (keycode == RIGHT && tools->pars->land[y][x] != '0')
-	{
-		tools->player_x += 25;
-		player(tools);
-	}
-	else if (keycode == DOWN && tools->pars->land[y][x] != '0')
-	{
-		tools->player_y += 25;
-		player(tools);
-	}
-	else if (keycode == UP && tools->pars->land[y][x] != '0')
-	{
-		tools->player_y -= 25;
-		player(tools);
-	}
+	x = (tools->player_x);
+	y = (tools->player_y);
+	if (keycode == LEFT && tools->pars->land[y / 50][(x -10)/ 50] != '1')
+		tools->player_x -= 10;
+	else if (keycode == RIGHT && tools->pars->land[y / 50][(x +10)/ 50] != '1')
+		tools->player_x += 10;
+	else if (keycode == DOWN && tools->pars->land[(y +10)/ 50][x / 50] != '1')
+		tools->player_y += 10;
+	else if (keycode == UP && tools->pars->land[(y -10)/ 50][x / 50] != '1')
+		tools->player_y -= 10;
 	else if (keycode == ESC)
 		exit(0);
-	// mlx_clear_window(tools->mlx, tools->win);
-	
-	
+		put_map(tools);
+	// rendering_after_move(tools,tools->player_x,tools->player_y);
+	mlx_put_image_to_window(tools->mlx, tools->win, tools->img.img, 0, 0);
 	return (0);
 }
 
@@ -116,6 +122,7 @@ void	put_map(t_tools *tools)
 {
 	int i = 0;
 	int j = 0;
+	mlx_clear_window(tools->mlx, tools->win);
 	while (tools->pars->land[i])
 	{
 		j = 0;
@@ -128,9 +135,12 @@ void	put_map(t_tools *tools)
 	
 			j++;
 		}
-		mlx_pixel_put(tools->mlx, tools->win, i, j, 0xffd700);
+		my_mlx_pixel_put(&tools->img, i, j, 0xffd700);
 		i++;
 	}
+	put_player(tools);
+	mlx_put_image_to_window(tools->mlx, tools->win, tools->img.img, 0, 0);
+	return;
 }
 
 int	biggest_line(t_tools *tools)
@@ -158,12 +168,17 @@ void	graphic(t_tools *tools)
 {
 	tools->mlx = mlx_init();
 	tools->win = mlx_new_window(tools->mlx, (biggest_line(tools) * 50), (50 * (tools->pars->land_range + 1)), "cub3D");
-	tools->player_x = (tools->player_x * 50);
-	tools->player_y = (tools->player_y * 50);
+	tools->img.img = mlx_new_image(tools->mlx, (biggest_line(tools) * 50), (50 * (tools->pars->land_range + 1)));
+	tools->img.addr = mlx_get_data_addr(tools->img.img, &tools->img.bits_per_pixel, &tools->img.line_length, &tools->img.endian);
+	tools->player_x = (tools->player_x * 50)+20;
+	tools->player_y = (tools->player_y * 50)+20;
+	printf("player x = %d\n",tools->player_x);
+	printf("player y = %d\n",tools->player_y);
 	put_map(tools);
-	// mlx_key_hook(tools->win, key_codes, tools);
+	mlx_put_image_to_window(tools->mlx, tools->win, tools->img.img, 0, 0);
+	mlx_hook(tools->win, 2, 1, key_codes, tools);
 	mlx_loop(tools->mlx);
-}
+} 
 int main(int argc, char **argv)
 {
 	t_tools tools;

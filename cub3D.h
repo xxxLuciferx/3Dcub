@@ -28,14 +28,25 @@ char	*ft_strtrim(char const *s1, char const *set);
 
 typedef	struct s_pars t_pars;
 
+typedef struct	s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
+
+
 
 typedef struct	s_tools
 {
 	t_pars	*pars;
 	void	*mlx;
 	void	*win;
+	int		orientation;
 	int		player_x;
 	int		player_y;
+	t_data	img;
 }				t_tools;
 
 typedef	struct s_pars
@@ -109,4 +120,9 @@ void	put_map(t_tools *tools);
 void	ceiling_colors(t_pars *pars, int i);
 void	floor_colors(t_pars *pars, int i);
 void	if_valid_string(char *line);
+
+
+
+
+void	put_player(t_tools *tools);
 #endif
