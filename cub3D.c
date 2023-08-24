@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/24 10:47:46 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/24 11:49:43 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	ft_draw(t_tools *tools, int start_y, int start_x, int red)
 
 void	put_player(t_tools *tools)
 {
+	int x = tools->player_x - 5;
+	int y = tools->player_y - 5;
 	int i = 0;
 	int j = 0;
 	int line = 50;
@@ -64,7 +66,8 @@ void	put_player(t_tools *tools)
 	{
 		while (j < 10)
 		{
-			my_mlx_pixel_put(&tools->img, tools->player_x + i - 5, tools->player_y + j - 5, 0xffd700);
+			my_mlx_pixel_put(&tools->img, x + i, y + j, 0xFFFFFF);
+			// my_mlx_pixel_put(&tools->img, x , y, 0xFFFFFF);
 			j++;
 		}
 		j = 0;
@@ -80,8 +83,8 @@ void	put_player(t_tools *tools)
 void	rendering_after_move(t_tools *tools, int start_y, int start_x)
 {
 	
-	int i = (start_x - 20) /50;
-	int j = (start_y - 20) /50;
+	int i = (start_x - 25) / 50;
+	int j = (start_y - 25) / 50;
 	
 	int	end_x = ((start_x - 20) / 50 ) +1;
 	int	end_y =((start_y - 20) / 50 ) +1;
@@ -108,13 +111,13 @@ int key_codes(int keycode, t_tools *tools)
 	int y;
 	x = (tools->player_x);
 	y = (tools->player_y);
-	if (keycode == LEFT && tools->pars->land[y / 50][(x -10)/ 50] != '1')
+	if (keycode == LEFT && tools->pars->land[y / 50][(x - 10)/ 50] != '1')
 		tools->player_x -= 10;
-	else if (keycode == RIGHT && tools->pars->land[y / 50][(x +10)/ 50] != '1')
+	else if (keycode == RIGHT && tools->pars->land[y / 50][(x + 10)/ 50] != '1')
 		tools->player_x += 10;
-	else if (keycode == DOWN && tools->pars->land[(y +10)/ 50][x / 50] != '1')
+	else if (keycode == DOWN && tools->pars->land[(y + 10)/ 50][x / 50] != '1')
 		tools->player_y += 10;
-	else if (keycode == UP && tools->pars->land[(y -10)/ 50][x / 50] != '1')
+	else if (keycode == UP && tools->pars->land[(y - 10)/ 50][x / 50] != '1')
 		tools->player_y -= 10;
 	else if (keycode == ESC)
 		exit(0);
@@ -176,8 +179,8 @@ void	graphic(t_tools *tools)
 	tools->win = mlx_new_window(tools->mlx, (biggest_line(tools) * 50), (50 * (tools->pars->land_range + 1)), "cub3D");
 	tools->img.img = mlx_new_image(tools->mlx, (biggest_line(tools) * 50), (50 * (tools->pars->land_range + 1)));
 	tools->img.addr = mlx_get_data_addr(tools->img.img, &tools->img.bits_per_pixel, &tools->img.line_length, &tools->img.endian);
-	tools->player_x = (tools->player_x * 50)+20;
-	tools->player_y = (tools->player_y * 50)+20;
+	tools->player_x = (tools->player_x * 50)+25;
+	tools->player_y = (tools->player_y * 50)+25;
 	// printf("player x = %d\n",tools->player_x);
 	printf("player orientation = %d\n",tools->orientation);
 	put_map(tools);
