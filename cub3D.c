@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/21 21:26:10 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/08/24 10:11:31 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,9 +130,9 @@ void	put_map(t_tools *tools)
 		{
 			if(tools->pars->land[i][j] == '1')
 				ft_draw(tools, i * 50, j * 50, RED);
-			else
+			else if(tools->pars->land[i][j] == '0' || tools->pars->land[i][j] == 'N' || tools->pars->land[i][j] == 'S' \
+						|| tools->pars->land[i][j] == 'W' || tools->pars->land[i][j] == 'E')
 				ft_draw(tools, i * 50, j * 50, BLUE);
-	
 			j++;
 		}
 		my_mlx_pixel_put(&tools->img, i, j, 0xffd700);
@@ -172,8 +172,8 @@ void	graphic(t_tools *tools)
 	tools->img.addr = mlx_get_data_addr(tools->img.img, &tools->img.bits_per_pixel, &tools->img.line_length, &tools->img.endian);
 	tools->player_x = (tools->player_x * 50)+20;
 	tools->player_y = (tools->player_y * 50)+20;
-	printf("player x = %d\n",tools->player_x);
-	printf("player y = %d\n",tools->player_y);
+	// printf("player x = %d\n",tools->player_x);
+	printf("player orientation = %d\n",tools->orientation);
 	put_map(tools);
 	mlx_put_image_to_window(tools->mlx, tools->win, tools->img.img, 0, 0);
 	mlx_hook(tools->win, 2, 1, key_codes, tools);

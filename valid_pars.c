@@ -3,16 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   valid_pars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:22:24 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/21 08:47:06 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/08/24 10:10:58 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-
+void	collect_direction(char c, t_pars *pars)
+{
+	if(c == 'N')
+		pars->ptr->orientation = 2;
+	else if(c == 'S')
+		pars->ptr->orientation = 3;
+	else if(c == 'E')
+		pars->ptr->orientation = 1;
+	else if(c == 'W')
+		pars->ptr->orientation = 4;		
+}
 
 void	if_one_player(t_pars *pars)
 {
@@ -30,7 +40,10 @@ void	if_one_player(t_pars *pars)
 		while ( pars->land[i][j] != '\0')
 		{
 			if(pars->land[i][j] == 'N' || pars->land[i][j] == 'S' || pars->land[i][j] == 'E' || pars->land[i][j] == 'W')
+			{
+				collect_direction(pars->land[i][j], pars);
 				counter++;
+			}
 			// else if(i != pars->land_range && pars->land[i][j] != '0' && pars->land[i][j] != '1' && i != 0)
 			// 	error_map();
 			j++;
