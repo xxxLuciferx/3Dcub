@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/24 10:11:31 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/24 10:47:46 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,26 @@ void	ft_draw(t_tools *tools, int start_y, int start_x, int red)
 			y++;
 	}
 }
-	
+
 void	put_player(t_tools *tools)
 {
 	int i = 0;
 	int j = 0;
+	int line = 50;
 	while (i < 10)
 	{
 		while (j < 10)
 		{
-			my_mlx_pixel_put(&tools->img, tools->player_x + i, tools->player_y + j, 0xffd700);
+			my_mlx_pixel_put(&tools->img, tools->player_x + i - 5, tools->player_y + j - 5, 0xffd700);
 			j++;
 		}
 		j = 0;
 		i++;
+	}
+	if(tools->orientation == 2)
+	{
+		while (line--)
+			my_mlx_pixel_put(&tools->img, tools->player_x + line, tools->player_y, 0x00FF00);
 	}
 }
 
@@ -135,7 +141,7 @@ void	put_map(t_tools *tools)
 				ft_draw(tools, i * 50, j * 50, BLUE);
 			j++;
 		}
-		my_mlx_pixel_put(&tools->img, i, j, 0xffd700);
+		// my_mlx_pixel_put(&tools->img, i, j, 0xffd700);
 		i++;
 	}
 	put_player(tools);
