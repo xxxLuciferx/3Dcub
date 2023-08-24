@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/24 11:49:43 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/24 12:09:14 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,38 @@ void	ft_draw(t_tools *tools, int start_y, int start_x, int red)
 			y++;
 	}
 }
-
+void	draw_direction(t_tools *tools)
+{
+	int line = 50;
+	// printf("Orientation code = %d", tools->orientation);
+	if(tools->orientation == 1)
+	{
+		while (line--)
+			my_mlx_pixel_put(&tools->img, tools->player_x + line, tools->player_y, 0x00FF00);
+	}
+	else if(tools->orientation == 2)
+	{
+		while (line--)
+			my_mlx_pixel_put(&tools->img, tools->player_x, tools->player_y - line, 0x00FF00);
+	}
+	else if(tools->orientation == 3)
+	{
+		while (line--)
+			my_mlx_pixel_put(&tools->img, tools->player_x , tools->player_y + line, 0x00FF00);
+	}
+	else if(tools->orientation == 4)
+	{
+		while (line--)
+			my_mlx_pixel_put(&tools->img, tools->player_x - line, tools->player_y, 0x00FF00);
+	}
+}
 void	put_player(t_tools *tools)
 {
 	int x = tools->player_x - 5;
 	int y = tools->player_y - 5;
 	int i = 0;
 	int j = 0;
-	int line = 50;
+	
 	while (i < 10)
 	{
 		while (j < 10)
@@ -73,11 +97,7 @@ void	put_player(t_tools *tools)
 		j = 0;
 		i++;
 	}
-	if(tools->orientation == 2)
-	{
-		while (line--)
-			my_mlx_pixel_put(&tools->img, tools->player_x + line, tools->player_y, 0x00FF00);
-	}
+	draw_direction(tools);
 }
 
 void	rendering_after_move(t_tools *tools, int start_y, int start_x)
