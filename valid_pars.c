@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_pars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:22:24 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/24 10:10:58 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/24 15:41:38 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 void	collect_direction(char c, t_pars *pars)
 {
+	pars->ptr->angle = 0 ;
+	pars->ptr->x_direction = pars->ptr->player_x * 50 + 50 ;
+	pars->ptr->y_direction = pars->ptr->player_y * 50 ;
 	if(c == 'N')
-		pars->ptr->orientation = 2;
-	else if(c == 'S')
-		pars->ptr->orientation = 3;
-	else if(c == 'E')
-		pars->ptr->orientation = 1;
+			pars->ptr->angle = 90 ;
 	else if(c == 'W')
-		pars->ptr->orientation = 4;		
+			pars->ptr->angle = 180 ;
+	else if(c == 'S')
+			pars->ptr->angle = 270 ;
 }
 
 void	if_one_player(t_pars *pars)
@@ -41,6 +42,9 @@ void	if_one_player(t_pars *pars)
 		{
 			if(pars->land[i][j] == 'N' || pars->land[i][j] == 'S' || pars->land[i][j] == 'E' || pars->land[i][j] == 'W')
 			{
+				pars->ptr->player_y = i;
+				pars->ptr->player_x = j;
+				
 				collect_direction(pars->land[i][j], pars);
 				counter++;
 			}

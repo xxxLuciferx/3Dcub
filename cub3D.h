@@ -4,14 +4,17 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <mlx.h>
+#include <math.h>
 #include <stdlib.h>
 #include <fcntl.h>
 
 #define ESC 53
-#define LEFT 123
-#define RIGHT 124
-#define UP 126
-#define DOWN 125
+#define LEFT 0
+#define RIGHT 2
+#define UP 13
+#define DOWN 1
+#define CAMERA_LEFT 123
+#define CAMERA_RIGHT 124
 
 
 #define RED	0xFF0000
@@ -44,6 +47,10 @@ typedef struct	s_tools
 	void	*mlx;
 	void	*win;
 	int		orientation;
+	int 	angle;
+	float 	angle_rad;
+	int		x_direction;
+	int		y_direction;
 	int		player_x;
 	int		player_y;
 	t_data	img;

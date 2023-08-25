@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/24 12:09:14 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/25 10:35:14 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,30 +54,29 @@ void	ft_draw(t_tools *tools, int start_y, int start_x, int red)
 			y++;
 	}
 }
-void	draw_direction(t_tools *tools)
+
+void draw_direction_line(t_tools *tools,float angle)
 {
-	int line = 50;
-	// printf("Orientation code = %d", tools->orientation);
-	if(tools->orientation == 1)
+    int line_length = 30;
+
+    int x;
+	int	y;
+	int i = 0;
+    while(i <= line_length) 
 	{
-		while (line--)
-			my_mlx_pixel_put(&tools->img, tools->player_x + line, tools->player_y, 0x00FF00);
-	}
-	else if(tools->orientation == 2)
-	{
-		while (line--)
-			my_mlx_pixel_put(&tools->img, tools->player_x, tools->player_y - line, 0x00FF00);
-	}
-	else if(tools->orientation == 3)
-	{
-		while (line--)
-			my_mlx_pixel_put(&tools->img, tools->player_x , tools->player_y + line, 0x00FF00);
-	}
-	else if(tools->orientation == 4)
-	{
-		while (line--)
-			my_mlx_pixel_put(&tools->img, tools->player_x - line, tools->player_y, 0x00FF00);
-	}
+        x = tools->player_x + i * cos(angle);
+        y = tools->player_y + i * sin(angle);
+        my_mlx_pixel_put(&tools->img, x, y, 0x00FF00); // Green color
+		i++;
+    }
+}
+void	orientations(t_tools *tools)
+{
+	float angle = tools->angle * (3.14159265 / 180.0);
+	tools->angle_rad = angle;
+	tools->x_direction = tools->x_direction * cos(angle);
+	tools->y_direction = tools->y_direction * sin(angle);
+	draw_direction_line(tools,angle);
 }
 void	put_player(t_tools *tools)
 {
@@ -91,38 +90,24 @@ void	put_player(t_tools *tools)
 		while (j < 10)
 		{
 			my_mlx_pixel_put(&tools->img, x + i, y + j, 0xFFFFFF);
-			// my_mlx_pixel_put(&tools->img, x , y, 0xFFFFFF);
 			j++;
 		}
 		j = 0;
 		i++;
 	}
-	draw_direction(tools);
+	orientations(tools);
 }
-
-void	rendering_after_move(t_tools *tools, int start_y, int start_x)
+int	move_cos(t_tools *tools)
 {
-	
-	int i = (start_x - 25) / 50;
-	int j = (start_y - 25) / 50;
-	
-	int	end_x = ((start_x - 20) / 50 ) +1;
-	int	end_y =((start_y - 20) / 50 ) +1;
-	while (i <= end_x)
-	{
-		j = ((start_y - 20) / 50 ) - 1;
-		while (j <= end_y )
-		{
-			if(tools->pars->land[i][j] == '1')
-				ft_draw(tools, i * 50, j * 50, RED);
-			else
-				ft_draw(tools, i * 50, j * 50, BLUE);
-			j++;
-		}
-		my_mlx_pixel_put(&tools->img, i, j, 0xffd700);
-		i++;
-	}
-	put_player(tools);
+	int tmp;
+	tmp = tools->player_x + cos(tools->angle_rad) * 10 ;
+	return(tmp);
+}
+int	move_sin(t_tools *tools)
+{
+	int tmp;
+	tmp = tools->player_y + sin(tools->angle_rad) * 10 ;
+	return(tmp);
 }
 
 int key_codes(int keycode, t_tools *tools)
@@ -131,18 +116,30 @@ int key_codes(int keycode, t_tools *tools)
 	int y;
 	x = (tools->player_x);
 	y = (tools->player_y);
-	if (keycode == LEFT && tools->pars->land[y / 50][(x - 10)/ 50] != '1')
+	if (keycode == CAMERA_LEFT)
+		tools->angle -= 10;
+	if (keycode == CAMERA_RIGHT)
+		tools->angle += 10;
+	if (keycode == LEFT && tools->pars->land[y / 50][(x - 10) / 50] != '1')
 		tools->player_x -= 10;
-	else if (keycode == RIGHT && tools->pars->land[y / 50][(x + 10)/ 50] != '1')
-		tools->player_x += 10;
-	else if (keycode == DOWN && tools->pars->land[(y + 10)/ 50][x / 50] != '1')
-		tools->player_y += 10;
-	else if (keycode == UP && tools->pars->land[(y - 10)/ 50][x / 50] != '1')
-		tools->player_y -= 10;
+	else if (keycode == RIGHT && tools->pars->land[y / 50][(x + 10) / 50] != '1')
+	{
+		tools->player_x = tools->player_x + cos(tools->angle_rad) * 10 ;
+		tools->player_y = tools->player_y + sin(tools->angle_rad) * 10 ;
+	}
+	else if (keycode == DOWN && tools->pars->land[(y + 10) / 50][x / 50] != '1')
+	{
+		tools->player_x = tools->player_x + cos(tools->angle_rad) * 10 ;
+		tools->player_y = tools->player_y + sin(tools->angle_rad) * 10 ;
+	}
+	else if (keycode == UP && tools->pars->land[(move_sin(tools)) / 50][move_cos(tools) / 50] != '1')
+	{
+		tools->player_x += cos(tools->angle_rad) * 10 ;
+		tools->player_y = tools->player_y + sin(tools->angle_rad) * 10 ;
+	}
 	else if (keycode == ESC)
 		exit(0);
-		put_map(tools);
-	// rendering_after_move(tools,tools->player_x,tools->player_y);
+	put_map(tools);
 	mlx_put_image_to_window(tools->mlx, tools->win, tools->img.img, 0, 0);
 	return (0);
 }
@@ -202,8 +199,9 @@ void	graphic(t_tools *tools)
 	tools->player_x = (tools->player_x * 50)+25;
 	tools->player_y = (tools->player_y * 50)+25;
 	// printf("player x = %d\n",tools->player_x);
-	printf("player orientation = %d\n",tools->orientation);
+	// printf("player orientation = %d\n",tools->orientation);
 	put_map(tools);
+	// draw_direction(tools);
 	mlx_put_image_to_window(tools->mlx, tools->win, tools->img.img, 0, 0);
 	mlx_hook(tools->win, 2, 1, key_codes, tools);
 	mlx_loop(tools->mlx);
