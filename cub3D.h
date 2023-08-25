@@ -124,14 +124,23 @@ void	if_line_of_walls(char *line);
 void	if_valid_string(char *line);
 void	check_next_wall(t_pars *pars, int pos, int line_pos);
 void	put_map(t_tools *tools);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	draw_direction_line(t_tools *tools,float angle);
 
 //(CEILING && FLOOR COLLECTING) (collect_map.c)
 void	ceiling_colors(t_pars *pars, int i);
 void	floor_colors(t_pars *pars, int i);
 void	if_valid_string(char *line);
 
-
-
-
+//maping.c MAP
+void	draw_fov(t_tools *tools);
+void	ft_draw(t_tools *tools, int start_y, int start_x, int red);
+void	orientations(t_tools *tools);
+void	put_player(t_tools *tools);
+void	put_map(t_tools *tools);
+ 
+ //DRAW LINES
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void draw_direction_line(t_tools *tools,float angle);
 void	put_player(t_tools *tools);
 #endif
