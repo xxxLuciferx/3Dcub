@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_pars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:22:24 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/24 15:41:38 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/08/25 14:10:31 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	collect_direction(char c, t_pars *pars)
 	pars->ptr->angle = 0 ;
 	pars->ptr->x_direction = pars->ptr->player_x * 50 + 50 ;
 	pars->ptr->y_direction = pars->ptr->player_y * 50 ;
-	if(c == 'N')
+	if(c == 'S')
 			pars->ptr->angle = 90 ;
 	else if(c == 'W')
 			pars->ptr->angle = 180 ;
-	else if(c == 'S')
+	else if(c == 'N')
 			pars->ptr->angle = 270 ;
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/25 10:35:14 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/08/25 17:17:05 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,9 @@ void	ft_draw(t_tools *tools, int start_y, int start_x, int red)
 			y++;
 	}
 }
-
 void draw_direction_line(t_tools *tools,float angle)
 {
-    int line_length = 30;
+    int line_length = 150;
 
     int x;
 	int	y;
@@ -70,13 +69,30 @@ void draw_direction_line(t_tools *tools,float angle)
 		i++;
     }
 }
+void draw_fov(t_tools *tools)
+{
+    float range;
+    float start;
+    float end;
+    float angle;
+
+	range = 60.0;
+	start = (tools->angle - (range / 2)) * (PI / RAD);
+	end = (tools->angle + (range / 2)) * (PI / RAD);
+	angle = start;
+    while (angle <= end)
+	 {
+        draw_direction_line(tools, angle);
+        angle += 0.001;
+    }
+}
 void	orientations(t_tools *tools)
 {
 	float angle = tools->angle * (3.14159265 / 180.0);
 	tools->angle_rad = angle;
 	tools->x_direction = tools->x_direction * cos(angle);
 	tools->y_direction = tools->y_direction * sin(angle);
-	draw_direction_line(tools,angle);
+	// draw_direction_line(tools,angle);
 }
 void	put_player(t_tools *tools)
 {
@@ -97,19 +113,27 @@ void	put_player(t_tools *tools)
 	}
 	orientations(tools);
 }
-int	move_cos(t_tools *tools)
+int	move_sin(t_tools *tools, int player, char c)
 {
 	int tmp;
-	tmp = tools->player_x + cos(tools->angle_rad) * 10 ;
-	return(tmp);
-}
-int	move_sin(t_tools *tools)
-{
-	int tmp;
-	tmp = tools->player_y + sin(tools->angle_rad) * 10 ;
+	tmp = 0;
+	if(c == '-')
+		tmp = player - sin(tools->angle_rad) * 10 - 5;
+	else if(c == '+')
+		tmp = player + sin(tools->angle_rad) * 10 + 5;
 	return(tmp);
 }
 
+int	move_cos(t_tools *tools, int player, char c)
+{
+	int tmp;
+	tmp = 0;
+	if(c == '-')
+		tmp = player - cos(tools->angle_rad) * 10 - 15 ;
+	else if(c == '+')
+		tmp = player + cos(tools->angle_rad) * 10 + 15;
+	return(tmp);
+}
 int key_codes(int keycode, t_tools *tools)
 {
 	int x;
@@ -120,22 +144,27 @@ int key_codes(int keycode, t_tools *tools)
 		tools->angle -= 10;
 	if (keycode == CAMERA_RIGHT)
 		tools->angle += 10;
-	if (keycode == LEFT && tools->pars->land[y / 50][(x - 10) / 50] != '1')
-		tools->player_x -= 10;
-	else if (keycode == RIGHT && tools->pars->land[y / 50][(x + 10) / 50] != '1')
+	if (keycode == LEFT)
 	{
-		tools->player_x = tools->player_x + cos(tools->angle_rad) * 10 ;
-		tools->player_y = tools->player_y + sin(tools->angle_rad) * 10 ;
+		tools->angle_rad = (M_PI / 2) - tools->angle_rad;
+		tools->player_x += cos(tools->angle_rad) * 10;
+		tools->player_y -= sin(tools->angle_rad) * 10;
 	}
-	else if (keycode == DOWN && tools->pars->land[(y + 10) / 50][x / 50] != '1')
+	else if (keycode == RIGHT)
 	{
-		tools->player_x = tools->player_x + cos(tools->angle_rad) * 10 ;
-		tools->player_y = tools->player_y + sin(tools->angle_rad) * 10 ;
+		tools->angle_rad = (M_PI / 2) - tools->angle_rad;
+		tools->player_x -= cos(tools->angle_rad) * 10 ;
+		tools->player_y += sin(tools->angle_rad) * 10 ;
 	}
-	else if (keycode == UP && tools->pars->land[(move_sin(tools)) / 50][move_cos(tools) / 50] != '1')
+	else if (keycode == DOWN)
+	{
+		tools->player_x -= cos(tools->angle_rad) * 10 ;
+		tools->player_y -= sin(tools->angle_rad) * 10 ;
+	}
+	else if (keycode == UP)
 	{
 		tools->player_x += cos(tools->angle_rad) * 10 ;
-		tools->player_y = tools->player_y + sin(tools->angle_rad) * 10 ;
+		tools->player_y += sin(tools->angle_rad) * 10 ;
 	}
 	else if (keycode == ESC)
 		exit(0);
@@ -165,6 +194,7 @@ void	put_map(t_tools *tools)
 		i++;
 	}
 	put_player(tools);
+	draw_fov(tools);
 	mlx_put_image_to_window(tools->mlx, tools->win, tools->img.img, 0, 0);
 	return;
 }
@@ -196,8 +226,8 @@ void	graphic(t_tools *tools)
 	tools->win = mlx_new_window(tools->mlx, (biggest_line(tools) * 50), (50 * (tools->pars->land_range + 1)), "cub3D");
 	tools->img.img = mlx_new_image(tools->mlx, (biggest_line(tools) * 50), (50 * (tools->pars->land_range + 1)));
 	tools->img.addr = mlx_get_data_addr(tools->img.img, &tools->img.bits_per_pixel, &tools->img.line_length, &tools->img.endian);
-	tools->player_x = (tools->player_x * 50)+25;
-	tools->player_y = (tools->player_y * 50)+25;
+	tools->player_x = (tools->player_x * 50) + 25;
+	tools->player_y = (tools->player_y * 50) + 25;
 	// printf("player x = %d\n",tools->player_x);
 	// printf("player orientation = %d\n",tools->orientation);
 	put_map(tools);

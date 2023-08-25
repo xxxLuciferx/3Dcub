@@ -15,6 +15,8 @@
 #define DOWN 1
 #define CAMERA_LEFT 123
 #define CAMERA_RIGHT 124
+#define PI 3.14159265
+#define RAD 180.0
 
 
 #define RED	0xFF0000
