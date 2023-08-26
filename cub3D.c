@@ -6,13 +6,11 @@
 /*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/26 09:49:45 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/08/26 14:48:14 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-
 
 void	initiation(t_tools *tools)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:24:25 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/15 16:40:57 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/26 14:48:24 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	error_player(void)
 void	error_map(void)
 {
 	printf("\nError\n$ Invalid MAP format\n\n");
-	// while (1);
 	exit(1);
 }
 void	error_colors(void)
