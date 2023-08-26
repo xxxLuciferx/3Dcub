@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_walls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 12:42:04 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/17 14:31:57 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/26 09:47:17 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	if_line_of_walls(char *line)
 	int i;
 
 	i = 0;
-	while (line[i] != '\n' && line[i] != '\0')
+	while (line && line[i] != '\n' && line[i] != '\0')
 	{
 		if(line[i] != '1' && line[i] != ' ')
 		{

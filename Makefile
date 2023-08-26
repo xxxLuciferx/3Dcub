@@ -11,9 +11,10 @@ SRC = cub3D.c  \
 			   ft_walls.c \
 			    collect_map.c \
 				 maping.c \
-				  draw_lines.c
+				  draw_lines.c\
+				  	move_player.c \
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
 OBJ = ${SRC:.c=.o}
 
@@ -23,7 +24,7 @@ OBJ = ${SRC:.c=.o}
 all : $(NAME)
 
 $(NAME): $(OBJ)
-		cc -fsanitize=address -g -lmlx -framework OpenGL -framework AppKit $(CFLAGS) $^  -o $(NAME)
+		cc  -lmlx -framework OpenGL -framework AppKit $(CFLAGS) $^  -o $(NAME)
 
 
 clean : 

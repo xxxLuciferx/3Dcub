@@ -143,4 +143,8 @@ void	put_map(t_tools *tools);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void draw_direction_line(t_tools *tools,float angle);
 void	put_player(t_tools *tools);
+
+
+
+int key_codes(int keycode, t_tools *tools);
 #endif

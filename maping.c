@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maping.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:33:41 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/25 18:37:37 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/26 13:35:11 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void draw_fov(t_tools *tools)
 
 void	ft_draw(t_tools *tools, int start_y, int start_x, int red)
 {
+	(void) red;
 	int y = 0;
 	int x = 0;
 	while (y < 50)
@@ -45,7 +46,7 @@ void	ft_draw(t_tools *tools, int start_y, int start_x, int red)
 		}
 			my_mlx_pixel_put(&tools->img, start_x , start_y + y, 0xffd700);
 			y++;
-	}
+	}	
 }
 
 void	orientations(t_tools *tools)
@@ -54,7 +55,6 @@ void	orientations(t_tools *tools)
 	tools->angle_rad = angle;
 	tools->x_direction = tools->x_direction * cos(angle);
 	tools->y_direction = tools->y_direction * sin(angle);
-	// draw_direction_line(tools,angle);
 }
 
 void	put_player(t_tools *tools)
@@ -81,7 +81,7 @@ void	put_map(t_tools *tools)
 {
 	int i = 0;
 	int j = 0;
-	mlx_clear_window(tools->mlx, tools->win);
+	// mlx_clear_window(tools->mlx, tools->win);
 	while (tools->pars->land[i])
 	{
 		j = 0;
@@ -94,7 +94,6 @@ void	put_map(t_tools *tools)
 				ft_draw(tools, i * 50, j * 50, BLUE);
 			j++;
 		}
-		// my_mlx_pixel_put(&tools->img, i, j, 0xffd700);
 		i++;
 	}
 	put_player(tools);

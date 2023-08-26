@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_pars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:22:24 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/25 14:10:31 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/26 09:42:47 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,16 +100,14 @@ void	collect_texture_and_colors(t_pars *pars, int i)
 
 void	ft_map_copy(t_pars *pars, int pos)
 {
-	int	tmp;
 	int i;
 	
 	i = 0;
-	while (pars->map[pars->land_range])
-		pars->land_range++;
-	tmp = pars->land_range - 1;
-	pars->land_range = pars->land_range - pos;
-	pars->land = malloc(sizeof(char **) * pars->land_range + 1);
-	pars->land_range = 0;
+	while (pars->map[pos +i])
+		i++;
+	pars->land_range = i;
+	pars->land = malloc(sizeof(char *) * (pars->land_range + 1));
+	i = 0;
 	while (pars->map[pos])
 	{
 		pars->land[i] = ft_strdup(pars->map[pos]);
@@ -117,7 +115,6 @@ void	ft_map_copy(t_pars *pars, int pos)
 		i++;
 	}
 	pars->land[i] = NULL;
-	pars->land_range = i - 1;	
 	if_player_exist(pars);
 	// if_correct_map(pars);
 }

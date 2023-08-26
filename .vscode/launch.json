@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/yichiba/Desktop/cub3D-game",
-      "program": "/Users/yichiba/Desktop/cub3D-game/build/Debug/outDebug"
+      "cwd": "/Users/yichiba/Desktop/cub",
+      "program": "/Users/yichiba/Desktop/cub/build/Debug/outDebug"
     }
   ]
 }
