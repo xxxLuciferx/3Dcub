@@ -6,7 +6,7 @@
 /*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:43:57 by yichiba           #+#    #+#             */
-/*   Updated: 2023/08/26 15:19:25 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/08/26 17:30:04 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,9 @@ int key_codes(int keycode, t_tools *tools)
 {
 	if (keycode == CAMERA_LEFT)
 		tools->angle -= 10;
-	if (keycode == CAMERA_RIGHT)
+	else if (keycode == CAMERA_RIGHT)
 		tools->angle += 10;
-	if (keycode == LEFT )
+	else if (keycode == LEFT )
 		move_left(tools);
 	else if (keycode == RIGHT)
 		move_right(tools);

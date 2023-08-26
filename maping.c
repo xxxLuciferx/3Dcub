@@ -6,7 +6,7 @@
 /*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:33:41 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/26 15:17:41 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/08/26 17:23:00 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	ft_draw(t_tools *tools, int start_y, int start_x, int color)
 			x++;
 		}
 			my_mlx_pixel_put(&tools->img, start_x , start_y + y, 0xffd700);
+				// return;
 			y++;
 	}
 }
