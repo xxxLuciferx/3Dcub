@@ -6,7 +6,7 @@
 /*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:33:41 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/26 17:23:00 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/08/27 14:02:41 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,52 @@ void draw_fov(t_tools *tools)
     while (angle <= end)
 	{
         draw_direction_line(tools, angle);
-        angle += 0.001;
+        angle += 0.01;
     }
 }
 
-void	ft_draw(t_tools *tools, int start_y, int start_x, int color)
+// void	ft_draw_(t_tools *tools, float start_y, float start_x, int color)
+// {
+// 	float y = 0;
+// 	float x = 0;
+		
+// 	while (y < 50)
+// 	{
+// 		x = 0;
+// 		while(x < 50)
+// 		{
+			
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// }
+void	ft_draw(t_tools *tools, float start_y, float start_x, int color)
 {
-	int y = 0;
-	int x = 0;
+	float y = 0;
+	float x = 0;
+		
 	while (y < 50)
 	{
 		x = 0;
 		while(x < 50)
 		{
 			my_mlx_pixel_put(&tools->img, start_x + x, start_y + y, color);
-			my_mlx_pixel_put(&tools->img, start_x + x, start_y, 0xffd700);
+			if(color == RED)
+				my_mlx_pixel_put(&tools->img, start_x + x, start_y, RED);
+			else
+				my_mlx_pixel_put(&tools->img, start_x + x, start_y,0xffd700);	
+			if(color == RED && ((x == 0 && y == 0) || (x == 49 &&  y == 49) || (x == 0 && y == 49) || (x == 49 && y == 0)))
+					my_mlx_pixel_put(&tools->img, start_x + x, start_y + y, RED);
 			x++;
 		}
-			my_mlx_pixel_put(&tools->img, start_x , start_y + y, 0xffd700);
-				// return;
+			if(color == RED)
+				my_mlx_pixel_put(&tools->img, start_x + x, start_y, RED);
+			else
+				my_mlx_pixel_put(&tools->img, start_x , start_y + y, 0xffd700);
 			y++;
 	}
+	
 }
 
 void	orientations(t_tools *tools)
@@ -88,7 +113,7 @@ void	put_map(t_tools *tools)
 		while (tools->pars->land[i][j])
 		{
 			if(tools->pars->land[i][j] == '1')
-				ft_draw(tools, (float)i * 50, (float)j * 50, RED);
+				ft_draw(tools, i * 50, j * 50, RED);
 			else if(tools->pars->land[i][j] == '0' || tools->pars->land[i][j] == 'N' || tools->pars->land[i][j] == 'S' \
 						|| tools->pars->land[i][j] == 'W' || tools->pars->land[i][j] == 'E')
 				ft_draw(tools, (float)i * 50, (float)j * 50, BLUE);
