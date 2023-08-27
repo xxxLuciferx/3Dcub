@@ -13,6 +13,7 @@ SRC = cub3D.c  \
 				 maping.c \
 				  draw_lines.c\
 				  	move_player.c \
+					 ft_map_pos.c
 
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_lines.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:41:21 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/27 15:01:47 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/08/27 15:38:00 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ int    get_pixel_color(t_tools *tools, float x, float y)
             return (1);
     return (0);
 }
-
-
 void draw_direction_line(t_tools *tools,float angle)
 {
     float x;
@@ -56,13 +54,11 @@ void draw_direction_line(t_tools *tools,float angle)
 	{
         x = tools->player_x + i * cos(angle);
         y = tools->player_y + i * sin(angle);
-        // printf("%d, %d\n",(int)x/50,(int)y/50);
         if(get_pixel_color(tools, x, y) == 1)
         {
             break;
         }
         my_mlx_pixel_put(&tools->img, x, y, 0x00FF00);
-    // return;
 		i++;
     }
 }

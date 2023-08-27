@@ -15,12 +15,12 @@
 #define DOWN 1
 #define CAMERA_LEFT 123
 #define CAMERA_RIGHT 124
-#define PI 3.14159265
 #define RAD 180.0
 
 
 #define RED	0xFF0000
 #define BLUE 0xFF
+#define YELLOW 0xFFFFFF
 
 
 char	**ft_split(char const *s, char *c);
@@ -146,7 +146,12 @@ void 	draw_direction_line(t_tools *tools,float angle);
 void	put_player(t_tools *tools);
 int    get_pixel_color(t_tools *tools, float x, float y);
 
-
+//MAP POS (ft_map_pos.c)
+void	checking_data(t_pars *pars);
+void	map_lines(char *buffer, int pos);
+int	first_in_map(char *buffer, int pos);
+void	check_new_lines(char *buffer,int start, int end);
+int	last_char_pos(char *line, int last_pos);
 
 int key_codes(int keycode, t_tools *tools);
 #endif

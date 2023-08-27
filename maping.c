@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maping.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:33:41 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/27 15:14:21 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/08/27 15:35:04 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void draw_fov(t_tools *tools)
     while (angle <= end)
 	{
         draw_direction_line(tools, angle);
-        angle += 0.01;
+        angle += 0.001;
     }
 }
 
@@ -51,7 +51,6 @@ void	ft_draw(t_tools *tools, float start_y, float start_x, int color)
 		while(x <= 50)
 		{
 			my_pixel_put(tools, start_x + x, start_y + y, color);
-			// my_mlx_pixel_put(tools, start_x + x, start_y + y, color);
 			my_pixel_put(tools, start_x + x, start_y, 0xffd700);
 			x++;
 		}
@@ -79,7 +78,7 @@ void	put_player(t_tools *tools)
 	{
 		while (j < 10)
 		{
-			my_mlx_pixel_put(&tools->img, x + i, y + j, 0xFFFFFF);
+			my_mlx_pixel_put(&tools->img, x + i, y + j, YELLOW);
 			j++;
 		}
 		j = 0;
@@ -92,7 +91,6 @@ void	put_map(t_tools *tools)
 {
 	int i = 0;
 	int j = 0;
-	// mlx_clear_window(tools->mlx, tools->win);
 	while (tools->pars->land[i])
 	{
 		j = 0;
@@ -100,8 +98,7 @@ void	put_map(t_tools *tools)
 		{
 			if(tools->pars->land[i][j] == '1')
 				ft_draw(tools, i * 50, j * 50, RED);
-			else if(tools->pars->land[i][j] == '0' || tools->pars->land[i][j] == 'N' || tools->pars->land[i][j] == 'S' \
-						|| tools->pars->land[i][j] == 'W' || tools->pars->land[i][j] == 'E')
+			else
 				ft_draw(tools, (float)i * 50, (float)j * 50, BLUE);
 			j++;
 		}
@@ -110,5 +107,4 @@ void	put_map(t_tools *tools)
 	put_player(tools);
 	draw_fov(tools);
 	mlx_put_image_to_window(tools->mlx, tools->win, tools->img.img, 0, 0);
-	return;
 }
