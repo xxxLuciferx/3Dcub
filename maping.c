@@ -6,7 +6,7 @@
 /*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:33:41 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/27 14:02:41 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/08/27 15:14:21 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,16 @@ void draw_fov(t_tools *tools)
     }
 }
 
-// void	ft_draw_(t_tools *tools, float start_y, float start_x, int color)
-// {
-// 	float y = 0;
-// 	float x = 0;
-		
-// 	while (y < 50)
-// 	{
-// 		x = 0;
-// 		while(x < 50)
-// 		{
-			
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// }
+void	my_pixel_put(t_tools *tools, int x, int y, int color)
+{
+    t_data *data = &tools->img;
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+    if(get_pixel_color(tools,x,y) == 0)
+		*(unsigned int*)dst = color;
+}
+
 void	ft_draw(t_tools *tools, float start_y, float start_x, int color)
 {
 	float y = 0;
@@ -54,24 +48,16 @@ void	ft_draw(t_tools *tools, float start_y, float start_x, int color)
 	while (y < 50)
 	{
 		x = 0;
-		while(x < 50)
+		while(x <= 50)
 		{
-			my_mlx_pixel_put(&tools->img, start_x + x, start_y + y, color);
-			if(color == RED)
-				my_mlx_pixel_put(&tools->img, start_x + x, start_y, RED);
-			else
-				my_mlx_pixel_put(&tools->img, start_x + x, start_y,0xffd700);	
-			if(color == RED && ((x == 0 && y == 0) || (x == 49 &&  y == 49) || (x == 0 && y == 49) || (x == 49 && y == 0)))
-					my_mlx_pixel_put(&tools->img, start_x + x, start_y + y, RED);
+			my_pixel_put(tools, start_x + x, start_y + y, color);
+			// my_mlx_pixel_put(tools, start_x + x, start_y + y, color);
+			my_pixel_put(tools, start_x + x, start_y, 0xffd700);
 			x++;
 		}
-			if(color == RED)
-				my_mlx_pixel_put(&tools->img, start_x + x, start_y, RED);
-			else
-				my_mlx_pixel_put(&tools->img, start_x , start_y + y, 0xffd700);
+			my_pixel_put(tools, start_x , start_y + y, 0xffd700);
 			y++;
 	}
-	
 }
 
 void	orientations(t_tools *tools)
