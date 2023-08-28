@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:43:57 by yichiba           #+#    #+#             */
-/*   Updated: 2023/08/27 15:33:46 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/28 19:30:15 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,9 @@ void	move_right(t_tools *tools)
 	}
 }
 
-int key_codes(int keycode, t_tools *tools)
+int key_codes(int keycode, void *ptr)
 {
+	t_tools *tools = (t_tools *)ptr;
 	if (keycode == CAMERA_LEFT)
 		tools->angle -= 10;
 	else if (keycode == CAMERA_RIGHT)

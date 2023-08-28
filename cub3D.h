@@ -8,6 +8,8 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
+
+
 #define ESC 53
 #define LEFT 0
 #define RIGHT 2
@@ -43,7 +45,6 @@ typedef struct	s_data {
 
 typedef struct s_ray
 {
-
 	int				indice;
 	float			x;
 	float			y;
@@ -170,5 +171,6 @@ t_ray	*ft_lstnew(t_tools *tools, float angle, int len, int indice);
 
 
 void    print_rays(t_ray *rays);
-int key_codes(int keycode, t_tools *tools);
+// int key_codes(int keycode, t_tools *tools);
+int key_codes(int keycode, void *ptr);
 #endif

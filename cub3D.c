@@ -6,7 +6,7 @@
 /*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/28 15:44:06 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/08/28 18:46:43 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	graphic(t_tools *tools)
 	put_map(tools);
 	mlx_put_image_to_window(tools->mlx, tools->win, tools->img.img, 0, 0);
 	mlx_hook(tools->win, 2, 1, key_codes, tools);
+	// mlx_loop_hook(tools->mlx,key_codes, (void*) tools);
 	mlx_loop(tools->mlx);
 } 
 int main(int argc, char **argv)
