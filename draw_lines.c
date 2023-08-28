@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_lines.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:41:21 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/27 15:38:00 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/28 15:47:41 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,26 @@ int    get_pixel_color(t_tools *tools, float x, float y)
             return (1);
     return (0);
 }
-void draw_direction_line(t_tools *tools,float angle)
+
+
+void draw_direction_line(t_tools *tools,float angle, int indice)
 {
     float x;
 	float	y;
-	int i = 1;
-    
-    while(i) 
+	int len_line;
+
+    len_line = 0;    
+    while(1) 
 	{
-        x = tools->player_x + i * cos(angle);
-        y = tools->player_y + i * sin(angle);
+        x = tools->player_x + len_line * cos(angle);
+        y = tools->player_y + len_line * sin(angle);
         if(get_pixel_color(tools, x, y) == 1)
         {
+            ft_lstadd_back(&tools->rays, ft_lstnew(tools, angle, len_line, indice));
             break;
         }
         my_mlx_pixel_put(&tools->img, x, y, 0x00FF00);
-		i++;
+		len_line++;
     }
+    
 }

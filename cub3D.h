@@ -41,10 +41,21 @@ typedef struct	s_data {
 	int		endian;
 }				t_data;
 
+typedef struct s_ray
+{
+
+	int				indice;
+	float			x;
+	float			y;
+	float			angle;
+	int				len;
+	struct s_ray	*next;
+}t_ray;
 
 
 typedef struct	s_tools
 {
+	t_ray	*rays;
 	t_pars	*pars;
 	void	*mlx;
 	void	*win;
@@ -125,7 +136,7 @@ void	if_valid_string(char *line);
 void	check_next_wall(t_pars *pars, int pos, int line_pos);
 void	put_map(t_tools *tools);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	draw_direction_line(t_tools *tools,float angle);
+void	draw_direction_line(t_tools *tools,float angle, int indice);
 int	biggest_line(t_tools *tools);
 
 //(CEILING && FLOOR COLLECTING) (collect_map.c)
@@ -142,7 +153,6 @@ void	put_map(t_tools *tools);
  
  //DRAW LINES
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void 	draw_direction_line(t_tools *tools,float angle);
 void	put_player(t_tools *tools);
 int    get_pixel_color(t_tools *tools, float x, float y);
 
@@ -153,5 +163,12 @@ int	first_in_map(char *buffer, int pos);
 void	check_new_lines(char *buffer,int start, int end);
 int	last_char_pos(char *line, int last_pos);
 
+// FT_CALLOC
+void	*ft_calloc(size_t count, size_t size);
+void	ft_lstadd_back(t_ray **lst, t_ray *new);
+t_ray	*ft_lstnew(t_tools *tools, float angle, int len, int indice);
+
+
+void    print_rays(t_ray *rays);
 int key_codes(int keycode, t_tools *tools);
 #endif

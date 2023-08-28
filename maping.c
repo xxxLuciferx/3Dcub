@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maping.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:33:41 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/27 15:35:04 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/28 16:14:13 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,24 @@
 
 void draw_fov(t_tools *tools)
 {
-    float range;
-    float start;
-    float end;
-    float angle;
+    float 	range;
+    float 	start;
+    float 	end;
+    float 	angle;
+	int		indice;
 
-	range = 60.0;
-	start = (tools->angle - (range / 2)) * (M_PI / RAD);
-	end = (tools->angle + (range / 2)) * (M_PI / RAD);
+	indice = 0;
+	range = (60.0 * M_PI)/RAD;
+	start = (tools->angle_rad - (range / 2));
+	end = (tools->angle_rad + (range / 2));
 	angle = start;
     while (angle <= end)
 	{
-        draw_direction_line(tools, angle);
-        angle += 0.001;
+        draw_direction_line(tools, angle, indice);
+        angle +=range/(biggest_line(tools) *50);
+		indice++;
     }
+	print_rays(tools->rays);
 }
 
 void	my_pixel_put(t_tools *tools, int x, int y, int color)

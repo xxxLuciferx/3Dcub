@@ -6,7 +6,7 @@
 /*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/27 13:18:22 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/08/28 15:44:06 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	initiation(t_tools *tools)
 	tools->pars->west_path = NULL;
 	tools->pars->east_path = NULL;
 	tools->pars->land_range = 0;
+	tools->rays = NULL;
 }
 
 int	biggest_line(t_tools *tools)

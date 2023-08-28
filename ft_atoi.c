@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 11:41:07 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/14 08:35:58 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/28 15:14:07 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*ft_strdup(const char *s1)
 	char	*m;
 
 	i = ft_strlen(s1);
-	c = (char *)malloc(i + 1);
+	c = (char *)ft_calloc((i+1),sizeof(char));
 	m = c;
 	if (!c)
 		return (NULL);
