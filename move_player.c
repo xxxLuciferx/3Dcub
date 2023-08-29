@@ -6,7 +6,7 @@
 /*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:43:57 by yichiba           #+#    #+#             */
-/*   Updated: 2023/08/28 19:30:15 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/08/28 22:46:55 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,8 @@ int key_codes(int keycode, void *ptr)
 		move_forward(tools);
 	else if (keycode == ESC)
 		exit(0);
+	else
+		return 0;
 	put_map(tools);
 	mlx_put_image_to_window(tools->mlx, tools->win, tools->img.img, 0, 0);
 	return (0);
