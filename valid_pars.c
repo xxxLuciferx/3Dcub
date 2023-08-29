@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_pars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:22:24 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/26 09:42:47 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/08/29 18:16:31 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,13 @@ void	if_one_player(t_pars *pars)
 			{
 				pars->ptr->player_y = i;
 				pars->ptr->player_x = j;
-				
 				collect_direction(pars->land[i][j], pars);
 				counter++;
 			}
-			// else if(i != pars->land_range && pars->land[i][j] != '0' && pars->land[i][j] != '1' && i != 0)
-			// 	error_map();
 			j++;
 		}
 		i++;
 	}
-	// printf("%s\n", pars->land[pars->land_range]);
 	if(counter != 1)
 		error_player();
 }
@@ -85,9 +81,15 @@ void		if_player_exist(t_pars *pars)
 void	collect_texture_and_colors(t_pars *pars, int i)
 {
 	if (pars->map[i][0] == 'C')
-		ceiling_colors(pars, i);
+	{
+		pars->ceilling_color = ceiling_colors(pars, i);
+		// printf("ceiling = %u\n", pars->ceilling_color); // testing
+	}
 	else if (pars->map[i][0] == 'F')
-		floor_colors(pars, i);
+	{
+		pars->floor_color = floor_colors(pars, i);
+		// printf("Floor = %u\n",pars->floor_color); // testing
+	}
 	else if (pars->map[i][0] == 'N' && pars->map[i][1] == 'O')
 		north_path(pars, i);
 	else if (pars->map[i][0] == 'S' && pars->map[i][1] == 'O')
@@ -96,6 +98,7 @@ void	collect_texture_and_colors(t_pars *pars, int i)
 		west_path(pars, i);
 	else if (pars->map[i][0] == 'E' && pars->map[i][1] == 'A')
 		east_path(pars, i);
+	
 }
 
 void	ft_map_copy(t_pars *pars, int pos)

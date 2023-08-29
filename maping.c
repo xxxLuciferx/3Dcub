@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maping.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:33:41 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/28 22:44:01 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/08/29 18:02:21 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void draw_fov(t_tools *tools)
         angle +=range/(biggest_line(tools) *50);
 		indice++;
     }
-	print_rays(tools->rays);
+	// print_rays(tools->rays);
 }
 
 void	my_pixel_put(t_tools *tools, int x, int y, int color)

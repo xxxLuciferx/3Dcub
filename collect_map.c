@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:46:35 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/16 07:34:59 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/29 18:01:05 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	if_valid_string(char *line)
 		error_colors();
 }
 
-void		ceiling_colors(t_pars *pars, int i)
+unsigned int		ceiling_colors(t_pars *pars, int i)
 {
 	char	**tmp;
 	
@@ -50,9 +50,11 @@ void		ceiling_colors(t_pars *pars, int i)
 		error_colors();
 	if(pars->C_B < 0 || pars->C_B > 255)
 		error_colors();
+	return ((pars->C_R << 16) | (pars->C_G << 8) | pars->C_B);
+	
 }
 
-void	floor_colors(t_pars *pars, int i)
+unsigned int	floor_colors(t_pars *pars, int i)
 {
 	char	**tmp;
 	
@@ -68,4 +70,5 @@ void	floor_colors(t_pars *pars, int i)
 		error_colors();
 	if(pars->F_B < 0 || pars->F_B > 255)
 		error_colors();
+	return ((pars->F_R << 16) | (pars->F_G << 8) | pars->F_B);
 }

@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:14:58 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/14 12:28:24 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/29 18:03:59 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	if_valid_texture(char *texture) /// REMEMBER THIS
 	int	i;
 
 	i = 2;
-	// printf(">>>> if_valid_texture >> %s\n", texture);
 	if(texture[0] != '.' || texture[1] != '/')
 		error_path();
 	while (texture[i])
@@ -50,10 +49,7 @@ int	ft_strcmp(char *s1, char *s2)
 void	north_path(t_pars *pars, int i)
 {
 	char	**tmp;
-	// char	spliter;
-	
-	// spliter = find_spliter(pars->map[i]);
-	
+
 	tmp = ft_split(pars->map[i], " 	\n");
 	if(ft_strcmp(tmp[0], "NO") == 0 || tmp[2] != NULL)
 		error_path();
@@ -65,9 +61,7 @@ void	north_path(t_pars *pars, int i)
 void	south_path(t_pars *pars, int i)
 {
 	char	**tmp;
-	// char	spliter;
 	
-	// spliter = find_spliter(pars->map[i]);	
 	tmp = ft_split(pars->map[i], " 	\n");
 	if(ft_strcmp(tmp[0], "SO") == 0 || tmp[2] != NULL)
 		error_path();
@@ -77,9 +71,7 @@ void	south_path(t_pars *pars, int i)
 void	west_path(t_pars *pars, int i)
 {
 	char	**tmp;
-	// char	spliter;
 
-	// spliter = find_spliter(pars->map[i]);
 	tmp = ft_split(pars->map[i], " 	\n");
 	if(ft_strcmp(tmp[0], "WE") == 0 || tmp[2] != NULL)
 		error_path();
@@ -91,9 +83,7 @@ void	west_path(t_pars *pars, int i)
 void	east_path(t_pars *pars, int i)
 {
 	char	**tmp;
-	// char	spliter;
 
-	// spliter = find_spliter(pars->map[i]);
 	tmp = ft_split(pars->map[i], " 	\n");
 	if(ft_strcmp(tmp[0], "EA") == 0 || tmp[2] != NULL)
 		error_path();

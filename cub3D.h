@@ -72,6 +72,9 @@ typedef struct	s_tools
 
 typedef	struct s_pars
 {
+	unsigned int ceilling_color;
+	unsigned int floor_color;
+
 	int		C_R;
 	int		C_G;
 	int		C_B;
@@ -79,6 +82,7 @@ typedef	struct s_pars
 	int		F_R;
 	int		F_G;
 	int		F_B;
+
 
 	char	**map;
 	char	**land;
@@ -141,9 +145,9 @@ void	draw_direction_line(t_tools *tools,float angle, int indice);
 int	biggest_line(t_tools *tools);
 
 //(CEILING && FLOOR COLLECTING) (collect_map.c)
-void	ceiling_colors(t_pars *pars, int i);
-void	floor_colors(t_pars *pars, int i);
-void	if_valid_string(char *line);
+unsigned int	ceiling_colors(t_pars *pars, int i);
+unsigned int	floor_colors(t_pars *pars, int i);
+void			if_valid_string(char *line);
 
 //maping.c MAP
 void	draw_fov(t_tools *tools);
