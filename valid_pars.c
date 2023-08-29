@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:22:24 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/29 18:16:31 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/29 18:17:52 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,9 @@ void		if_player_exist(t_pars *pars)
 void	collect_texture_and_colors(t_pars *pars, int i)
 {
 	if (pars->map[i][0] == 'C')
-	{
 		pars->ceilling_color = ceiling_colors(pars, i);
-		// printf("ceiling = %u\n", pars->ceilling_color); // testing
-	}
 	else if (pars->map[i][0] == 'F')
-	{
 		pars->floor_color = floor_colors(pars, i);
-		// printf("Floor = %u\n",pars->floor_color); // testing
-	}
 	else if (pars->map[i][0] == 'N' && pars->map[i][1] == 'O')
 		north_path(pars, i);
 	else if (pars->map[i][0] == 'S' && pars->map[i][1] == 'O')
