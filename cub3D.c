@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/28 18:46:43 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/08/30 14:48:17 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,12 @@ int	biggest_line(t_tools *tools)
 }
 void	graphic(t_tools *tools)
 {
+	int line;
+
+	line = biggest_line(tools);
 	tools->mlx = mlx_init();
-	tools->win = mlx_new_window(tools->mlx, (biggest_line(tools) * 50), (50 * tools->pars->land_range), "cub3D");
-	tools->img.img = mlx_new_image(tools->mlx, (biggest_line(tools) * 50), (50 * tools->pars->land_range ));
+	tools->win = mlx_new_window(tools->mlx, (line * 50 + line), (50 * tools->pars->land_range), "cub3D");
+	tools->img.img = mlx_new_image(tools->mlx, (line * 50 + line), (50 * tools->pars->land_range ));
 	tools->img.addr = mlx_get_data_addr(tools->img.img, &tools->img.bits_per_pixel, &tools->img.line_length, &tools->img.endian);
 	tools->player_x = (tools->player_x * 50) + 25;
 	tools->player_y = (tools->player_y * 50) + 25;
