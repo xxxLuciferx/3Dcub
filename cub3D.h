@@ -107,8 +107,11 @@ void	east_path(t_pars *pars, int i);
 void	error_map(void);
 void	error_colors(void);
 void	error_path(void);
-void	if_all_textures_exist(t_pars *pars);
 void	error_player(void);
+void	error_file(void);
+
+
+// void	if_all_textures_exist(t_pars *pars);
 
 //LEAKS (leaks.c)
 void	free_arrays(char **array);

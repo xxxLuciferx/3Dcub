@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:33:41 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/29 18:02:21 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/30 12:50:31 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	my_pixel_put(t_tools *tools, int x, int y, int color)
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
     if(get_pixel_color(tools,x,y) == 0)
 		*(unsigned int*)dst = color;
+	
 }
 
 void	ft_draw(t_tools *tools, float start_y, float start_x, int color)
