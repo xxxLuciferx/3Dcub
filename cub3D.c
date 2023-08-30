@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/30 14:48:17 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/30 18:19:24 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,25 +53,32 @@ int	biggest_line(t_tools *tools)
 }
 void	graphic(t_tools *tools)
 {
-	int line;
-
-	line = biggest_line(tools);
+	int p_line;
+	int p_width;
+	
+	p_line = biggest_line(tools) * 50;
+	p_width = tools->pars->land_range * 50;
+	if(p_line > 2800 || p_width > 5100)
+	{
+		printf("Error\nResolution is too big\n");
+		exit(0);
+	}
 	tools->mlx = mlx_init();
-	tools->win = mlx_new_window(tools->mlx, (line * 50 + line), (50 * tools->pars->land_range), "cub3D");
-	tools->img.img = mlx_new_image(tools->mlx, (line * 50 + line), (50 * tools->pars->land_range ));
+	tools->win = mlx_new_window(tools->mlx, p_line, p_width, "cub3D");
+	tools->img.img = mlx_new_image(tools->mlx, p_line, p_width);
 	tools->img.addr = mlx_get_data_addr(tools->img.img, &tools->img.bits_per_pixel, &tools->img.line_length, &tools->img.endian);
 	tools->player_x = (tools->player_x * 50) + 25;
 	tools->player_y = (tools->player_y * 50) + 25;
 	put_map(tools);
 	mlx_put_image_to_window(tools->mlx, tools->win, tools->img.img, 0, 0);
 	mlx_hook(tools->win, 2, 1, key_codes, tools);
-	// mlx_loop_hook(tools->mlx,key_codes, (void*) tools);
 	mlx_loop(tools->mlx);
-} 
+}
+
 int main(int argc, char **argv)
 {
 	t_tools tools;
-	
+
 	valid_entry(argc, argv, &tools);
 	graphic(&tools);
 }

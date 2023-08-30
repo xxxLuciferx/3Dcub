@@ -65,8 +65,8 @@ typedef struct	s_tools
 	float 	angle_rad;
 	int		x_direction;
 	int		y_direction;
-	int		player_x;
-	int		player_y;
+	float		player_x;
+	float		player_y;
 	t_data	img;
 }				t_tools;
 

@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:40:50 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/30 12:15:00 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/30 18:02:18 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	last_char_pos(char *line, int last_pos)
 		if(line[last_pos] == ' ' || line[last_pos] == '\t')
 			last_pos--;
 		else if(line[last_pos] == '1')
-			break;
+			return (last_pos);
 		else
 			error_map();
 	}

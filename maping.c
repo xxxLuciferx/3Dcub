@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:33:41 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/30 12:50:31 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/30 18:20:10 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ void draw_fov(t_tools *tools)
 	range = (60.0 * M_PI)/RAD;
 	start = (tools->angle_rad - (range / 2));
 	end = (tools->angle_rad + (range / 2));
-	angle = start;
+	angle = tools->angle_rad;
     while (angle <= end)
 	{
         draw_direction_line(tools, angle, indice);
         angle +=range/(biggest_line(tools) *50);
 		indice++;
+		break;
     }
 	// print_rays(tools->rays);
 }
@@ -49,11 +50,11 @@ void	ft_draw(t_tools *tools, float start_y, float start_x, int color)
 {
 	float y = 0;
 	float x = 0;
-		
+
 	while (y < 50)
 	{
 		x = 0;
-		while(x <= 50)
+		while(x < 50)
 		{
 			my_pixel_put(tools, start_x + x, start_y + y, color);
 			my_pixel_put(tools, start_x + x, start_y, 0xffd700);
@@ -103,7 +104,7 @@ void	put_map(t_tools *tools)
 		{
 			if(tools->pars->land[i][j] == '1')
 				ft_draw(tools, i * 50, j * 50, RED);
-			else
+			else if(tools->pars->land[i][j] != ' ')
 				ft_draw(tools, (float)i * 50, (float)j * 50, BLUE);
 			j++;
 		}

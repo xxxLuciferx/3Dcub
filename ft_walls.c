@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_walls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 12:42:04 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/26 09:47:17 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/08/30 18:07:11 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,16 @@ void	left_wall(t_pars *pars)
 int	allowed_contact(char c)
 {
 	if(c != '1' && c != '0' && c != 'N' && c != 'S' && c != 'W' && c != 'E')
+	{
+		// printf("c = %c\n", c);
 		return(1);
+	}
 	return(0);
 }
 
 void	zero_sides_verification(char **land, int pos_i, int pos_j)
 {
+	// printf("HELLOOO\n");
 	if(allowed_contact(land[pos_i - 1][pos_j]))
 		error_map();
 	else if(allowed_contact(land[pos_i + 1][pos_j]))
