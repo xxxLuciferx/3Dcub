@@ -18,6 +18,8 @@
 #define CAMERA_LEFT 123
 #define CAMERA_RIGHT 124
 #define RAD 180.0
+#define MAC_X 2550
+#define MAC_Y 1400
 
 
 #define RED	0xFF0000
@@ -29,7 +31,6 @@ char	**ft_split(char const *s, char *c);
 int		ft_atoi(const char *str);
 char	*ft_strdup(const char *s1);
 size_t	ft_strlen(const char *s);
-char	*ft_strtrim(char const *s1, char const *set);
 
 
 
@@ -167,7 +168,7 @@ int    get_pixel_color(t_tools *tools, float x, float y);
 //MAP POS (ft_map_pos.c)
 void	checking_data(t_pars *pars);
 void	map_lines(char *buffer, int pos);
-int	first_in_map(char *buffer, int pos);
+int		first_in_map(char *buffer, int pos);
 void	check_new_lines(char *buffer,int start, int end);
 int	last_char_pos(char *line, int last_pos);
 

@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:33:41 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/30 18:20:10 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/30 18:54:51 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,12 @@ void draw_fov(t_tools *tools)
 	range = (60.0 * M_PI)/RAD;
 	start = (tools->angle_rad - (range / 2));
 	end = (tools->angle_rad + (range / 2));
-	angle = tools->angle_rad;
+	angle = start;
     while (angle <= end)
 	{
         draw_direction_line(tools, angle, indice);
         angle +=range/(biggest_line(tools) *50);
 		indice++;
-		break;
     }
 	// print_rays(tools->rays);
 }

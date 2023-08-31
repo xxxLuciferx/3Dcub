@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/30 18:19:24 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/31 10:10:28 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	graphic(t_tools *tools)
 	
 	p_line = biggest_line(tools) * 50;
 	p_width = tools->pars->land_range * 50;
-	if(p_line > 2800 || p_width > 5100)
+	if(p_line > MAC_X || p_width > MAC_Y)
 	{
 		printf("Error\nResolution is too big\n");
 		exit(0);

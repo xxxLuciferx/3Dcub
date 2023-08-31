@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:40:50 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/30 18:02:18 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/30 18:56:26 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@ void	checking_data(t_pars *pars)
 
 	i = 0;
 	if_directions_and_colors_exist(pars->map);
-	// for (size_t i = 0; pars->map[i]; i++)
-	// {
-	// 	printf("%s\n", pars->map[i]);
-	// }
-	
-	// exit(0);
 	while (pars->map[i])
 	{
 		collect_texture_and_colors(pars, i);
