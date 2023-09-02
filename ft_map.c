@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:15:18 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/30 18:18:33 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/31 11:10:32 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ void	reading_map(t_tools *tools, char *av)
 {
 	int		fd;
 	int		i;
-	char	buffer[2001];
+	char	buffer[READER];
 
 	i = 0;
 	tools->pars = malloc(sizeof(t_pars));
 	initiation(tools);
 	fd = open(av, O_RDONLY, NULL);
-	i = read(fd, buffer, 2000);
+	i = read(fd, buffer, READER - 1);
 	if(i <= 0)
 		error_file();
 	buffer[i] = '\0';
@@ -58,7 +58,6 @@ void	reading_map(t_tools *tools, char *av)
 	check_new_lines(buffer, first_in_map(buffer, i), i);
 	tools->pars->map = ft_split(buffer, "\n");
 	checking_data(tools->pars);
-
 }
 
 void	valid_entry(int ac, char **av, t_tools *tools)

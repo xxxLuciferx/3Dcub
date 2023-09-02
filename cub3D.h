@@ -18,8 +18,9 @@
 #define CAMERA_LEFT 123
 #define CAMERA_RIGHT 124
 #define RAD 180.0
-#define MAC_X 2550
-#define MAC_Y 1400
+#define MAC_PX 2550
+#define MAC_PY 1400
+#define READER 30000
 
 
 #define RED	0xFF0000
@@ -79,7 +80,6 @@ typedef	struct s_pars
 	int		C_R;
 	int		C_G;
 	int		C_B;
-
 	int		F_R;
 	int		F_G;
 	int		F_B;

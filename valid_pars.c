@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:22:24 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/29 18:17:52 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/08/31 11:09:13 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	if_one_player(t_pars *pars)
 	i = 0;
 	j = 0;
 	counter = 0;
-	
 	while (pars->land[i])
 	{
 		j = 0;
