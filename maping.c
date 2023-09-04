@@ -3,36 +3,127 @@
 /*                                                        :::      ::::::::   */
 /*   maping.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:33:41 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/30 18:54:51 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/04 15:01:17 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
+
+float	normalize_angle(float angle)
+{
+	angle = fmodf(angle, 2 * M_PI);
+		if(angle < 0)
+			angle += 2 * M_PI;
+	return(angle);
+}
+
+t_ray	**creat_rays_table(int len)
+{
+	printf("creat_rays_table\n");
+    t_ray** rays;
+	int i = 0;
+    rays = (t_ray **)malloc(len * sizeof(t_ray *));
+    
+    if (rays == NULL)
+		return NULL;
+	while(i < len)
+   	{
+        rays[i] = ft_lstnew(i);
+		i++;
+    }
+    return rays;
+}
+
+
 void draw_fov(t_tools *tools)
 {
-    float 	range;
-    float 	start;
-    float 	end;
     float 	angle;
-	int		indice;
+	int 	i;
+	static	int old;
 
-	indice = 0;
-	range = (60.0 * M_PI)/RAD;
-	start = (tools->angle_rad - (range / 2));
-	end = (tools->angle_rad + (range / 2));
-	angle = start;
-    while (angle <= end)
-	{
-        draw_direction_line(tools, angle, indice);
-        angle +=range/(biggest_line(tools) *50);
-		indice++;
+	tools->range = (60.0 * M_PI)/RAD;
+	angle = (tools->angle_rad - (tools->range / 2));
+	i = 0;
+		system("clear");
+    while (i < 2)
+	{angle = normalize_angle(angle);
+		if(old++ == 0)
+			tools->rays = creat_rays_table(2);
+		update_rays(tools->rays[i], angle, intersection(tools, tools->rays[i], angle), i);
+		draw_line_dda(tools, tools->rays[i]->x, tools->rays[i]->y);
+        angle +=tools->range/(biggest_line(tools) *50);
+		
+		i++;
     }
-	// print_rays(tools->rays);
+		print_rays(tools);
 }
+
+// void draw_fov(t_tools *tools)
+// {
+//     float 	angle;
+// 	float	x;
+// 	float	y;
+// 	int 	i;
+// 	static	int old = 0;
+
+// 	tools->range = (60.0 * M_PI)/RAD;
+// 	angle = (tools->angle_rad - (tools->range / 2));
+// 	i = 0;
+//     while (i < tools->lenght)
+// 	{
+// 		angle = normalize_angle(angle);
+// 		if(old++ <= i)
+// 			ft_lstadd_back(&tools->rays, ft_lstnew(tools, angle, intersection(tools, &x, &y,angle), i));
+// 		else
+// 			update_rays(tools, angle, intersection(tools, &x, &y,angle), i);
+// 		draw_line_dda(tools, x,y);
+//         angle +=tools->range/(biggest_line(tools) *50);
+// 		// break;
+// 		i++;
+//     }
+// 	print_rays(tools->rays);
+// 	// exit(0);
+// }
+
+// void draw_fov(t_tools *tools)
+// {
+//     float 	angle;
+// 	float	x;
+// 	float	y;
+// 	int 	i;
+// 	static	int old = 0;
+// 	int len = 0;
+
+// 	tools->range = (60.0 * M_PI)/RAD;
+// 	angle = (tools->angle_rad - (tools->range / 2));
+// 	i = 0;
+//     while (i < tools->lenght)
+// 	{
+// 		angle = normalize_angle(angle);
+// 		len = intersection(tools, &x, &y,angle);
+// 		if(old <= i)
+// 		{
+// 			ft_lstadd_back(&tools->rays, ft_lstnew(tools, angle, len, i));
+// 			old++;
+// 			printf("create them\n");
+// 		}
+// 		else
+// 		{
+// 			printf("update\n");
+// 			update_rays(tools, angle, len, i);
+// 		}
+// 		draw_line_dda(tools, x,y);
+//         angle +=tools->range/(biggest_line(tools) *50);
+// 		// break;
+// 		i++;
+//     }
+// 	// print_rays(tools->rays);
+// 	// exit(0);
+// }
 
 void	my_pixel_put(t_tools *tools, int x, int y, int color)
 {
@@ -74,8 +165,8 @@ void	orientations(t_tools *tools)
 
 void	put_player(t_tools *tools)
 {
-	int x = tools->player_x - 5;
-	int y = tools->player_y - 5;
+	float x = tools->player_x - 5;
+	float y = tools->player_y - 5;
 	int i = 0;
 	int j = 0;
 	

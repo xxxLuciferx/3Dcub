@@ -14,7 +14,7 @@ SRC = cub3D.c  \
 				  draw_lines.c\
 				  	move_player.c \
 					 ft_map_pos.c \
-					  ft_calloc.c print.c
+					  ft_calloc.c print.c intersections.c
 
 
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g

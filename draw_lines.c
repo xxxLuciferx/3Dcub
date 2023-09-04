@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_lines.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:41:21 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/30 12:53:26 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/04 13:53:29 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,48 +44,42 @@ int    get_pixel_color(t_tools *tools, float x, float y)
             return (1);
     return (0);
 }
-void    update_rays(t_tools *tools, float angle, int len_line, int indice)
+void    update_rays(t_ray  *ray, float angle, int len_line, int indice)
 {
-    t_ray *ray = tools->rays;
-    while(ray)
-    {
-        if(ray->indice == indice)
-            {
-                ray->angle = angle; // accumulee 
-                ray->len = len_line;
-                ray->x = tools->player_x + len_line * cos(angle);
-                ray->y = tools->player_y + len_line * sin(angle);
-                break;
-            }
-        ray = ray->next;
-    }
-}
-
-
-void draw_direction_line(t_tools *tools, float angle, int indice)
-{
-    float   x;
-	float	y;
-	int len_line;
-    static int old ;
-      
-    len_line = 0;
-    while(1) 
-	{
-        x = tools->player_x + len_line * cos(angle);
-        y = tools->player_y + len_line * sin(angle);
-        if(get_pixel_color(tools, x, y) == 1)
+    printf("update_rays\n");
+    printf("ray->indice = %d ,indice = %d \n",ray->indice,indice);
+    if(ray->indice == indice)
         {
-            if(old <= indice)
-            {
-                ft_lstadd_back(&tools->rays, ft_lstnew(tools, angle, len_line, indice));
-                old++;
-            }
-            else
-                update_rays(tools, angle, len_line, indice);
-            break;
+            ray->angle = angle; // accumulee 
+            ray->len = len_line;
         }
-        my_mlx_pixel_put(&tools->img, x, y, 0x00FF00);
-		len_line++;
-    }
 }
+
+
+// void draw_direction_line(t_tools *tools, float angle, int indice)
+// {
+//     float   x;
+// 	float	y;
+// 	int len_line;
+//     static int old ;
+      
+//     len_line = 0;
+//     while(1) 
+// 	{
+//         x = tools->player_x + len_line * cos(angle);
+//         y = tools->player_y + len_line * sin(angle);
+//         if(get_pixel_color(tools, x, y) == 1)
+//         {
+//             if(old <= indice)
+//             {
+//                 ft_lstadd_back(tools->rays, ft_lstnew(tools, angle, len_line, indice));
+//                 old++;
+//             }
+//             else
+//                 update_rays(tools, angle, len_line, indice);
+//             break;
+//         }
+//         my_mlx_pixel_put(&tools->img, x, y, 0x00FF00);
+// 		len_line++;
+//     }
+// }

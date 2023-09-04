@@ -5,6 +5,7 @@
 # include <stdio.h>
 # include <mlx.h>
 #include <math.h>
+#include <limits.h>
 #include <stdlib.h>
 #include <fcntl.h>
 
@@ -21,6 +22,8 @@
 #define MAC_PX 2550
 #define MAC_PY 1400
 #define READER 30000
+#define VERTICAL 0
+#define HORIZENTAL 1
 
 
 #define RED	0xFF0000
@@ -33,7 +36,10 @@ int		ft_atoi(const char *str);
 char	*ft_strdup(const char *s1);
 size_t	ft_strlen(const char *s);
 
-
+typedef struct s_hit{
+	float		x;
+	float		y;
+}t_hit;
 
 typedef	struct s_pars t_pars;
 
@@ -52,13 +58,13 @@ typedef struct s_ray
 	float			y;
 	float			angle;
 	int				len;
-	struct s_ray	*next;
+	char			dir;
 }t_ray;
 
 
 typedef struct	s_tools
 {
-	t_ray	*rays;
+	t_ray	**rays;
 	t_pars	*pars;
 	void	*mlx;
 	void	*win;
@@ -67,8 +73,11 @@ typedef struct	s_tools
 	float 	angle_rad;
 	int		x_direction;
 	int		y_direction;
-	float		player_x;
-	float		player_y;
+	float	player_x;
+	float	player_y;
+	int 	size;
+	int 	lenght;
+	float	range;
 	t_data	img;
 }				t_tools;
 
@@ -175,10 +184,16 @@ int	last_char_pos(char *line, int last_pos);
 // FT_CALLOC
 void	*ft_calloc(size_t count, size_t size);
 void	ft_lstadd_back(t_ray **lst, t_ray *new);
-t_ray	*ft_lstnew(t_tools *tools, float angle, int len, int indice);
+t_ray	*ft_lstnew(int);
 
 
-void    print_rays(t_ray *rays);
+void    print_rays(t_tools *tools);
 // int key_codes(int keycode, t_tools *tools);
 int key_codes(int keycode, void *ptr);
+
+int		intersection(t_tools *tools,t_ray *ray, float angle);
+int		intersection_horiz(t_tools *tools, float *x, float *y,float angle );
+int		intersection_verti(t_tools *tools, float *x, float *y,float angle);
+void 	draw_line_dda(t_tools *tools, float x2, float y2);
+void    update_rays(t_ray *ray, float angle, int len_line, int indice);
 #endif

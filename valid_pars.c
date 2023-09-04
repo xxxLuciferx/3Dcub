@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_pars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:22:24 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/31 11:09:13 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/04 09:01:35 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,45 @@ void	collect_texture_and_colors(t_pars *pars, int i)
 	
 }
 
+int 	ft_len(char **tab)
+{
+	int i = 0;
+	int j ;
+	int max_len  = 0;;
+	while(tab[i])
+	{
+		j = 0;
+		while(tab[i][j])
+		{
+			j++;
+		}
+		if(j > max_len)
+			max_len = j;
+		i++;
+	}
+	return(max_len);
+}
+
+char	*ft_strddup(const char *s1, int len)
+{
+	int		i;
+	char	*str;
+	
+	i = 0;
+	str = (char *)ft_calloc((len+1),sizeof(char));
+	if (!str)
+		return (NULL);
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while(i < len)
+		str[i++] = ' ';
+	str[i] = '\0';
+	return (str);
+}
+
 void	ft_map_copy(t_pars *pars, int pos)
 {
 	int i;
@@ -104,9 +143,11 @@ void	ft_map_copy(t_pars *pars, int pos)
 	pars->land_range = i;
 	pars->land = malloc(sizeof(char *) * (pars->land_range + 1));
 	i = 0;
+	int r = ft_len(pars->map+pos);
 	while (pars->map[pos])
 	{
-		pars->land[i] = ft_strdup(pars->map[pos]);
+		// pars->land[i] = ft_strddup(pars->map[pos]);
+		pars->land[i] = ft_strddup(pars->map[pos], r);
 		pos++;
 		i++;
 	}

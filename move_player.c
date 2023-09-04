@@ -6,7 +6,7 @@
 /*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:43:57 by yichiba           #+#    #+#             */
-/*   Updated: 2023/08/28 22:46:55 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/09/03 20:49:01 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	move_forward(t_tools *tools)
 {
 	float	coss;
 	float	sinn;
-	int		y;
-	int		x;
+	float		y;
+	float		x;
 	char	**map;
 
 	
@@ -40,8 +40,8 @@ void	move_down(t_tools *tools)
 {
 	float	coss;
 	float	sinn;
-	int		y;
-	int		x;
+	float		y;
+	float		x;
 	char	**map;
 
 	
@@ -64,8 +64,8 @@ void	move_left(t_tools *tools)
 {
 	float	coss ;
 	float	sinn ;
-	int		y;
-	int		x;
+	float		y;
+	float		x;
 	char	**map;
 	float	angle;
 
@@ -80,7 +80,7 @@ void	move_left(t_tools *tools)
 			&& map[(int)((y - 10 * sinn) / 50)][(int)(((x + 5) + 10 * coss) / 50)] != '1'
 				&& map[(int)((y - 10 * sinn) / 50)][(int)(((x - 5) + 10 * coss) / 50)] != '1')
 	{
-		tools->angle_rad = M_PI/2 -tools->angle_rad;
+		tools->angle_rad = M_PI/2 - tools->angle_rad;
 		sinn = sin(tools->angle_rad);
 		coss = cos(tools->angle_rad);
 		tools->player_x = tools->player_x + 10 * coss;
@@ -91,8 +91,8 @@ void	move_right(t_tools *tools)
 {
 	float	coss ;
 	float	sinn ;
-	int		y;
-	int		x;
+	float		y;
+	float		x;
 	char	**map;
 	float	angle;
 

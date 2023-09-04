@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/02 16:19:23 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/04 08:52:49 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	graphic(t_tools *tools)
 	
 	p_line = biggest_line(tools) * 50;
 	p_width = tools->pars->land_range * 50;
+	tools->lenght = p_line;
+	tools->size = p_width;
 	if(p_line > MAC_PX || p_width > MAC_PY)
 	{
 		printf("Error\nResolution is too big\n");
