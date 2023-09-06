@@ -6,7 +6,7 @@
 /*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:47:56 by yichiba           #+#    #+#             */
-/*   Updated: 2023/09/05 20:09:20 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/09/06 11:06:49 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void draw_column(t_tools *tools, t_hit p, float height)
         while (column < p.x + 1)
         {
             if (column >= 0 && column < tools->lenght && row >= 0 && row < tools->size)
-                my_mlx_pixel_put2(&tools->img, column, row, RED);
+                my_mlx_pixel_put2(&tools->img, column, row, 0xD3D3D3);
             column++;
         }
         row++;

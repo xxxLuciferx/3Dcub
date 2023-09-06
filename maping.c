@@ -6,7 +6,7 @@
 /*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:33:41 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/06 08:50:41 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/09/06 11:19:54 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void draw_directions(t_tools *tools)
 	put_map(tools);
     while (i < tools->lenght)
 	{
-		if(i == tools->lenght/2)
+		// if(i == tools->lenght/2)
 			draw_line_dda(tools, tools->rays[i]->x, tools->rays[i]->y);
 		i++;
     }
@@ -69,8 +69,8 @@ void draw_fov(t_tools *tools)
 			tools->rays = creat_rays_table(tools->lenght);
 		update_rays(tools->rays[i], angle, intersection(tools, tools->rays[i], angle), i);
 		// if((i >= tools->lenght /2) && (i <= tools->lenght /2) )
-		// draw_3d_wall(tools, tools->rays[i]->len, i);
-		draw_line_dda(tools, tools->rays[i]->x, tools->rays[i]->y);
+		draw_3d_wall(tools, tools->rays[i]->len, i);
+		// draw_line_dda(tools, tools->rays[i]->x, tools->rays[i]->y);
 	       angle +=tools->range/(biggest_line(tools) *50);
 		i++;
     }
@@ -136,7 +136,7 @@ void	put_map(t_tools *tools)
 		{
 			if(tools->pars->land[i][j] == '1')
 				ft_draw(tools, i * 50, j * 50, RED);
-			else if(tools->pars->land[i][j] != '1')
+			else if(tools->pars->land[i][j] != ' ')
 				ft_draw(tools, (float)i * 50, (float)j * 50, BLUE);
 			j++;
 		}

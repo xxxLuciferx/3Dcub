@@ -6,7 +6,7 @@
 /*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 11:20:44 by yichiba           #+#    #+#             */
-/*   Updated: 2023/09/06 08:43:45 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/09/06 11:11:48 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,51 +53,80 @@ int		check_intersections(float x, float y , float angle,t_tools *tools )
 // 	return(0);
 // }
 
-int     intersection_horiz(t_tools *tools, float *x, float *y,float angle )
-{
-	int i  = 0;
-	while(1)
-	{
-		
-		if (angle < M_PI && angle > 0)
-			*y = ((int)tools->player_y /50 + i+ 1) * 50;
-		else
-			*y = ((int)tools->player_y /50 - i) * 50;
+// int		intersection_verti(t_tools *tools, float *x, float *y,float angle)
+// {
+// 	int i = 0;
+// 	while(1)
+// 	{
+// 		if (angle < (M_PI / 2) || angle > (3 * M_PI) / 2)
+// 			*x = ((int)tools->player_x / 50 + 1 + i) * 50 ;
+// 		else
+// 			*x = ((int)tools->player_x / 50 - i)* 50;
+// 		if (angle < M_PI && angle > 0)
+// 			*y = (int)tools->player_y - (((int)tools->player_x - *x) * tan(angle));
+// 		else
+// 			*y = (int)tools->player_y + ((*x -(int) tools->player_x) * tan(angle));
+// 		int check = check_intersections(*x,*y,angle, tools);
+// 		if( check == -1)
+// 			return(-1);	
+// 		if(check == 1)
+// 			return(1);	
+// 		i++;
+// 	}
+// }
+
+// int     intersection_horiz(t_tools *tools,t_hit *h,float angle ,int i)
+// {
+// 		if (angle < M_PI && angle > 0)
+// 			h->y = ((int)tools->player_y /50 + i+ 1) * 50;
+// 		else
+// 			h->y = ((int)tools->player_y /50 - i) * 50;
 			
-		if (angle > (M_PI / 2) || angle < (3 * M_PI) / 2)
-			*x = (int) tools->player_x - (((int)tools->player_y - *y) / tan(angle));
+// 		if (angle > (M_PI / 2) || angle < (3 * M_PI) / 2)
+// 			h->x = (int) tools->player_x - (((int)tools->player_y - h->y) / tan(angle));
+// 		else
+// 			h->x = (int)tools->player_x + (((int)tools->player_y - h->y) / tan(angle));
+//         int check = check_intersections(h->x,h->y,angle, tools);
+// 		if( check == -1)
+// 			return(-1);	
+// 		if(check == 1)
+// 			return(1);
+// 		return(intersection_horiz(tools, h,angle,i+1));
+// }
+int     intersection_horiz(t_tools *tools,t_hit *h,float angle ,int i)
+{
+		if (angle < M_PI && angle > 0)
+			h->y = ((int)tools->player_y /50 + i+ 1) * 50;
 		else
-			*x = (int)tools->player_x + (((int)tools->player_y - *y) / tan(angle));
-        int check = check_intersections(*x,*y,angle, tools);
+			h->y = ((int)tools->player_y /50 - i) * 50;
+		if (angle > (M_PI / 2) || angle < (3 * M_PI) / 2)
+			h->x = (int) tools->player_x - (((int)tools->player_y - h->y) / tan(angle));
+		else
+			h->x = (int)tools->player_x + (((int)tools->player_y - h->y) / tan(angle));
+        int check = check_intersections(h->x,h->y,angle, tools);
 		if( check == -1)
 			return(-1);	
 		if(check == 1)
 			return(1);
-		
-	i++;
-	}
+		return(intersection_horiz(tools, h,angle,i+1));
 }
 
-int		intersection_verti(t_tools *tools, float *x, float *y,float angle)
+int		intersection_verti(t_tools *tools, t_hit *v,float angle,int i)
 {
-	int i = 0;
-	while(1)
-	{
-		if (angle < (M_PI / 2) || angle > (3 * M_PI) / 2)
-			*x = ((int)tools->player_x / 50 + 1 + i) * 50 ;
-		else
-			*x = ((int)tools->player_x / 50 - i)* 50;
-		if (angle < M_PI && angle > 0)
-			*y = (int)tools->player_y - (((int)tools->player_x - *x) * tan(angle));
-		else
-			*y = (int)tools->player_y + ((*x -(int) tools->player_x) * tan(angle));
-		int check = check_intersections(*x,*y,angle, tools);
-		if( check == -1)
-			return(-1);	
-		if(check == 1)
-			return(1);	
-		i++;
-	}
+	if (angle < (M_PI / 2) || angle > (3 * M_PI) / 2)
+		v->x = ((int)tools->player_x / 50 + 1 + i) * 50 ;
+	else
+		v->x = ((int)tools->player_x / 50 - i)* 50;
+	if (angle < M_PI && angle > 0)
+		v->y = (int)tools->player_y - (((int)tools->player_x - v->x) * tan(angle));
+	else
+		v->y = (int)tools->player_y + ((v->x -(int) tools->player_x) * tan(angle));
+	int check = check_intersections(v->x,v->y,angle, tools);
+	if( check == -1)
+		return(-1);	
+	if(check == 1)
+		return(1);
+	return(intersection_verti(tools, v,angle,i+1));
 }
 
 void draw_line_dda(t_tools *tools, float x2, float y2)
@@ -157,8 +186,8 @@ float	intersection(t_tools *tools,t_ray *ray, float angle)
 	float	distance_h;
 	float	distance_v;
 	
-	intersection_verti(tools, &vertical.x, &vertical.y,angle);
-	intersection_horiz(tools, &horizental.x, &horizental.y,angle);
+	intersection_verti(tools, &vertical, angle, 0);
+	intersection_horiz(tools, &horizental, angle, 0);
 	distance_h = ray_lenght(tools,horizental.x,horizental.y);
 	distance_v = ray_lenght(tools,vertical.x,vertical.y);
 	if(distance_h > distance_v )

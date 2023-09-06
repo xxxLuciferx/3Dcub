@@ -192,8 +192,8 @@ void    print_rays(t_tools *tools);
 int key_codes(int keycode, void *ptr);
 
 float		intersection(t_tools *tools,t_ray *ray, float angle);
-int		intersection_horiz(t_tools *tools, float *x, float *y,float angle );
-int		intersection_verti(t_tools *tools, float *x, float *y,float angle);
+int		intersection_horiz(t_tools *tools, t_hit *h,float angle, int i );
+int		intersection_verti(t_tools *tools, t_hit *v,float angle,int i);
 void 	draw_line_dda(t_tools *tools, float x2, float y2);
 void    update_rays(t_ray *ray, float angle, int len_line, int indice);
 void	draw_column(t_tools *tools, t_hit p, float height);
