@@ -6,7 +6,7 @@
 /*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:41:21 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/04 13:53:29 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/09/06 08:45:03 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
+    // x = x/4;
+    // y = y/4;
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
@@ -46,8 +48,8 @@ int    get_pixel_color(t_tools *tools, float x, float y)
 }
 void    update_rays(t_ray  *ray, float angle, int len_line, int indice)
 {
-    printf("update_rays\n");
-    printf("ray->indice = %d ,indice = %d \n",ray->indice,indice);
+    // printf("update_rays\n");
+    // printf("ray->indice = %d ,indice = %d \n",ray->indice,indice);
     if(ray->indice == indice)
         {
             ray->angle = angle; // accumulee 

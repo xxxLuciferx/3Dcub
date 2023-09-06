@@ -191,9 +191,12 @@ void    print_rays(t_tools *tools);
 // int key_codes(int keycode, t_tools *tools);
 int key_codes(int keycode, void *ptr);
 
-int		intersection(t_tools *tools,t_ray *ray, float angle);
+float		intersection(t_tools *tools,t_ray *ray, float angle);
 int		intersection_horiz(t_tools *tools, float *x, float *y,float angle );
 int		intersection_verti(t_tools *tools, float *x, float *y,float angle);
 void 	draw_line_dda(t_tools *tools, float x2, float y2);
 void    update_rays(t_ray *ray, float angle, int len_line, int indice);
+void	draw_column(t_tools *tools, t_hit p, float height);
+void    draw_3d_wall(t_tools *tools, float distance, int i);
+void    ereas(t_tools *tools);
 #endif

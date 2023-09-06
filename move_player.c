@@ -6,13 +6,13 @@
 /*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:43:57 by yichiba           #+#    #+#             */
-/*   Updated: 2023/09/03 20:49:01 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/09/06 09:06:41 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	move_forward(t_tools *tools)
+int		move_forward(t_tools *tools)
 {
 	float	coss;
 	float	sinn;
@@ -33,10 +33,12 @@ void	move_forward(t_tools *tools)
 		{
 			tools->player_x = x + 10 * coss;
 			tools->player_y = y + 10 * sinn;
+			return(1);
 		}
+	return(0);
 }
 
-void	move_down(t_tools *tools)
+int		move_down(t_tools *tools)
 {
 	float	coss;
 	float	sinn;
@@ -57,10 +59,12 @@ void	move_down(t_tools *tools)
 		{
 			tools->player_x = x - 10 * (float)coss;
 			tools->player_y = y - 10 * (float)sinn;
+			return(1);
 		}
+	return(0);
 }
 
-void	move_left(t_tools *tools)
+int	move_left(t_tools *tools)
 {
 	float	coss ;
 	float	sinn ;
@@ -80,14 +84,16 @@ void	move_left(t_tools *tools)
 			&& map[(int)((y - 10 * sinn) / 50)][(int)(((x + 5) + 10 * coss) / 50)] != '1'
 				&& map[(int)((y - 10 * sinn) / 50)][(int)(((x - 5) + 10 * coss) / 50)] != '1')
 	{
-		tools->angle_rad = M_PI/2 - tools->angle_rad;
-		sinn = sin(tools->angle_rad);
-		coss = cos(tools->angle_rad);
+		// tools->angle_rad = M_PI/2 - tools->angle_rad;
+		// sinn = sin(tools->angle_rad);
+		// coss = cos(tools->angle_rad);
 		tools->player_x = tools->player_x + 10 * coss;
 		tools->player_y = tools->player_y - 10 * sinn;
+		return(1);
 	}
+	return(0);
 }
-void	move_right(t_tools *tools)
+int	move_right(t_tools *tools)
 {
 	float	coss ;
 	float	sinn ;
@@ -107,34 +113,41 @@ void	move_right(t_tools *tools)
 			&& map[(int)((y + 10 * sinn) / 50)][(int)(((x + 5) - 10 * coss) / 50)] != '1'
 				&& map[(int)((y + 10 * sinn) / 50)][(int)(((x - 5) - 10 * coss) / 50)] != '1')
 	{
-		tools->angle_rad = M_PI/2 -tools->angle_rad;
-		sinn = sin(tools->angle_rad);
-		coss = cos(tools->angle_rad);
+		// tools->angle_rad = M_PI/2 - tools->angle_rad;
+		// sinn = sin(tools->angle_rad);
+		// coss = cos(tools->angle_rad);
 		tools->player_x = tools->player_x - 10 * coss;
 		tools->player_y = tools->player_y + 10 * sinn;
-	}
+		return(1);
+		}
+	return(0);
 }
 
 int key_codes(int keycode, void *ptr)
 {
 	t_tools *tools = (t_tools *)ptr;
+	float angle;
+	int ret;
+	
+	ret  = -1;
+	angle = tools->angle;
 	if (keycode == CAMERA_LEFT)
 		tools->angle -= 10;
 	else if (keycode == CAMERA_RIGHT)
 		tools->angle += 10;
 	else if (keycode == LEFT )
-		move_left(tools);
+		ret = move_left(tools);
 	else if (keycode == RIGHT)
-		move_right(tools);
+		ret = move_right(tools);
 	else if (keycode == DOWN )
-		move_down(tools);
+		ret = move_down(tools);
 	else if (keycode == UP)
-		move_forward(tools);
+		ret = move_forward(tools);
 	else if (keycode == ESC)
 		exit(0);
-	else
-		return 0;
-	put_map(tools);
+	if(ret != 1 && angle == tools->angle)
+		return(0);
+	draw_fov(tools);
 	mlx_put_image_to_window(tools->mlx, tools->win, tools->img.img, 0, 0);
 	return (0);
 }

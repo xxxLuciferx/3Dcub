@@ -6,7 +6,7 @@
 /*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/04 08:52:49 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/09/05 20:59:17 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ void	graphic(t_tools *tools)
 	tools->img.addr = mlx_get_data_addr(tools->img.img, &tools->img.bits_per_pixel, &tools->img.line_length, &tools->img.endian);
 	tools->player_x = (tools->player_x * 50) + 25;
 	tools->player_y = (tools->player_y * 50) + 25;
-	put_map(tools);
+	draw_fov(tools);
+	// put_map(tools);
 	mlx_put_image_to_window(tools->mlx, tools->win, tools->img.img, 0, 0);
 	mlx_hook(tools->win, 2, 1, key_codes, tools);
 	mlx_loop(tools->mlx);

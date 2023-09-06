@@ -6,7 +6,7 @@
 /*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:09:53 by yichiba           #+#    #+#             */
-/*   Updated: 2023/09/04 13:55:43 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/09/04 16:45:30 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void    print_rays(t_tools *tools)
 {
 	t_ray **rays = tools->rays;
 	int i = 0;
-    while (i < 2)
+    while (i < tools->lenght)
 	{
 		printf("%d\n",i);
         printf("***********************************\n");
