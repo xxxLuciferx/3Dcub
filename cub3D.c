@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/09 22:04:41 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/09/11 10:52:08 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ int	ara_lcolorr_r(t_data *data, int x, int y)
 void	intiate_textures(t_tools *tools)
 {
 	// tools->tex = malloc(4*sizeof(t_data));
-	tools->tex[0].img = mlx_xpm_file_to_image(tools->mlx, "./textures/wall.xpm",&tools->width, &tools->height);
+	tools->tex[0].img = mlx_xpm_file_to_image(tools->mlx, "./textures/Blue.xpm",&tools->width, &tools->height);
 	tools->tex[0].addr = mlx_get_data_addr(tools->tex[0].img, &tools->tex[0].bits_per_pixel, &tools->tex[0].line_length, &tools->tex[0].endian);
 
 	
-	tools->tex[1].img = mlx_xpm_file_to_image(tools->mlx, "./textures/wall2.xpm",&tools->width, &tools->height);
+	tools->tex[1].img = mlx_xpm_file_to_image(tools->mlx, "./textures/1.xpm",&tools->width, &tools->height);
 	tools->tex[1].addr = mlx_get_data_addr(tools->tex[1].img, &tools->tex[1].bits_per_pixel, &tools->tex[1].line_length, &tools->tex[1].endian);
 	
-	tools->tex[2].img = mlx_xpm_file_to_image(tools->mlx, "./textures/wall3.xpm",&tools->width, &tools->height);
+	tools->tex[2].img = mlx_xpm_file_to_image(tools->mlx, "./textures/2.xpm",&tools->width, &tools->height);
 	tools->tex[2].addr = mlx_get_data_addr(tools->tex[2].img, &tools->tex[2].bits_per_pixel, &tools->tex[2].line_length, &tools->tex[2].endian);
 	
-	tools->tex[3].img = mlx_xpm_file_to_image(tools->mlx, "./textures/wall4.xpm",&tools->width, &tools->height);
+	tools->tex[3].img = mlx_xpm_file_to_image(tools->mlx, "./textures/wall.xpm",&tools->width, &tools->height);
 	tools->tex[3].addr = mlx_get_data_addr(tools->tex[3].img, &tools->tex[3].bits_per_pixel, &tools->tex[3].line_length, &tools->tex[3].endian);
 	
 }
