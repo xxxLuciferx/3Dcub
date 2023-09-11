@@ -6,7 +6,7 @@
 /*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:22:24 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/04 09:01:35 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/09/07 14:05:01 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 void	collect_direction(char c, t_pars *pars)
 {
 	pars->ptr->angle = 0 ;
-	pars->ptr->x_direction = pars->ptr->player_x * 50 + 50 ;
-	pars->ptr->y_direction = pars->ptr->player_y * 50 ;
 	if(c == 'S')
 			pars->ptr->angle = 90 ;
 	else if(c == 'W')

@@ -6,7 +6,7 @@
 /*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:09:53 by yichiba           #+#    #+#             */
-/*   Updated: 2023/09/04 16:45:30 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/09/06 15:27:09 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void    print_rays(t_tools *tools)
 		    printf("ray_x[%d] = %f\n",rays[i]->indice, rays[i]->x);
 		    printf("ray_y[%d] = %f\n",rays[i]->indice, rays[i]->y);
 		    printf("ray_angle[%d] = %f\n",rays[i]->indice, rays[i]->angle);
-		    printf("ray_len[%d] = %d\n",rays[i]->indice, rays[i]->len);
+		    printf("ray_len[%d] = %f\n",rays[i]->indice, rays[i]->len);
 		i++;
 	}
 }

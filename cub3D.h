@@ -9,6 +9,8 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
+#define HEIGHT 50
+#define WIDTH 50
 
 
 #define ESC 53
@@ -25,7 +27,11 @@
 #define VERTICAL 0
 #define HORIZENTAL 1
 
+#define SQ_SIZE	50
 
+#define BLACK 0x000000
+#define WHITE 0xFFFFFF
+#define GRis 0x808080
 #define RED	0xFF0000
 #define BLUE 0xFF
 #define YELLOW 0xFFFFFF
@@ -57,7 +63,7 @@ typedef struct s_ray
 	float			x;
 	float			y;
 	float			angle;
-	int				len;
+	float			len;
 	char			dir;
 }t_ray;
 
@@ -68,17 +74,18 @@ typedef struct	s_tools
 	t_pars	*pars;
 	void	*mlx;
 	void	*win;
-	int		orientation;
 	int 	angle;
 	float 	angle_rad;
-	int		x_direction;
-	int		y_direction;
 	float	player_x;
 	float	player_y;
-	int 	size;
-	int 	lenght;
+	float 	size;
+	float 	lenght;
 	float	range;
 	t_data	img;
+	t_data  tex[4];
+	int		width;
+	int		height;
+
 }				t_tools;
 
 typedef	struct s_pars
@@ -195,8 +202,10 @@ float		intersection(t_tools *tools,t_ray *ray, float angle);
 int		intersection_horiz(t_tools *tools, t_hit *h,float angle, int i );
 int		intersection_verti(t_tools *tools, t_hit *v,float angle,int i);
 void 	draw_line_dda(t_tools *tools, float x2, float y2);
-void    update_rays(t_ray *ray, float angle, int len_line, int indice);
+void    update_rays(t_ray *ray, float angle, float len_line, int indice);
 void	draw_column(t_tools *tools, t_hit p, float height);
 void    draw_3d_wall(t_tools *tools, float distance, int i);
 void    ereas(t_tools *tools);
+int 	get_pixel_color_from_image(t_data *data, int x, int y);
+void    draw_texture(t_tools *tools);
 #endif

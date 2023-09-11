@@ -6,7 +6,7 @@
 /*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:33:41 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/06 11:19:54 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/09/11 08:29:59 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void draw_directions(t_tools *tools)
 	put_map(tools);
     while (i < tools->lenght)
 	{
-		// if(i == tools->lenght/2)
+		if(i == tools->lenght/2)
 			draw_line_dda(tools, tools->rays[i]->x, tools->rays[i]->y);
 		i++;
     }
@@ -55,25 +55,22 @@ void draw_fov(t_tools *tools)
     float 	angle;
 	int 	i;
 	static	int old;
-
 	tools->range = (60.0 * M_PI)/RAD;
-	// angle = (tools->angle_rad - (tools->range / 2));
+	orientations(tools);
 	angle = (tools->angle_rad - (tools->range / 2));
 	i = 0;
-		system("clear");
-		ereas(tools);
+	ereas(tools);
     while (i < tools->lenght)
 	{
 		angle = normalize_angle(angle);
 		if(old++ == 0)
 			tools->rays = creat_rays_table(tools->lenght);
 		update_rays(tools->rays[i], angle, intersection(tools, tools->rays[i], angle), i);
-		// if((i >= tools->lenght /2) && (i <= tools->lenght /2) )
-		draw_3d_wall(tools, tools->rays[i]->len, i);
-		// draw_line_dda(tools, tools->rays[i]->x, tools->rays[i]->y);
-	       angle +=tools->range/(biggest_line(tools) *50);
+		// draw_3d_wall(tools, tools->rays[i]->len, i);
+	    angle +=tools->range/(biggest_line(tools) *50);
 		i++;
     }
+		draw_texture(tools);
 		draw_directions(tools);
 		// print_rays(tools);
 }
@@ -101,8 +98,8 @@ void	orientations(t_tools *tools)
 {
 	float angle = tools->angle * (M_PI / RAD);
 	tools->angle_rad = angle;
-	tools->x_direction = tools->x_direction * cos(angle);
-	tools->y_direction = tools->y_direction * sin(angle);
+	// tools->x_direction = tools->x_direction * cos(angle);
+	// tools->y_direction = tools->y_direction * sin(angle);
 }
 
 void	put_player(t_tools *tools)
@@ -116,13 +113,12 @@ void	put_player(t_tools *tools)
 	{
 		while (j < 10)
 		{
-			my_mlx_pixel_put(&tools->img, x + i, y + j, YELLOW);
+			my_mlx_pixel_put(&tools->img, x + i, y + j, BLACK);
 			j++;
 		}
 		j = 0;
 		i++;
 	}
-	orientations(tools);
 }
 
 void	put_map(t_tools *tools)
@@ -135,14 +131,11 @@ void	put_map(t_tools *tools)
 		while (tools->pars->land[i][j])
 		{
 			if(tools->pars->land[i][j] == '1')
-				ft_draw(tools, i * 50, j * 50, RED);
-			else if(tools->pars->land[i][j] != ' ')
-				ft_draw(tools, (float)i * 50, (float)j * 50, BLUE);
+				ft_draw(tools, i * 50, j * 50, GRis);
 			j++;
 		}
 		i++;
 	}
 	put_player(tools);
-	// draw_fov(tools);
 	mlx_put_image_to_window(tools->mlx, tools->win, tools->img.img, 0, 0);
 }
