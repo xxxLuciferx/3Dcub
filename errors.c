@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:24:25 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/11 18:25:19 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/11 18:48:21 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ void	error_file(t_tools *tools)
 {
 	free(tools->pars);
 	printf("\n$ Invalid file\n\n");
-	while(1);
+	// while(1);
 	exit(1);
 }
