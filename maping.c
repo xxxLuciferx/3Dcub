@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maping.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:33:41 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/11 08:29:59 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/09/11 11:16:26 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,14 @@ void draw_directions(t_tools *tools)
 }
 void draw_fov(t_tools *tools)
 {
-    float 	angle;
-	int 	i;
+    float 		angle;
+	int 		i;
 	static	int old;
+	
+	i = 0;
 	tools->range = (60.0 * M_PI)/RAD;
 	orientations(tools);
 	angle = (tools->angle_rad - (tools->range / 2));
-	i = 0;
 	ereas(tools);
     while (i < tools->lenght)
 	{
@@ -96,7 +97,9 @@ void	ft_draw(t_tools *tools, float start_y, float start_x, int color)
 
 void	orientations(t_tools *tools)
 {
-	float angle = tools->angle * (M_PI / RAD);
+	float angle;
+
+	angle = tools->angle * (M_PI / RAD);
 	tools->angle_rad = angle;
 	// tools->x_direction = tools->x_direction * cos(angle);
 	// tools->y_direction = tools->y_direction * sin(angle);
