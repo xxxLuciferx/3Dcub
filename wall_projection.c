@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:47:56 by yichiba           #+#    #+#             */
-/*   Updated: 2023/09/11 13:01:40 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/11 15:38:18 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,45 @@ void    draw_3d_wall(t_tools *tools, float distance, int i)
     wall_height = ((tools->size / 2) - (((tools->size / 2) * 50) / distance));
     draw_column_with_texture(tools, p, tools->size - (p.y * 2));
 }
-
+t_data	*get_picture(t_tools *tools, int i)
+{
+	i = i + 1- 1;
+	float angle;
+	angle = tools->rays[i]->angle;
+	// printf("%f\n", angle);
+	if(tools->rays[i]->dir == 'h')
+		{
+			if(angle >=0 && angle <= M_PI)
+				return (&tools->tex[1]);
+			else
+				return (&tools->tex[2]);
+		}
+	else
+	{
+		if(angle >= M_PI / 2 && angle <= (3 * M_PI) / 2)
+			return (&tools->tex[0]);
+		else
+			return (&tools->tex[3]);
+	}
+}
+// t_data	*get_picture(t_tools *tools, int i)
+// {
+// 	i = i + 1- 1;
+// 	float angle;
+// 	angle = tools->angle * (M_PI / RAD);
+// 	// printf("%f\n", angle);
+// 	if ((angle > ((7 * M_PI) / 4) && angle <= M_PI / 4))
+// 		return (&tools->tex[0]);
+// 	else if (angle > M_PI / 4  && angle <= (3 * M_PI) / 4)
+// 		return (&tools->tex[1]);
+// 	else if (angle > (3 * M_PI) / 4 && angle <= (5 * M_PI) / 4)
+// 		return (&tools->tex[2]);
+// 	else if (angle > (5 * M_PI) / 4 && angle <= (7 * M_PI) / 4)
+// 		return (&tools->tex[3]);
+// 	return (&tools->tex[3]);
+// 	// return (NULL);
+// }
+	
 void    put_textures(t_tools *tools,int x, float y0, float y1, float start)
 {
     float            col;
@@ -138,7 +176,7 @@ void    put_textures(t_tools *tools,int x, float y0, float y1, float start)
     row = (inc * start);
     while (i < wall_height && i < tools->size)
     {
-        my_mlx_pixel_put2(&tools->img, x,y0 + i, get_pixel_color_from_image(&tools->tex[0],row,col));
+        my_mlx_pixel_put2(&tools->img, x,y0 + i, get_pixel_color_from_image(get_picture(tools,x),row,col));
         row += inc;
         i++;
     }

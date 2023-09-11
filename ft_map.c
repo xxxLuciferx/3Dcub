@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:15:18 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/31 11:10:32 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/11 14:41:30 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		check_pars(t_pars *pars)
 	return(1);
 }
 
-void	if_directions_and_colors_exist(char **map)
+void	if_directions_and_colors_exist(t_pars *pars)
 {
 	int i;
 	int j;
@@ -27,17 +27,17 @@ void	if_directions_and_colors_exist(char **map)
 
 	i = 0;
 	data = 0;
-	while (map[i])
+	while (pars->map[i])
 	{
 		j = 0;
-		while (map[i][j] == ' ' || map[i][j] == '\t')
+		while (pars->map[i][j] == ' ' || pars->map[i][j] == '\t')
 			j++;
-		if(map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E' || map[i][j] == 'F' || map[i][j] == 'C')
+		if(pars->map[i][j] == 'N' || pars->map[i][j] == 'S' || pars->map[i][j] == 'W' || pars->map[i][j] == 'E' || pars->map[i][j] == 'F' || pars->map[i][j] == 'C')
 			data++;
 		i++;
 	}
 	if(data != 6)
-		error_map();
+		error_map(pars->ptr);
 }
 
 void	reading_map(t_tools *tools, char *av)
@@ -47,15 +47,15 @@ void	reading_map(t_tools *tools, char *av)
 	char	buffer[READER];
 
 	i = 0;
-	tools->pars = malloc(sizeof(t_pars));
+	tools->pars = malloc(sizeof(t_pars)); //ALOCATION
 	initiation(tools);
 	fd = open(av, O_RDONLY, NULL);
 	i = read(fd, buffer, READER - 1);
-	if(i <= 0)
-		error_file();
+	if (i <= 0)
+		error_file(tools);
 	buffer[i] = '\0';
-	i = last_char_pos(buffer, i - 1);
-	check_new_lines(buffer, first_in_map(buffer, i), i);
+	i = last_char_pos(tools, buffer, i - 1);
+	check_new_lines(tools, buffer, first_in_map(buffer, i), i); //FIX THIS
 	tools->pars->map = ft_split(buffer, "\n");
 	checking_data(tools->pars);
 }

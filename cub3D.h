@@ -121,11 +121,11 @@ void	west_path(t_pars *pars, int i);
 void	east_path(t_pars *pars, int i);
 
 //ERRORS (errors.c)
-void	error_map(void);
+void	error_map(t_tools *tools);
 void	error_colors(void);
 void	error_path(void);
 void	error_player(void);
-void	error_file(void);
+void	error_file(t_tools *tools);
 
 
 // void	if_all_textures_exist(t_pars *pars);
@@ -137,7 +137,7 @@ void	free_arrays(char **array);
 void	valid_entry(int ac, char **av, t_tools *tools);
 void	reading_map(t_tools *tools, char *av);
 void	checking_data(t_pars *pars);
-void	if_directions_and_colors_exist(char **map);
+void	if_directions_and_colors_exist(t_pars *pars);
 int		check_pars(t_pars *pars);
 
 
@@ -149,14 +149,13 @@ void	if_one_player(t_pars *pars);
 
 // (ft_walls.c)
 void	if_valid_inside_lines(t_pars *pars);
-void	zero_sides_verification(char **land, int pos_i, int pos_j);
+void	zero_sides_verification(t_pars *pars, int pos_i, int pos_j);
 void	left_wall(t_pars *pars);
-void	if_line_of_walls(char *line);
+void	if_line_of_walls(t_pars *pars, char *land);
 
 // main
 void	initiation(t_tools *tools);
 void	if_valid_lines(t_pars *pars);
-void	if_line_of_walls(char *line);
 void	if_valid_string(char *line);
 void	check_next_wall(t_pars *pars, int pos, int line_pos);
 void	put_map(t_tools *tools);
@@ -185,8 +184,8 @@ int    get_pixel_color(t_tools *tools, float x, float y);
 void	checking_data(t_pars *pars);
 void	map_lines(char *buffer, int pos);
 int		first_in_map(char *buffer, int pos);
-void	check_new_lines(char *buffer,int start, int end);
-int	last_char_pos(char *line, int last_pos);
+void	check_new_lines(t_tools *tools, char *buffer,int start, int end);
+int	last_char_pos(t_tools *tools, char *line, int last_pos);
 
 // FT_CALLOC
 void	*ft_calloc(size_t count, size_t size);

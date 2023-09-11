@@ -6,26 +6,23 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 12:42:04 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/30 18:07:11 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/11 15:20:16 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	if_line_of_walls(char *line)
+void	if_line_of_walls(t_pars *pars, char *land)
 {
 	int i;
 
 	i = 0;
-	while (line && line[i] != '\n' && line[i] != '\0')
+	while (land && land[i] != '\n' && land[i] != '\0')
 	{
-		if(line[i] != '1' && line[i] != ' ')
-		{
-			error_map();
-		}
+		if(land[i] != '1' && land[i] != ' ')
+			error_map(pars->ptr);
 		i++;
 	}
-	
 }
 void	left_wall(t_pars *pars)
 {
@@ -47,7 +44,7 @@ void	left_wall(t_pars *pars)
 			i++;
 		}
 		else
-			error_map();
+			error_map(pars->ptr);
 	}
 }
 
@@ -61,17 +58,17 @@ int	allowed_contact(char c)
 	return(0);
 }
 
-void	zero_sides_verification(char **land, int pos_i, int pos_j)
+void	zero_sides_verification(t_pars *pars, int pos_i, int pos_j)
 {
 	// printf("HELLOOO\n");
-	if(allowed_contact(land[pos_i - 1][pos_j]))
-		error_map();
-	else if(allowed_contact(land[pos_i + 1][pos_j]))
-		error_map();
-	else if(allowed_contact(land[pos_i][pos_j + 1]))
-		error_map();
-	else if(allowed_contact(land[pos_i][pos_j - 1]))
-		error_map();
+	if(allowed_contact(pars->land[pos_i - 1][pos_j]))
+		error_map(pars->ptr);
+	else if(allowed_contact(pars->land[pos_i + 1][pos_j]))
+		error_map(pars->ptr);
+	else if(allowed_contact(pars->land[pos_i][pos_j + 1]))
+		error_map(pars->ptr);
+	else if(allowed_contact(pars->land[pos_i][pos_j - 1]))
+		error_map(pars->ptr);
 }
 void	if_valid_inside_lines(t_pars *pars)
 {
@@ -88,7 +85,7 @@ void	if_valid_inside_lines(t_pars *pars)
 		{
 			if(pars->land[i][j] == '0')
 			{
-				zero_sides_verification(pars->land, i,j);
+				zero_sides_verification(pars, i,j);
 				j++;
 				continue;
 			}
