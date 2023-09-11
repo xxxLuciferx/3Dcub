@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:40:50 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/11 15:20:07 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/11 18:13:40 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	checking_data(t_pars *pars)
 	left_wall(pars);
 	if_line_of_walls(pars, pars->land[0]);
 	if_line_of_walls(pars, pars->land[pars->land_range]);
-	// if_line_of_walls(pars);
 	if_valid_inside_lines(pars);
 }
 

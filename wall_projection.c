@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:47:56 by yichiba           #+#    #+#             */
-/*   Updated: 2023/09/11 15:38:18 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/11 18:05:49 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,17 +124,17 @@ t_data	*get_picture(t_tools *tools, int i)
 	// printf("%f\n", angle);
 	if(tools->rays[i]->dir == 'h')
 		{
-			if(angle >=0 && angle <= M_PI)
-				return (&tools->tex[1]);
-			else
+			if(angle >= 0 && angle <= M_PI)
 				return (&tools->tex[2]);
+			else
+				return (&tools->tex[1]);
 		}
 	else
 	{
 		if(angle >= M_PI / 2 && angle <= (3 * M_PI) / 2)
-			return (&tools->tex[0]);
-		else
 			return (&tools->tex[3]);
+		else
+			return (&tools->tex[0]);
 	}
 }
 // t_data	*get_picture(t_tools *tools, int i)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_pars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:22:24 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/07 14:05:01 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/09/11 18:24:02 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	if_one_player(t_pars *pars)
 		i++;
 	}
 	if(counter != 1)
-		error_player();
+		error_player(pars->ptr);
 }
 void		if_player_exist(t_pars *pars)
 {
@@ -144,7 +144,6 @@ void	ft_map_copy(t_pars *pars, int pos)
 	int r = ft_len(pars->map+pos);
 	while (pars->map[pos])
 	{
-		// pars->land[i] = ft_strddup(pars->map[pos]);
 		pars->land[i] = ft_strddup(pars->map[pos], r);
 		pos++;
 		i++;

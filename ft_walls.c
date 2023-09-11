@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 12:42:04 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/11 15:20:16 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/11 18:14:57 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,19 @@ void	if_line_of_walls(t_pars *pars, char *land)
 			error_map(pars->ptr);
 		i++;
 	}
+}
+
+void	free_map(char **land)
+{
+	int i;
+
+	i = 0;
+	while (land[i])
+	{
+		free(land[i]);
+		i++;
+	}
+	free(land);
 }
 void	left_wall(t_pars *pars)
 {
@@ -44,7 +57,10 @@ void	left_wall(t_pars *pars)
 			i++;
 		}
 		else
+		{
+			free_map(pars->land);
 			error_map(pars->ptr);
+		}
 	}
 }
 
@@ -60,15 +76,26 @@ int	allowed_contact(char c)
 
 void	zero_sides_verification(t_pars *pars, int pos_i, int pos_j)
 {
-	// printf("HELLOOO\n");
 	if(allowed_contact(pars->land[pos_i - 1][pos_j]))
+	{
+		free_map(pars->land);
 		error_map(pars->ptr);
+	}
 	else if(allowed_contact(pars->land[pos_i + 1][pos_j]))
+	{
+		free_map(pars->land);
 		error_map(pars->ptr);
+	}
 	else if(allowed_contact(pars->land[pos_i][pos_j + 1]))
+	{
+		free_map(pars->land);
 		error_map(pars->ptr);
+	}
 	else if(allowed_contact(pars->land[pos_i][pos_j - 1]))
+	{
+		free_map(pars->land);
 		error_map(pars->ptr);
+	}
 }
 void	if_valid_inside_lines(t_pars *pars)
 {

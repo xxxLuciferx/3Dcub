@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:33:41 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/11 11:16:26 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/11 18:04:25 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void draw_directions(t_tools *tools)
 	put_map(tools);
     while (i < tools->lenght)
 	{
-		if(i == tools->lenght/2)
+		// if(i == tools->lenght/2)
 			draw_line_dda(tools, tools->rays[i]->x, tools->rays[i]->y);
 		i++;
     }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 11:20:44 by yichiba           #+#    #+#             */
-/*   Updated: 2023/09/07 14:21:34 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/09/11 15:59:25 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,14 @@ void draw_line_dda(t_tools *tools, float x2, float y2)
 	y_increment = (y2 - tools->player_y) / steps;
 	x = tools->player_x;
 	y = tools->player_y;
-	while(i <= 50)
+	while(i <= steps)
 	{
-        my_mlx_pixel_put(&tools->img, x -(2 *x_increment), y-(2 * y_increment), 0x00FF00);
-        my_mlx_pixel_put(&tools->img, x -x_increment, y-y_increment, 0x00FF00);
-        my_mlx_pixel_put(&tools->img, x, y, 0x00FF00);
-        my_mlx_pixel_put(&tools->img, x+x_increment, y+y_increment, 0x00FF00);
-        my_mlx_pixel_put(&tools->img, x +(2 *x_increment), y+(2 * y_increment), 0x00FF00);
+        // my_mlx_pixel_put(&tools->img, x -(2 *x_increment), y-(2 * y_increment), YELLOW);
+        // my_mlx_pixel_put(&tools->img, x -x_increment, y-y_increment, YELLOW);
+        if((int)y % 50 == 0 || (int)x % 50 == 0)
+			my_mlx_pixel_put(&tools->img, x, y, YELLOW);
+        // my_mlx_pixel_put(&tools->img, x+x_increment, y+y_increment, YELLOW);
+        // my_mlx_pixel_put(&tools->img, x +(2 *x_increment), y+(2 * y_increment), YELLOW);}
         x += x_increment;
         y += y_increment;
 		i++;

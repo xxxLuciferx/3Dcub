@@ -55,6 +55,7 @@ typedef struct	s_data {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	// char	type;
 }				t_data;
 
 typedef struct s_ray
@@ -124,7 +125,7 @@ void	east_path(t_pars *pars, int i);
 void	error_map(t_tools *tools);
 void	error_colors(void);
 void	error_path(void);
-void	error_player(void);
+void	error_player(t_tools *tools);
 void	error_file(t_tools *tools);
 
 
@@ -162,6 +163,9 @@ void	put_map(t_tools *tools);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	draw_direction_line(t_tools *tools,float angle, int indice);
 int	biggest_line(t_tools *tools);
+
+
+void	free_map(char **land);
 
 //(CEILING && FLOOR COLLECTING) (collect_map.c)
 unsigned int	ceiling_colors(t_pars *pars, int i);
