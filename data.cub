@@ -1,7 +1,7 @@
-NO ./textures/4.xpm
-SO ./textures/3.xpm
-WE ./textures/2.xpm
-EA ./textures/1.xpm
+NO ./mandatory/textures/4.xpm
+SO ./mandatory/textures/3.xpm
+WE ./mandatory/textures/2.xpm
+EA ./mandatory/textures/1.xpm
 
 
 F 102,0,0
