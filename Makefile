@@ -44,7 +44,7 @@ BONUS =	bonus/cub3D.c\
 		bonus/texturing.c
 
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
 
 OBJ = ${SRC:.c=.o}
