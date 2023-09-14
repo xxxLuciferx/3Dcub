@@ -12,19 +12,19 @@
 
 #include "cub3D.h"
 
-void    print_rays(t_tools *tools)
+void	print_rays(t_tools *tools)
 {
 	t_ray **rays = tools->rays;
 	int i = 0;
-    while (i < tools->lenght)
+	while (i < tools->lenght)
 	{
-		printf("%d\n",i);
-        printf("***********************************\n");
-		    printf("ray_direction[%d] = %c\n",rays[i]->indice, rays[i]->dir);
-		    printf("ray_x[%d] = %f\n",rays[i]->indice, rays[i]->x);
-		    printf("ray_y[%d] = %f\n",rays[i]->indice, rays[i]->y);
-		    printf("ray_angle[%d] = %f\n",rays[i]->indice, rays[i]->angle);
-		    printf("ray_len[%d] = %f\n",rays[i]->indice, rays[i]->len);
+		printf("%d\n", i);
+		printf("***********************************\n");
+		printf("ray_direction[%d] = %c\n", rays[i]->indice, rays[i]->dir);
+		printf("ray_x[%d] = %f\n", rays[i]->indice, rays[i]->x);
+		printf("ray_y[%d] = %f\n", rays[i]->indice, rays[i]->y);
+		printf("ray_angle[%d] = %f\n", rays[i]->indice, rays[i]->angle);
+		printf("ray_len[%d] = %f\n", rays[i]->indice, rays[i]->len);
 		i++;
 	}
 }

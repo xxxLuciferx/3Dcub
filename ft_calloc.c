@@ -12,7 +12,6 @@
 
 #include "cub3D.h"
 
-
 void	*ft_calloc(size_t count, size_t size)
 {
 	char	*s;
@@ -61,20 +60,20 @@ void	*ft_calloc(size_t count, size_t size)
 //     node->y = tools->player_y + len * sin(angle);
 //     node->next = NULL;
 // 	return (node);
-// }  
+// }
 
 t_ray	*ft_lstnew(int indice)
 {
-	t_ray	*node;
+	t_ray *node;
 
 	node = (t_ray *)ft_calloc(1, sizeof(t_ray));
 	if (!node)
 		return (NULL);
-    node->indice = indice;
+	node->indice = indice;
 	node->angle = -1;
-    node->len = -1;
-    node->x = -1;
-    node->y = -1;
+	node->len = -1;
+	node->x = -1;
+	node->y = -1;
 	node->dir = -1;
 	return (node);
 }

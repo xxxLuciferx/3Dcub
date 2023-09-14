@@ -61,8 +61,8 @@ int	check_intersections_vertical(float x, float y, float angle, t_tools *tools)
 		&& (map[(int)(y / 50)][(int)((x - 1) / 50)] == '1'))
 		return (1);
 	else if ((angle >= 3 * M_PI_2 && angle <= 2 * M_PI) && y - 1 >= 0
-		&& y <= height - 1 && x + 1 <= width
-		&& (map[(int)(y / 50)][(int)((x + 1) / 50)] == '1'))
+		&& y <= height - 1 && x + 1 <= width && (map[(int)(y / 50)][(int)((x
+					+ 1) / 50)] == '1'))
 		return (1);
 	return (0);
 }

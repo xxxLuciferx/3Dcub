@@ -216,6 +216,8 @@ float	normalize_angle(float angle);
 void	draw_directions(t_tools *tools);
 float	ray_lenght(t_tools *tools, float x2, float y2);
 float	absolutevalue(double num);
+void	set_angle(t_tools *tools, int keycode);
+void	set_angle(t_tools *tools, int keycode);
 
 
 void	free_all(t_tools *tools);

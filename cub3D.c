@@ -14,20 +14,30 @@
 
 void	intiate_textures(t_tools *tools)
 {
-	t_data *tex = tools->tex;
-	tex[0].img = mlx_xpm_file_to_image(tools->mlx, tools->pars->east_path,&tools->width, &tools->height);
-	tex[1].img = mlx_xpm_file_to_image(tools->mlx, tools->pars->south_path,&tools->width, &tools->height);
-	tex[2].img = mlx_xpm_file_to_image(tools->mlx, tools->pars->north_path,&tools->width, &tools->height);
-	tex[3].img = mlx_xpm_file_to_image(tools->mlx, tools->pars->west_path,&tools->width, &tools->height);
+	t_data	*tex;
+
+	tex = tools->tex;
+	tex[0].img = mlx_xpm_file_to_image(tools->mlx, tools->pars->east_path,
+			&tools->width, &tools->height);
+	tex[1].img = mlx_xpm_file_to_image(tools->mlx, tools->pars->south_path,
+			&tools->width, &tools->height);
+	tex[2].img = mlx_xpm_file_to_image(tools->mlx, tools->pars->north_path,
+			&tools->width, &tools->height);
+	tex[3].img = mlx_xpm_file_to_image(tools->mlx, tools->pars->west_path,
+			&tools->width, &tools->height);
 	if (!tex[0].img || !tex[1].img || !tex[2].img || !tex[3].img)
 	{
 		printf("Error\nIN MLX XPM\n");
 		exit(1);
 	}
-	tex[0].addr = mlx_get_data_addr(tex[0].img, &tex[0].bits_per_pixel, &tex[0].line_length, &tex[0].endian);
-	tex[1].addr = mlx_get_data_addr(tex[1].img, &tex[1].bits_per_pixel, &tex[1].line_length, &tex[1].endian);
-	tex[2].addr = mlx_get_data_addr(tex[2].img, &tex[2].bits_per_pixel, &tex[2].line_length, &tex[2].endian);
-	tex[3].addr = mlx_get_data_addr(tex[3].img, &tex[3].bits_per_pixel, &tex[3].line_length, &tex[3].endian);
+	tex[0].addr = mlx_get_data_addr(tex[0].img, &tex[0].bits_per_pixel,
+			&tex[0].line_length, &tex[0].endian);
+	tex[1].addr = mlx_get_data_addr(tex[1].img, &tex[1].bits_per_pixel,
+			&tex[1].line_length, &tex[1].endian);
+	tex[2].addr = mlx_get_data_addr(tex[2].img, &tex[2].bits_per_pixel,
+			&tex[2].line_length, &tex[2].endian);
+	tex[3].addr = mlx_get_data_addr(tex[3].img, &tex[3].bits_per_pixel,
+			&tex[3].line_length, &tex[3].endian);
 	if (!tex[0].addr || !tex[1].addr || !tex[2].addr || !tex[3].addr)
 	{
 		printf("Error\nIN MLX XPM ADDRESS\n");
@@ -54,7 +64,7 @@ void	initiation(t_tools *tools)
 
 int	biggest_line(t_tools *tools)
 {
-	int lenght;
+	int	lenght;
 	int	i;
 	int	j;
 
@@ -67,22 +77,22 @@ int	biggest_line(t_tools *tools)
 		{
 			j++;
 		}
-		if(lenght <= j)
+		if (lenght <= j)
 			lenght = j;
 		i++;
 	}
-	return(lenght);
+	return (lenght);
 }
 void	graphic(t_tools *tools)
 {
-	int p_line;
-	int p_width;
-	
+	int	p_line;
+	int	p_width;
+
 	p_line = biggest_line(tools) * 50;
 	p_width = tools->pars->land_range * 50;
 	tools->lenght = p_line;
 	tools->size = p_width;
-	if(p_line > MAC_PX || p_width > MAC_PY)
+	if (p_line > MAC_PX || p_width > MAC_PY)
 	{
 		printf("Error\nResolution is too big\n");
 		free_all(tools);
@@ -90,7 +100,9 @@ void	graphic(t_tools *tools)
 	tools->mlx = mlx_init();
 	tools->win = mlx_new_window(tools->mlx, p_line, p_width, "cub3D");
 	tools->img.img = mlx_new_image(tools->mlx, p_line, p_width);
-	tools->img.addr = mlx_get_data_addr(tools->img.img, &tools->img.bits_per_pixel, &tools->img.line_length, &tools->img.endian);
+	tools->img.addr = mlx_get_data_addr(tools->img.img,
+			&tools->img.bits_per_pixel, &tools->img.line_length,
+			&tools->img.endian);
 	intiate_textures(tools);
 	tools->player_x = (tools->player_x * 50) + 25;
 	tools->player_y = (tools->player_y * 50) + 25;
@@ -100,7 +112,7 @@ void	graphic(t_tools *tools)
 	mlx_loop(tools->mlx);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_tools tools;
 

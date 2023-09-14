@@ -21,7 +21,8 @@ int	ft_atoi(const char *str)
 	res = 0;
 	a = 0;
 	sign = 1;
-	while (str[a] == ' ' || (str[a] <= 13 && str[a] >= 9) || str[a] == 'F' || str[a] == 'C')
+	while (str[a] == ' ' || (str[a] <= 13 && str[a] >= 9) || str[a] == 'F'
+		|| str[a] == 'C')
 		a++;
 	if (str[a] == '-')
 	{
@@ -49,12 +50,12 @@ size_t	ft_strlen(const char *s)
 
 char	*ft_strdup(const char *s1)
 {
-	int		i;
-	char	*c;
-	char	*m;
+	int i;
+	char *c;
+	char *m;
 
 	i = ft_strlen(s1);
-	c = (char *)ft_calloc((i+1),sizeof(char));
+	c = (char *)ft_calloc((i + 1), sizeof(char));
 	m = c;
 	if (!c)
 		return (NULL);

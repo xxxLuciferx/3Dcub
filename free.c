@@ -14,7 +14,7 @@
 
 void	free_map(char **land)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (land[i])

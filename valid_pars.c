@@ -14,20 +14,20 @@
 
 void	collect_direction(char c, t_pars *pars)
 {
-	pars->ptr->angle = 0 ;
-	if(c == 'S')
-			pars->ptr->angle = 90 ;
-	else if(c == 'W')
-			pars->ptr->angle = 180 ;
-	else if(c == 'N')
-			pars->ptr->angle = 270 ;
+	pars->ptr->angle = 0;
+	if (c == 'S')
+		pars->ptr->angle = 90;
+	else if (c == 'W')
+		pars->ptr->angle = 180;
+	else if (c == 'N')
+		pars->ptr->angle = 270;
 }
 
 void	if_one_player(t_pars *pars)
 {
 	int	i;
 	int	j;
-	int counter;
+	int	counter;
 
 	i = 0;
 	j = 0;
@@ -35,9 +35,10 @@ void	if_one_player(t_pars *pars)
 	while (pars->land[i])
 	{
 		j = 0;
-		while ( pars->land[i][j] != '\0')
+		while (pars->land[i][j] != '\0')
 		{
-			if(pars->land[i][j] == 'N' || pars->land[i][j] == 'S' || pars->land[i][j] == 'E' || pars->land[i][j] == 'W')
+			if (pars->land[i][j] == 'N' || pars->land[i][j] == 'S'
+				|| pars->land[i][j] == 'E' || pars->land[i][j] == 'W')
 			{
 				pars->ptr->player_y = i;
 				pars->ptr->player_x = j;
@@ -48,10 +49,10 @@ void	if_one_player(t_pars *pars)
 		}
 		i++;
 	}
-	if(counter != 1)
+	if (counter != 1)
 		error_player(pars->ptr);
 }
-void		if_player_exist(t_pars *pars)
+void	if_player_exist(t_pars *pars)
 {
 	int	i;
 	int	j;
@@ -63,16 +64,17 @@ void		if_player_exist(t_pars *pars)
 		j = 0;
 		while (pars->land[i][j] != '\n' && pars->land[i][j] != '\0')
 		{
-			if(pars->land[i][j] == 'N' || pars->land[i][j] == 'S' || pars->land[i][j] == 'E' || pars->land[i][j] == 'W')
+			if (pars->land[i][j] == 'N' || pars->land[i][j] == 'S'
+				|| pars->land[i][j] == 'E' || pars->land[i][j] == 'W')
 			{
 				pars->ptr->player_x = j;
 				pars->ptr->player_y = i;
-				return;
+				return ;
 			}
 			j++;
 		}
 		i++;
-	}	
+	}
 }
 
 void	collect_texture_and_colors(t_pars *pars, int i)
@@ -89,35 +91,38 @@ void	collect_texture_and_colors(t_pars *pars, int i)
 		west_path(pars, i);
 	else if (pars->map[i][0] == 'E' && pars->map[i][1] == 'A')
 		east_path(pars, i);
-	
 }
 
-int 	ft_len(char **tab)
+int	ft_len(char **tab)
 {
-	int i = 0;
-	int j ;
-	int max_len  = 0;;
-	while(tab[i])
+	int	i;
+	int	j;
+	int	max_len;
+
+	i = 0;
+	max_len = 0;
+	;
+	while (tab[i])
 	{
 		j = 0;
-		while(tab[i][j])
+		while (tab[i][j])
 		{
 			j++;
 		}
-		if(j > max_len)
+		if (j > max_len)
 			max_len = j;
 		i++;
 	}
-	return(max_len);
+	return (max_len);
 }
 
 char	*ft_strddup(const char *s1, int len)
 {
 	int		i;
 	char	*str;
-	
+
 	i = 0;
-	str = (char *)ft_calloc((len+1),sizeof(char));
+	str = (char *)ft_calloc((len + 1), sizeof(char));
 	if (!str)
 		return (NULL);
 	while (s1[i])
@@ -125,7 +130,7 @@ char	*ft_strddup(const char *s1, int len)
 		str[i] = s1[i];
 		i++;
 	}
-	while(i < len)
+	while (i < len)
 		str[i++] = ' ';
 	str[i] = '\0';
 	return (str);
@@ -133,15 +138,16 @@ char	*ft_strddup(const char *s1, int len)
 
 void	ft_map_copy(t_pars *pars, int pos)
 {
-	int i;
-	
+	int	i;
+	int	r;
+
 	i = 0;
-	while (pars->map[pos +i])
+	while (pars->map[pos + i])
 		i++;
 	pars->land_range = i;
 	pars->land = malloc(sizeof(char *) * (pars->land_range + 1));
 	i = 0;
-	int r = ft_len(pars->map+pos);
+	r = ft_len(pars->map + pos);
 	while (pars->map[pos])
 	{
 		pars->land[i] = ft_strddup(pars->map[pos], r);

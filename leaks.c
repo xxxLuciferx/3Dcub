@@ -14,11 +14,11 @@
 
 void	free_arrays(char **array)
 {
-	int	i;
+	int i;
 
 	i = 0;
-	if(array && array[i])
-	{	
+	if (array && array[i])
+	{
 		while (array[i] != NULL)
 		{
 			free(array[i]);

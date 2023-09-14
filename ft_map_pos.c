@@ -14,17 +14,17 @@
 
 void	checking_data(t_pars *pars)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if_directions_and_colors_exist(pars);
 	while (pars->map[i])
 	{
 		collect_texture_and_colors(pars, i);
-		if(check_pars(pars))
+		if (check_pars(pars))
 		{
 			i++;
-			break;
+			break ;
 		}
 		i++;
 	}
@@ -37,21 +37,23 @@ void	checking_data(t_pars *pars)
 
 int	first_in_map(char *buffer, int pos)
 {
-	int number = 0;
+	int	number;
+
+	number = 0;
 	while (pos && buffer[pos])
 	{
-		if(buffer[pos] == '1' && buffer[pos - 1] == '\n')
+		if (buffer[pos] == '1' && buffer[pos - 1] == '\n')
 			number = pos;
 		pos--;
 	}
 	return (number);
 }
-void	check_new_lines(t_tools *tools, char *buffer,int start, int end)
+void	check_new_lines(t_tools *tools, char *buffer, int start, int end)
 {
 	while (start <= end)
 	{
-		if(buffer[start] == '\n' && buffer[start + 1] == '\n')
-				error_map(tools);
+		if (buffer[start] == '\n' && buffer[start + 1] == '\n')
+			error_map(tools);
 		start++;
 	}
 }
@@ -59,13 +61,12 @@ int	last_char_pos(t_tools *tools, char *line, int last_pos)
 {
 	while (last_pos)
 	{
-		if(line[last_pos] == ' ' || line[last_pos] == '\t')
+		if (line[last_pos] == ' ' || line[last_pos] == '\t')
 			last_pos--;
-		else if(line[last_pos] == '1')
+		else if (line[last_pos] == '1')
 			return (last_pos);
 		else
 			error_map(tools);
 	}
 	return (last_pos);
 }
-
