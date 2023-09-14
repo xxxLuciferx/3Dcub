@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 12:42:04 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/11 18:47:05 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/14 15:17:13 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,7 @@ void	left_wall(t_pars *pars)
 int	allowed_contact(char c)
 {
 	if (c != '1' && c != '0' && c != 'N' && c != 'S' && c != 'W' && c != 'E')
-	{
-		// printf("c = %c\n", c);
 		return (1);
-	}
 	return (0);
 }
 
@@ -85,6 +82,7 @@ void	zero_sides_verification(t_pars *pars, int pos_i, int pos_j)
 		error_map(pars->ptr);
 	}
 }
+
 void	if_valid_inside_lines(t_pars *pars)
 {
 	int	i;

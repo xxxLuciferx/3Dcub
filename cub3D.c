@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/14 13:16:40 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/09/14 15:28:49 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,7 @@ void	intiate_textures(t_tools *tools)
 	tex[3].img = mlx_xpm_file_to_image(tools->mlx, tools->pars->west_path,
 			&tools->width, &tools->height);
 	if (!tex[0].img || !tex[1].img || !tex[2].img || !tex[3].img)
-	{
-		printf("Error\nIN MLX XPM\n");
-		exit(1);
-	}
+		file_not_found(tools);
 	tex[0].addr = mlx_get_data_addr(tex[0].img, &tex[0].bits_per_pixel,
 			&tex[0].line_length, &tex[0].endian);
 	tex[1].addr = mlx_get_data_addr(tex[1].img, &tex[1].bits_per_pixel,
@@ -39,20 +36,18 @@ void	intiate_textures(t_tools *tools)
 	tex[3].addr = mlx_get_data_addr(tex[3].img, &tex[3].bits_per_pixel,
 			&tex[3].line_length, &tex[3].endian);
 	if (!tex[0].addr || !tex[1].addr || !tex[2].addr || !tex[3].addr)
-	{
-		printf("Error\nIN MLX XPM ADDRESS\n");
-		exit(1);
-	}
+		file_not_found(tools);
 }
+
 void	initiation(t_tools *tools)
 {
 	tools->pars->ptr = tools;
-	tools->pars->C_B = -1;
-	tools->pars->C_G = -1;
-	tools->pars->C_B = -1;
-	tools->pars->F_R = -1;
-	tools->pars->F_G = -1;
-	tools->pars->F_B = -1;
+	tools->pars->c_r = -1;
+	tools->pars->c_g = -1;
+	tools->pars->c_b = -1;
+	tools->pars->f_r = -1;
+	tools->pars->f_g = -1;
+	tools->pars->f_b = -1;
 	tools->pars->map = NULL;
 	tools->pars->north_path = NULL;
 	tools->pars->south_path = NULL;
@@ -83,6 +78,7 @@ int	biggest_line(t_tools *tools)
 	}
 	return (lenght);
 }
+
 void	graphic(t_tools *tools)
 {
 	int	p_line;
@@ -100,9 +96,8 @@ void	graphic(t_tools *tools)
 	tools->mlx = mlx_init();
 	tools->win = mlx_new_window(tools->mlx, p_line, p_width, "cub3D");
 	tools->img.img = mlx_new_image(tools->mlx, p_line, p_width);
-	tools->img.addr = mlx_get_data_addr(tools->img.img,
-			&tools->img.bits_per_pixel, &tools->img.line_length,
-			&tools->img.endian);
+	tools->img.addr = mlx_get_data_addr(tools->img.img, \
+	&tools->img.bits_per_pixel, &tools->img.line_length, &tools->img.endian);
 	intiate_textures(tools);
 	tools->player_x = (tools->player_x * 50) + 25;
 	tools->player_y = (tools->player_y * 50) + 25;
@@ -114,7 +109,7 @@ void	graphic(t_tools *tools)
 
 int	main(int argc, char **argv)
 {
-	t_tools tools;
+	t_tools	tools;
 
 	valid_entry(argc, argv, &tools);
 	graphic(&tools);

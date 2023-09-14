@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:15:18 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/14 13:10:32 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/09/14 15:33:22 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	check_pars(t_pars *pars)
 {
-	if (pars->east_path == NULL || pars->north_path == NULL
-		|| pars->south_path == NULL || pars->west_path == NULL || pars->C_B ==
-		-1 || pars->C_G == -1 || pars->C_R == -1 || pars->F_B == -1
-		|| pars->F_G == -1 || pars->F_R == -1)
+	if (pars->east_path == NULL || pars->north_path == NULL \
+		|| pars->south_path == NULL || pars->west_path == NULL || pars->c_b == \
+		-1 || pars->c_g == -1 || pars->c_r == -1 || pars->f_b == -1 \
+		|| pars->f_g == -1 || pars->f_r == -1)
 		return (0);
 	return (1);
 }
@@ -67,7 +67,7 @@ void	reading_map(t_tools *tools, char *av)
 
 void	valid_entry(int ac, char **av, t_tools *tools)
 {
-	int len;
+	int	len;
 
 	if (ac != 2)
 	{

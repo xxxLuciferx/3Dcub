@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maping.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:33:41 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/14 14:25:44 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/09/14 15:31:00 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	put_map(t_tools *tools)
 		while (tools->pars->land[i][j])
 		{
 			if (tools->pars->land[i][j] == '1')
-				ft_draw(tools, i * 50, j * 50, GRis);
+				ft_draw(tools, i * 50, j * 50, GRIS);
 			j++;
 		}
 		i++;

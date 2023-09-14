@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:40:50 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/11 18:13:40 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/14 15:15:49 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	checking_data(t_pars *pars)
 		}
 		i++;
 	}
-	ft_map_copy(pars, i); // ALOCATION
+	ft_map_copy(pars, i);
 	left_wall(pars);
 	if_line_of_walls(pars, pars->land[0]);
 	if_line_of_walls(pars, pars->land[pars->land_range]);
@@ -48,6 +48,7 @@ int	first_in_map(char *buffer, int pos)
 	}
 	return (number);
 }
+
 void	check_new_lines(t_tools *tools, char *buffer, int start, int end)
 {
 	while (start <= end)
@@ -57,6 +58,7 @@ void	check_new_lines(t_tools *tools, char *buffer, int start, int end)
 		start++;
 	}
 }
+
 int	last_char_pos(t_tools *tools, char *line, int last_pos)
 {
 	while (last_pos)

@@ -6,22 +6,11 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:22:24 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/11 18:24:02 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/14 15:24:31 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-void	collect_direction(char c, t_pars *pars)
-{
-	pars->ptr->angle = 0;
-	if (c == 'S')
-		pars->ptr->angle = 90;
-	else if (c == 'W')
-		pars->ptr->angle = 180;
-	else if (c == 'N')
-		pars->ptr->angle = 270;
-}
 
 void	if_one_player(t_pars *pars)
 {
@@ -30,7 +19,6 @@ void	if_one_player(t_pars *pars)
 	int	counter;
 
 	i = 0;
-	j = 0;
 	counter = 0;
 	while (pars->land[i])
 	{
@@ -52,6 +40,7 @@ void	if_one_player(t_pars *pars)
 	if (counter != 1)
 		error_player(pars->ptr);
 }
+
 void	if_player_exist(t_pars *pars)
 {
 	int	i;
@@ -101,7 +90,6 @@ int	ft_len(char **tab)
 
 	i = 0;
 	max_len = 0;
-	;
 	while (tab[i])
 	{
 		j = 0;
@@ -114,26 +102,6 @@ int	ft_len(char **tab)
 		i++;
 	}
 	return (max_len);
-}
-
-char	*ft_strddup(const char *s1, int len)
-{
-	int		i;
-	char	*str;
-
-	i = 0;
-	str = (char *)ft_calloc((len + 1), sizeof(char));
-	if (!str)
-		return (NULL);
-	while (s1[i])
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	while (i < len)
-		str[i++] = ' ';
-	str[i] = '\0';
-	return (str);
 }
 
 void	ft_map_copy(t_pars *pars, int pos)
@@ -156,5 +124,4 @@ void	ft_map_copy(t_pars *pars, int pos)
 	}
 	pars->land[i] = NULL;
 	if_player_exist(pars);
-	// if_correct_map(pars);
 }

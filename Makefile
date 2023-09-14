@@ -1,5 +1,5 @@
 NAME = cub3D
-# LIBFT = ./libft/libft.a
+
 SRC = cub3D.c  \
 		ft_split.c \
 		 ft_atoi.c \
@@ -14,17 +14,14 @@ SRC = cub3D.c  \
 				  draw_lines.c\
 				  	move_player.c \
 					 ft_map_pos.c \
-					  ft_calloc.c print.c intersections.c\
+					  ft_calloc.c intersections.c\
 					  	wall_projection.c intersection_tools.c \
 					  	 free.c texturing.c
 
 
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror 
 
 OBJ = ${SRC:.c=.o}
-
-# $(LIBFT):
-# 	make -C ./libft
 
 all : $(NAME)
 

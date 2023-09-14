@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 11:41:07 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/28 15:14:07 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/09/14 15:24:43 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_atoi(const char *str)
 {
-	int	a;
-	int	sign;
-	int	res;
+	int		a;
+	int		sign;
+	int		res;
 
 	res = 0;
 	a = 0;
@@ -38,6 +38,7 @@ int	ft_atoi(const char *str)
 	}
 	return (res * sign);
 }
+
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;
@@ -50,9 +51,9 @@ size_t	ft_strlen(const char *s)
 
 char	*ft_strdup(const char *s1)
 {
-	int i;
-	char *c;
-	char *m;
+	int		i;
+	char	*c;
+	char	*m;
 
 	i = ft_strlen(s1);
 	c = (char *)ft_calloc((i + 1), sizeof(char));
@@ -67,4 +68,35 @@ char	*ft_strdup(const char *s1)
 	}
 	*c = '\0';
 	return (m);
+}
+
+char	*ft_strddup(const char *s1, int len)
+{
+	int		i;
+	char	*str;
+
+	i = 0;
+	str = (char *)ft_calloc((len + 1), sizeof(char));
+	if (!str)
+		return (NULL);
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while (i < len)
+		str[i++] = ' ';
+	str[i] = '\0';
+	return (str);
+}
+
+void	collect_direction(char c, t_pars *pars)
+{
+	pars->ptr->angle = 0;
+	if (c == 'S')
+		pars->ptr->angle = 90;
+	else if (c == 'W')
+		pars->ptr->angle = 180;
+	else if (c == 'N')
+		pars->ptr->angle = 270;
 }

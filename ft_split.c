@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 11:50:07 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/14 11:50:07 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/14 15:16:52 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ static size_t	count_words(const char *str, char *c)
 
 char	**ft_split(char const *s, char *c)
 {
-	char **split;
-	size_t start;
-	size_t end;
-	size_t i;
+	char	**split;
+	size_t	start;
+	size_t	end;
+	size_t	i;
 
 	if (!s)
 		return (NULL);

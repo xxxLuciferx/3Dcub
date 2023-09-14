@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 19:42:34 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/14 19:45:24 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/14 15:19:11 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_arrays(char **array)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (array && array[i])
@@ -26,4 +26,23 @@ void	free_arrays(char **array)
 		}
 		free(array);
 	}
+}
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	if (s1 && s2)
+	{
+		while (s1[i] != '\0')
+		{
+			if (s1[i] != s2[i])
+				return (0);
+			i++;
+		}
+		return (1);
+	}
+	else
+		return (0);
 }
