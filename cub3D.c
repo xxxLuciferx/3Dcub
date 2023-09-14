@@ -6,11 +6,11 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/14 15:28:49 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/14 16:17:12 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "mandatory/cub3D.h"
 
 void	intiate_textures(t_tools *tools)
 {

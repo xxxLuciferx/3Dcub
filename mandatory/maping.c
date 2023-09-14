@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:33:41 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/14 15:31:00 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/14 15:39:42 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	draw_fov(t_tools *tools)
 		i++;
 	}
 	draw_texture(tools);
-	draw_directions(tools);
 }
 
 void	ft_draw(t_tools *tools, float start_y, float start_x, int color)
