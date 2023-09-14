@@ -211,6 +211,11 @@ void    draw_3d_wall(t_tools *tools, float distance, int i);
 void    ereas(t_tools *tools);
 int 	get_pixel_color_from_image(t_data *data, int x, int y);
 void    draw_texture(t_tools *tools);
+t_ray	**creat_rays_table(int len);
+float	normalize_angle(float angle);
+void	draw_directions(t_tools *tools);
+float	ray_lenght(t_tools *tools, float x2, float y2);
+float	absolutevalue(double num);
 
 
 void	free_all(t_tools *tools);
