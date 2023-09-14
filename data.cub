@@ -4,7 +4,7 @@ SO ./textures/3.xpm
 WE ./textures/2.xpm
 EA ./textures/1.xpm
 
-C 135,206,235
+C 135,206,0,0
 F 102,0,0
 
        1111111111111111111111111

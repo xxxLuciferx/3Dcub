@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 11:46:35 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/14 18:58:31 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/14 23:48:27 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ unsigned int	ceiling_colors(t_pars *pars, int i)
 
 	if_valid_string(pars, pars->map[i]);
 	tmp = ft_split(pars->map[i], ",");
+	if(tmp[0] == NULL || tmp[1] == NULL || tmp[2] == NULL)
+		error_colors(pars);
 	pars->c_r = ft_atoi(tmp[0]);
 	pars->c_g = ft_atoi(tmp[1]);
 	pars->c_b = ft_atoi(tmp[2]);
@@ -59,6 +61,8 @@ unsigned int	floor_colors(t_pars *pars, int i)
 
 	if_valid_string(pars, pars->map[i]);
 	tmp = ft_split(pars->map[i], ",");
+	if(tmp[0] == NULL || tmp[1] == NULL || tmp[2] == NULL)
+		error_colors(pars);
 	pars->f_r = ft_atoi(tmp[0]);
 	pars->f_g = ft_atoi(tmp[1]);
 	pars->f_b = ft_atoi(tmp[2]);
