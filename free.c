@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:46:52 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/11 18:47:06 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/14 13:12:52 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,11 @@ void	free_map(char **land)
 		i++;
 	}
 	free(land);
+}
+
+void	free_all(t_tools *tools)
+{
+	free_map(tools->pars->land);
+	free(tools->pars);
+	exit(1);
 }

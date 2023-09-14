@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:15:18 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/11 14:41:30 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/14 13:10:32 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	reading_map(t_tools *tools, char *av)
 	char	buffer[READER];
 
 	i = 0;
-	tools->pars = malloc(sizeof(t_pars)); //ALOCATION
+	tools->pars = malloc(sizeof(t_pars));
 	initiation(tools);
 	fd = open(av, O_RDONLY, NULL);
 	i = read(fd, buffer, READER - 1);
@@ -55,7 +55,7 @@ void	reading_map(t_tools *tools, char *av)
 		error_file(tools);
 	buffer[i] = '\0';
 	i = last_char_pos(tools, buffer, i - 1);
-	check_new_lines(tools, buffer, first_in_map(buffer, i), i); //FIX THIS
+	check_new_lines(tools, buffer, first_in_map(buffer, i), i);
 	tools->pars->map = ft_split(buffer, "\n");
 	checking_data(tools->pars);
 }

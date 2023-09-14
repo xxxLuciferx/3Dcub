@@ -3,34 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/11 18:20:21 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/14 13:16:40 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-
-// int	ara_lcolorr_r(t_data *data, int x, int y)
-// {
-// 	char	*dst;
-
-// 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-// 	return (*(unsigned int*)dst);
-// }
-
 void	intiate_textures(t_tools *tools)
 {
-	tools->tex[0].img = mlx_xpm_file_to_image(tools->mlx, tools->pars->east_path,&tools->width, &tools->height);
-	tools->tex[0].addr = mlx_get_data_addr(tools->tex[0].img, &tools->tex[0].bits_per_pixel, &tools->tex[0].line_length, &tools->tex[0].endian);
-	tools->tex[1].img = mlx_xpm_file_to_image(tools->mlx, tools->pars->south_path,&tools->width, &tools->height);
-	tools->tex[1].addr = mlx_get_data_addr(tools->tex[1].img, &tools->tex[1].bits_per_pixel, &tools->tex[1].line_length, &tools->tex[1].endian);
-	tools->tex[2].img = mlx_xpm_file_to_image(tools->mlx, tools->pars->north_path,&tools->width, &tools->height);
-	tools->tex[2].addr = mlx_get_data_addr(tools->tex[2].img, &tools->tex[2].bits_per_pixel, &tools->tex[2].line_length, &tools->tex[2].endian);
-	tools->tex[3].img = mlx_xpm_file_to_image(tools->mlx, tools->pars->west_path,&tools->width, &tools->height);
-	tools->tex[3].addr = mlx_get_data_addr(tools->tex[3].img, &tools->tex[3].bits_per_pixel, &tools->tex[3].line_length, &tools->tex[3].endian);
+	t_data *tex = tools->tex;
+	tex[0].img = mlx_xpm_file_to_image(tools->mlx, tools->pars->east_path,&tools->width, &tools->height);
+	tex[1].img = mlx_xpm_file_to_image(tools->mlx, tools->pars->south_path,&tools->width, &tools->height);
+	tex[2].img = mlx_xpm_file_to_image(tools->mlx, tools->pars->north_path,&tools->width, &tools->height);
+	tex[3].img = mlx_xpm_file_to_image(tools->mlx, tools->pars->west_path,&tools->width, &tools->height);
+	if (!tex[0].img || !tex[1].img || !tex[2].img || !tex[3].img)
+	{
+		printf("Error\nIN MLX XPM\n");
+		exit(1);
+	}
+	tex[0].addr = mlx_get_data_addr(tex[0].img, &tex[0].bits_per_pixel, &tex[0].line_length, &tex[0].endian);
+	tex[1].addr = mlx_get_data_addr(tex[1].img, &tex[1].bits_per_pixel, &tex[1].line_length, &tex[1].endian);
+	tex[2].addr = mlx_get_data_addr(tex[2].img, &tex[2].bits_per_pixel, &tex[2].line_length, &tex[2].endian);
+	tex[3].addr = mlx_get_data_addr(tex[3].img, &tex[3].bits_per_pixel, &tex[3].line_length, &tex[3].endian);
+	if (!tex[0].addr || !tex[1].addr || !tex[2].addr || !tex[3].addr)
+	{
+		printf("Error\nIN MLX XPM ADDRESS\n");
+		exit(1);
+	}
 }
 void	initiation(t_tools *tools)
 {
@@ -83,7 +85,7 @@ void	graphic(t_tools *tools)
 	if(p_line > MAC_PX || p_width > MAC_PY)
 	{
 		printf("Error\nResolution is too big\n");
-		exit(0);
+		free_all(tools);
 	}
 	tools->mlx = mlx_init();
 	tools->win = mlx_new_window(tools->mlx, p_line, p_width, "cub3D");

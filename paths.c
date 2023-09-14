@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:14:58 by khaimer           #+#    #+#             */
-/*   Updated: 2023/08/29 18:03:59 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/14 13:08:10 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	north_path(t_pars *pars, int i)
 {
 	char	**tmp;
 
-	tmp = ft_split(pars->map[i], " 	\n");
-	if(ft_strcmp(tmp[0], "NO") == 0 || tmp[2] != NULL)
+	tmp = ft_split(pars->map[i], "  \n");
+	if(ft_strcmp(tmp[0], "NO") == 0 || !tmp[1] || tmp[2] != NULL)
 		error_path();
 	pars->north_path = ft_strdup(tmp[1]);
 	free_arrays(tmp);
@@ -63,7 +63,7 @@ void	south_path(t_pars *pars, int i)
 	char	**tmp;
 	
 	tmp = ft_split(pars->map[i], " 	\n");
-	if(ft_strcmp(tmp[0], "SO") == 0 || tmp[2] != NULL)
+	if(ft_strcmp(tmp[0], "SO") == 0 || !tmp[1] || tmp[2])
 		error_path();
 	pars->south_path = ft_strdup(tmp[1]);
 	free_arrays(tmp);
@@ -73,7 +73,7 @@ void	west_path(t_pars *pars, int i)
 	char	**tmp;
 
 	tmp = ft_split(pars->map[i], " 	\n");
-	if(ft_strcmp(tmp[0], "WE") == 0 || tmp[2] != NULL)
+	if(ft_strcmp(tmp[0], "WE") == 0 || !tmp[1] || tmp[2] != NULL)
 		error_path();
 	pars->west_path = ft_strdup(tmp[1]);
 	free_arrays(tmp);
@@ -85,7 +85,7 @@ void	east_path(t_pars *pars, int i)
 	char	**tmp;
 
 	tmp = ft_split(pars->map[i], " 	\n");
-	if(ft_strcmp(tmp[0], "EA") == 0 || tmp[2] != NULL)
+	if(ft_strcmp(tmp[0], "EA") == 0 || !tmp[1] || tmp[2] != NULL)
 		error_path();
 	pars->east_path = ft_strdup(tmp[1]);
 	free_arrays(tmp);

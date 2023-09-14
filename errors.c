@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:24:25 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/11 18:48:21 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/14 13:03:49 by yichiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,12 @@ void	error_player(t_tools *tools)
 	free_map(tools->pars->land);
 	free(tools->pars);
 	printf("\nError\n$ Invalid PLAYER numbers\n\n");
-	// while(1);
 	exit(0);
 }
 void	error_map(t_tools *tools)
 {
 	free(tools->pars);
 	printf("\nError\n$ Invalid MAP format\n\n");
-	// while(1);
 	exit(1);
 }
 void	error_colors(void)

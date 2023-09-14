@@ -211,4 +211,7 @@ void    draw_3d_wall(t_tools *tools, float distance, int i);
 void    ereas(t_tools *tools);
 int 	get_pixel_color_from_image(t_data *data, int x, int y);
 void    draw_texture(t_tools *tools);
+
+
+void	free_all(t_tools *tools);
 #endif

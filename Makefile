@@ -19,7 +19,7 @@ SRC = cub3D.c  \
 					  	 free.c
 
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 
 OBJ = ${SRC:.c=.o}
 
