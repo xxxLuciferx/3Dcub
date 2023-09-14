@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 11:20:44 by yichiba           #+#    #+#             */
-/*   Updated: 2023/09/14 15:32:41 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/14 20:01:18 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	check_intersections_horizental(float x, float y, float angle,
 	else if ((angle >= M_PI && angle < 3 * M_PI_2) && y - 1 >= 0 && x - 1 >= 0
 		&& (map[(int)((y - 1) / 50)][(int)(x / 50)] == '1'))
 		return (1);
-	else if ((angle >= 3 * M_PI_2 && angle <= 2 * M_PI) && y - 1 >= 0
-		&& y <= height - 1 && x + 1 <= width && (map[(int)((y - 1)
-				/ 50)][(int)(x / 50)] == '1'))
+	else if ((angle >= 3 * M_PI_2 && angle <= 2 * M_PI) && y - 1 >= 0 && \
+		y <= height - 1 && x + 1 <= width && (map[(int)((y - 1) \
+		/ 50)][(int)(x / 50)] == '1'))
 		return (1);
 	return (0);
 }
@@ -54,15 +54,15 @@ int	check_intersections_vertical(float x, float y, float angle, t_tools *tools)
 	if ((angle >= 0 && angle < M_PI_2) && y + 1 <= height && x + 1 <= width
 		&& (map[(int)(y / 50)][(int)((x + 1) / 50)] == '1'))
 		return (1);
-	else if ((angle >= M_PI_2 && angle < M_PI) && y + 1 <= height && x - 1 >= 0
-		&& (map[(int)(y / 50)][(int)((x - 1) / 50)] == '1'))
+	else if ((angle >= M_PI_2 && angle < M_PI) && y + 1 <= height && x - 1 >= 0 \
+	&& (map[(int)(y / 50)][(int)((x - 1) / 50)] == '1'))
 		return (1);
-	else if ((angle >= M_PI && angle < 3 * M_PI_2) && y - 1 >= 0 && x - 1 >= 0
-		&& (map[(int)(y / 50)][(int)((x - 1) / 50)] == '1'))
+	else if ((angle >= M_PI && angle < 3 * M_PI_2) && y - 1 >= 0 && x - 1 >= 0 \
+	&& (map[(int)(y / 50)][(int)((x - 1) / 50)] == '1'))
 		return (1);
-	else if ((angle >= 3 * M_PI_2 && angle <= 2 * M_PI) && y - 1 >= 0
-		&& y <= height - 1 && x + 1 <= width && (map[(int)(y / 50)][(int)((x
-			+ 1) / 50)] == '1'))
+	else if ((angle >= 3 * M_PI_2 && angle <= 2 * M_PI) && y - 1 >= 0 \
+	&& y <= height - 1 && x + 1 <= width && (map[(int)(y / 50)][(int)((x \
+	+ 1) / 50)] == '1'))
 		return (1);
 	return (0);
 }

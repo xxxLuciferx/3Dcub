@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 12:42:04 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/14 15:17:13 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/14 19:09:46 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@ void	if_line_of_walls(t_pars *pars, char *land)
 	int	i;
 
 	i = 0;
+	(void)pars;
 	while (land && land[i] != '\n' && land[i] != '\0')
 	{
 		if (land[i] != '1' && land[i] != ' ')
-			error_map(pars->ptr);
+			error_map();
 		i++;
 	}
 }
@@ -47,7 +48,7 @@ void	left_wall(t_pars *pars)
 		else
 		{
 			free_map(pars->land);
-			error_map(pars->ptr);
+			error_map();
 		}
 	}
 }
@@ -64,22 +65,22 @@ void	zero_sides_verification(t_pars *pars, int pos_i, int pos_j)
 	if (allowed_contact(pars->land[pos_i - 1][pos_j]))
 	{
 		free_map(pars->land);
-		error_map(pars->ptr);
+		error_map();
 	}
 	else if (allowed_contact(pars->land[pos_i + 1][pos_j]))
 	{
 		free_map(pars->land);
-		error_map(pars->ptr);
+		error_map();
 	}
 	else if (allowed_contact(pars->land[pos_i][pos_j + 1]))
 	{
 		free_map(pars->land);
-		error_map(pars->ptr);
+		error_map();
 	}
 	else if (allowed_contact(pars->land[pos_i][pos_j - 1]))
 	{
 		free_map(pars->land);
-		error_map(pars->ptr);
+		error_map();
 	}
 }
 
@@ -96,7 +97,9 @@ void	if_valid_inside_lines(t_pars *pars)
 			j++;
 		while (pars->land[i][j] != '\n' && pars->land[i][j] != '\0')
 		{
-			if (pars->land[i][j] == '0')
+			if (pars->land[i][j] == '0' || pars->land[i][j] == 'E'
+				|| pars->land[i][j] == 'N' || pars->land[i][j] == 'S'
+				|| pars->land[i][j] == 'W')
 			{
 				zero_sides_verification(pars, i, j);
 				j++;

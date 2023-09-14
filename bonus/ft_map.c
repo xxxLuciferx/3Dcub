@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:15:18 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/14 15:33:22 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/14 19:59:23 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	check_pars(t_pars *pars)
 {
-	if (pars->east_path == NULL || pars->north_path == NULL \
-		|| pars->south_path == NULL || pars->west_path == NULL || pars->c_b == \
-		-1 || pars->c_g == -1 || pars->c_r == -1 || pars->f_b == -1 \
-		|| pars->f_g == -1 || pars->f_r == -1)
+	if (pars->east_path == NULL || pars->north_path == NULL || \
+	pars->south_path == NULL || pars->west_path == NULL || pars->c_b == \
+	-1 || pars->c_g == -1 || pars->c_r == -1 || pars->f_b == -1 \
+	|| pars->f_g == -1 || pars->f_r == -1)
 		return (0);
 	return (1);
 }
@@ -39,10 +39,12 @@ void	if_directions_and_colors_exist(t_pars *pars)
 			|| pars->map[i][j] == 'W' || pars->map[i][j] == 'E'
 			|| pars->map[i][j] == 'F' || pars->map[i][j] == 'C')
 			data++;
+		else if (pars->map[i][j] != '\n' && pars->map[i][j] != '1')
+			error_map();
 		i++;
 	}
 	if (data != 6)
-		error_map(pars->ptr);
+		error_map();
 }
 
 void	reading_map(t_tools *tools, char *av)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_projection.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichiba <yichiba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:47:56 by yichiba           #+#    #+#             */
-/*   Updated: 2023/09/14 14:21:52 by yichiba          ###   ########.fr       */
+/*   Updated: 2023/09/14 20:02:32 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	ereas(t_tools *tools)
 		while (j < tools->size)
 		{
 			if (j <= tools->size / 2)
-				my_mlx_pixel_put2(&tools->img, i, j,
-					tools->pars->ceilling_color);
+				my_mlx_pixel_put2(&tools->img, i, j, \
+				tools->pars->ceilling_color);
 			else
 				my_mlx_pixel_put2(&tools->img, i, j, tools->pars->floor_color);
 			j++;
@@ -83,8 +83,8 @@ void	put_textures(t_tools *tools, int x, t_hit *hit, float start)
 	row = (inc * start);
 	while (i < wall_height && i < tools->size)
 	{
-		my_mlx_pixel_put2(&tools->img, x, hit->y + i,
-			get_pixel_color_from_image(get_texture(tools, x), row, col));
+		my_mlx_pixel_put2(&tools->img, x, hit->y + i, \
+		get_pixel_color_from_image(get_texture(tools, x), row, col));
 		row += inc;
 		i++;
 	}

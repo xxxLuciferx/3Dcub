@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 19:42:34 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/14 15:19:11 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/14 19:10:29 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,13 @@ int	ft_strcmp(char *s1, char *s2)
 	}
 	else
 		return (0);
+}
+
+int	close_window(void *param)
+{
+	t_tools	*tools;
+
+	tools = (t_tools *)param;
+	mlx_destroy_window(tools->mlx, tools->win);
+	exit(0);
 }

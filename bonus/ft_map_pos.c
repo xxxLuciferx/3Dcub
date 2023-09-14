@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:40:50 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/14 15:15:49 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/14 19:05:39 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,18 @@ int	first_in_map(char *buffer, int pos)
 
 void	check_new_lines(t_tools *tools, char *buffer, int start, int end)
 {
+	(void)tools;
 	while (start <= end)
 	{
 		if (buffer[start] == '\n' && buffer[start + 1] == '\n')
-			error_map(tools);
+			error_map();
 		start++;
 	}
 }
 
 int	last_char_pos(t_tools *tools, char *line, int last_pos)
 {
+	(void)tools;
 	while (last_pos)
 	{
 		if (line[last_pos] == ' ' || line[last_pos] == '\t')
@@ -68,7 +70,7 @@ int	last_char_pos(t_tools *tools, char *line, int last_pos)
 		else if (line[last_pos] == '1')
 			return (last_pos);
 		else
-			error_map(tools);
+			error_map();
 	}
 	return (last_pos);
 }

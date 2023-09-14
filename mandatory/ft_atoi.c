@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 11:41:07 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/14 15:24:43 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/14 19:04:04 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_atoi(const char *str)
 {
-	int		a;
-	int		sign;
-	int		res;
+	int	a;
+	int	sign;
+	int	res;
 
 	res = 0;
 	a = 0;
@@ -31,11 +31,13 @@ int	ft_atoi(const char *str)
 	}
 	else if (str[a] == '+')
 		a++;
-	while (str[a] <= '9' && str[a] >= '0')
+	while ((str[a] <= '9' && str[a] >= '0'))
 	{
 		res = str[a] - '0' + (res * 10);
 		a++;
 	}
+	if (str[a] != '\0')
+		error_map();
 	return (res * sign);
 }
 

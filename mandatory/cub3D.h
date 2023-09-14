@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 15:26:27 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/14 15:32:16 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/14 19:04:25 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,9 +127,10 @@ void					south_path(t_pars *pars, int i);
 void					west_path(t_pars *pars, int i);
 void					east_path(t_pars *pars, int i);
 void					file_not_found(t_tools *tools);
-void					error_map(t_tools *tools);
-void					error_colors(void);
+void					error_map(void);
+void					error_colors(t_pars *pars);
 void					error_path(void);
+int						close_window(void *param);
 void					error_player(t_tools *tools);
 void					error_file(t_tools *tools);
 void					free_arrays(char **array);
@@ -151,7 +152,6 @@ char					*ft_strddup(const char *s1, int len);
 void					if_line_of_walls(t_pars *pars, char *land);
 void					initiation(t_tools *tools);
 void					if_valid_lines(t_pars *pars);
-void					if_valid_string(char *line);
 void					check_next_wall(t_pars *pars, int pos, int line_pos);
 void					put_map(t_tools *tools);
 void					my_mlx_pixel_put(t_data *data, int x, int y, int color);
@@ -161,7 +161,6 @@ int						biggest_line(t_tools *tools);
 void					free_map(char **land);
 unsigned int			ceiling_colors(t_pars *pars, int i);
 unsigned int			floor_colors(t_pars *pars, int i);
-void					if_valid_string(char *line);
 void					draw_fov(t_tools *tools);
 void					ft_draw(t_tools *tools, float start_y, float start_x,
 							int red);

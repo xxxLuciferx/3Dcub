@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 10:06:17 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/14 16:56:50 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/14 19:57:38 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	graphic(t_tools *tools)
 	if (p_line > MAC_PX || p_width > MAC_PY)
 	{
 		printf("Error\nResolution is too big\n");
-		free_all(tools);
+		exit(1);
 	}
 	tools->mlx = mlx_init();
 	tools->win = mlx_new_window(tools->mlx, p_line, p_width, "cub3D");
@@ -104,6 +104,7 @@ void	graphic(t_tools *tools)
 	draw_fov(tools);
 	mlx_put_image_to_window(tools->mlx, tools->win, tools->img.img, 0, 0);
 	mlx_hook(tools->win, 2, 1, key_codes, tools);
+	mlx_hook(tools->win, 17, 0, close_window, tools);
 	mlx_loop(tools->mlx);
 }
 

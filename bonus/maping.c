@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:33:41 by khaimer           #+#    #+#             */
-/*   Updated: 2023/09/14 15:39:34 by khaimer          ###   ########.fr       */
+/*   Updated: 2023/09/14 20:10:02 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	draw_fov(t_tools *tools)
 		angle = normalize_angle(angle);
 		if (old++ == 0)
 			tools->rays = creat_rays_table(tools->lenght);
-		update_rays(tools->rays[i], angle, intersection(tools, tools->rays[i],
-				angle), i);
+		update_rays(tools->rays[i], angle, intersection(tools, tools->rays[i], \
+		angle), i);
 		angle += tools->range / (biggest_line(tools) * 50);
 		i++;
 	}
